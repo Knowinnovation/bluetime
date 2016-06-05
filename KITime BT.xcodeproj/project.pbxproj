@@ -8,20 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		FD9EFFB21CFCCB6500BDBCA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */; };
-		FD9EFFB41CFCCB6500BDBCA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFB31CFCCB6500BDBCA7 /* ViewController.swift */; };
 		FD9EFFB71CFCCB6500BDBCA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFB51CFCCB6500BDBCA7 /* Main.storyboard */; };
 		FD9EFFB91CFCCB6500BDBCA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFB81CFCCB6500BDBCA7 /* Assets.xcassets */; };
 		FD9EFFBC1CFCCB6500BDBCA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFBA1CFCCB6500BDBCA7 /* LaunchScreen.storyboard */; };
+		FD9EFFC41CFCD3B100BDBCA7 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFC31CFCD3B100BDBCA7 /* TimerViewController.swift */; };
+		FD9EFFC81CFCD7D800BDBCA7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9EFFC71CFCD7D800BDBCA7 /* MultipeerConnectivity.framework */; };
+		FD9EFFCA1CFCF8F000BDBCA7 /* TimeServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */; };
+		FD9EFFCC1D00A24D00BDBCA7 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */; };
+		FD9EFFCE1D00A96C00BDBCA7 /* TimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFCD1D00A96C00BDBCA7 /* TimeData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FD9EFFAE1CFCCB6500BDBCA7 /* KITime BT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITime BT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FD9EFFB31CFCCB6500BDBCA7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FD9EFFB61CFCCB6500BDBCA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD9EFFB81CFCCB6500BDBCA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD9EFFBB1CFCCB6500BDBCA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FD9EFFBD1CFCCB6500BDBCA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD9EFFC31CFCD3B100BDBCA7 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		FD9EFFC71CFCD7D800BDBCA7 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeServiceManager.swift; sourceTree = "<group>"; };
+		FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
+		FD9EFFCD1D00A96C00BDBCA7 /* TimeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD9EFFC81CFCD7D800BDBCA7 /* MultipeerConnectivity.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +47,7 @@
 		FD9EFFA51CFCCB6500BDBCA7 = {
 			isa = PBXGroup;
 			children = (
+				FD9EFFC71CFCD7D800BDBCA7 /* MultipeerConnectivity.framework */,
 				FD9EFFB01CFCCB6500BDBCA7 /* KITime BT */,
 				FD9EFFAF1CFCCB6500BDBCA7 /* Products */,
 			);
@@ -55,7 +65,10 @@
 			isa = PBXGroup;
 			children = (
 				FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */,
-				FD9EFFB31CFCCB6500BDBCA7 /* ViewController.swift */,
+				FD9EFFC31CFCD3B100BDBCA7 /* TimerViewController.swift */,
+				FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */,
+				FD9EFFCD1D00A96C00BDBCA7 /* TimeData.swift */,
+				FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */,
 				FD9EFFB51CFCCB6500BDBCA7 /* Main.storyboard */,
 				FD9EFFB81CFCCB6500BDBCA7 /* Assets.xcassets */,
 				FD9EFFBA1CFCCB6500BDBCA7 /* LaunchScreen.storyboard */,
@@ -135,7 +148,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FD9EFFB41CFCCB6500BDBCA7 /* ViewController.swift in Sources */,
+				FD9EFFC41CFCD3B100BDBCA7 /* TimerViewController.swift in Sources */,
+				FD9EFFCA1CFCF8F000BDBCA7 /* TimeServiceManager.swift in Sources */,
+				FD9EFFCC1D00A24D00BDBCA7 /* TimerButton.swift in Sources */,
+				FD9EFFCE1D00A96C00BDBCA7 /* TimeData.swift in Sources */,
 				FD9EFFB21CFCCB6500BDBCA7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +268,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "KITime BT/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.knowinnovation.KITime-BT";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -263,6 +280,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "KITime BT/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.knowinnovation.KITime-BT";
 				PRODUCT_NAME = "$(TARGET_NAME)";

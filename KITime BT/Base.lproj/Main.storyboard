@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yNW-BH-EVg">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +17,222 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UzK-4J-EPU">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="301"/>
+                                <subviews>
+                                    <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AeI-Mc-N4c">
+                                        <rect key="frame" x="0.0" y="43" width="600" height="216"/>
+                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="snw-Vp-Sfi">
+                                        <rect key="frame" x="8" y="8" width="584" height="285"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="75"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kdg-nL-UWc">
+                                <rect key="frame" x="0.0" y="302" width="600" height="298"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ndT-PP-nfO" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
+                                        <rect key="frame" x="238" y="105" width="124" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Start">
+                                            <color key="titleColor" red="0.059263445061153677" green="0.89373363874345546" blue="0.1768362511844617" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTE-BZ-v5S" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
+                                        <rect key="frame" x="238" y="153" width="124" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="0.010267665139987225" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anC-Uk-xsG" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
+                                        <rect key="frame" x="238" y="105" width="124" height="40"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Pause">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.95728348600000002" green="0.95728348600000002" blue="0.95728348600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.95728348603839442" green="0.95728348603839442" blue="0.95728348603839442" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kdg-nL-UWc" secondAttribute="trailing" id="6MP-9L-mlz"/>
+                            <constraint firstItem="kdg-nL-UWc" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="LgP-To-KWg"/>
+                            <constraint firstItem="kdg-nL-UWc" firstAttribute="top" secondItem="UzK-4J-EPU" secondAttribute="bottom" constant="1" id="Rgv-hJ-PS3"/>
+                            <constraint firstItem="kdg-nL-UWc" firstAttribute="trailing" secondItem="UzK-4J-EPU" secondAttribute="trailing" id="XIe-nL-SuY"/>
+                            <constraint firstItem="kdg-nL-UWc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aUM-al-2bd"/>
+                            <constraint firstItem="kdg-nL-UWc" firstAttribute="height" secondItem="UzK-4J-EPU" secondAttribute="height" id="esn-lf-g9b"/>
+                            <constraint firstItem="kdg-nL-UWc" firstAttribute="leading" secondItem="UzK-4J-EPU" secondAttribute="leading" id="qeR-rx-ECv"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="192" y="427"/>
+        </scene>
+        <!--Timer Name-->
+        <scene sceneID="faQ-Qr-l22">
+            <objects>
+                <viewController id="yNW-BH-EVg" customClass="TimerViewController" customModule="KITime_BT" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b3j-2C-Uv4"/>
+                        <viewControllerLayoutGuide type="bottom" id="ToR-0m-oFv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t5Y-j3-ten">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNE-jW-xA7">
+                                <rect key="frame" x="16" y="0.0" width="568" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="162" id="Oy4-XS-qrn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="75"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nib-n8-qqC">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="162" id="F8o-9D-SHn"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="yNW-BH-EVg" id="5af-Fz-0Np"/>
+                                    <outlet property="delegate" destination="yNW-BH-EVg" id="lTO-mm-Fx3"/>
+                                </connections>
+                            </pickerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4u-KN-hzw" userLabel="Button Container View">
+                                <rect key="frame" x="0.0" y="198" width="600" height="402"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Af6-TZ-w8D" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
+                                        <rect key="frame" x="512" y="364" width="80" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="dBZ-Zw-CZx"/>
+                                            <constraint firstAttribute="height" constant="30" id="olR-sz-17d"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="1" green="0.03014565537" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pJ-HM-oJ3" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
+                                        <rect key="frame" x="255" y="156" width="90" height="90"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="WSl-jS-TRC"/>
+                                            <constraint firstAttribute="height" priority="750" constant="90" id="WlD-SM-ReL"/>
+                                        </constraints>
+                                        <state key="normal" title="Start">
+                                            <color key="titleColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QG6-oj-cvw" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
+                                        <rect key="frame" x="255" y="156" width="90" height="90"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="5co-mE-Kqx"/>
+                                            <constraint firstAttribute="height" priority="750" constant="90" id="BZW-s1-uZ0"/>
+                                        </constraints>
+                                        <state key="normal" title="Pause">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMt-rt-yGn" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="364" width="80" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="k6a-xC-kjp"/>
+                                            <constraint firstAttribute="width" constant="80" id="y9p-ak-nHL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="Invite">
+                                            <color key="titleColor" red="0.0" green="0.52971073575451122" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="invitePeers:" destination="yNW-BH-EVg" eventType="touchUpInside" id="Nsd-Lr-OeH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="7pJ-HM-oJ3" secondAttribute="centerX" id="25h-F8-F2O"/>
+                                    <constraint firstItem="QG6-oj-cvw" firstAttribute="centerX" secondItem="v4u-KN-hzw" secondAttribute="centerX" id="9TY-Df-M2K"/>
+                                    <constraint firstAttribute="trailing" secondItem="Af6-TZ-w8D" secondAttribute="trailing" constant="8" id="JSu-80-Ldp"/>
+                                    <constraint firstAttribute="bottom" secondItem="iMt-rt-yGn" secondAttribute="bottom" constant="8" id="Nxj-BB-oUf"/>
+                                    <constraint firstItem="QG6-oj-cvw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v4u-KN-hzw" secondAttribute="top" constant="16" id="Vb5-Yu-0O6"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7pJ-HM-oJ3" secondAttribute="bottom" constant="16" id="aNc-K4-bSF"/>
+                                    <constraint firstItem="iMt-rt-yGn" firstAttribute="leading" secondItem="v4u-KN-hzw" secondAttribute="leading" constant="8" id="hn7-Va-J2k"/>
+                                    <constraint firstAttribute="bottom" secondItem="Af6-TZ-w8D" secondAttribute="bottom" constant="8" id="ljb-kz-6gI"/>
+                                    <constraint firstAttribute="centerY" secondItem="7pJ-HM-oJ3" secondAttribute="centerY" id="oAv-ad-OaU"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QG6-oj-cvw" secondAttribute="bottom" constant="16" id="oLh-YV-6FS"/>
+                                    <constraint firstAttribute="centerX" secondItem="7pJ-HM-oJ3" secondAttribute="centerX" id="t5l-W0-qZ3"/>
+                                    <constraint firstItem="7pJ-HM-oJ3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v4u-KN-hzw" secondAttribute="top" constant="16" id="vPN-oO-3un"/>
+                                    <constraint firstItem="QG6-oj-cvw" firstAttribute="centerY" secondItem="v4u-KN-hzw" secondAttribute="centerY" id="yIg-Ap-XIV"/>
+                                </constraints>
+                            </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ubt-GZ-E3Z">
+                                <rect key="frame" x="8" y="162" width="584" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="KGl-gy-Syd"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Hard Stop"/>
+                                    <segment title="Soft Stop"/>
+                                </segments>
+                                <color key="tintColor" red="0.21960784310000001" green="0.58823529409999997" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="v4u-KN-hzw" firstAttribute="leading" secondItem="t5Y-j3-ten" secondAttribute="leading" id="1DE-3l-jgX"/>
+                            <constraint firstItem="gNE-jW-xA7" firstAttribute="leading" secondItem="t5Y-j3-ten" secondAttribute="leading" constant="16" id="DNI-Jd-S8Y"/>
+                            <constraint firstItem="Ubt-GZ-E3Z" firstAttribute="centerX" secondItem="Nib-n8-qqC" secondAttribute="centerX" id="HTw-TT-70v"/>
+                            <constraint firstAttribute="trailing" secondItem="Nib-n8-qqC" secondAttribute="trailing" id="JCI-u6-QWD"/>
+                            <constraint firstItem="Ubt-GZ-E3Z" firstAttribute="top" secondItem="Nib-n8-qqC" secondAttribute="bottom" id="Lb2-UV-AQ4"/>
+                            <constraint firstItem="gNE-jW-xA7" firstAttribute="top" secondItem="t5Y-j3-ten" secondAttribute="top" id="LpD-2q-Yph"/>
+                            <constraint firstAttribute="bottom" secondItem="v4u-KN-hzw" secondAttribute="bottom" id="O3P-Uk-iDh"/>
+                            <constraint firstItem="v4u-KN-hzw" firstAttribute="top" secondItem="Ubt-GZ-E3Z" secondAttribute="bottom" constant="8" id="PsC-x2-1bA"/>
+                            <constraint firstItem="Ubt-GZ-E3Z" firstAttribute="leading" secondItem="t5Y-j3-ten" secondAttribute="leadingMargin" constant="-8" id="TgT-S0-wuK"/>
+                            <constraint firstAttribute="trailing" secondItem="gNE-jW-xA7" secondAttribute="trailing" constant="16" id="b8j-OI-O7L"/>
+                            <constraint firstItem="Nib-n8-qqC" firstAttribute="top" secondItem="t5Y-j3-ten" secondAttribute="top" id="b9S-l3-Yme"/>
+                            <constraint firstItem="Nib-n8-qqC" firstAttribute="leading" secondItem="t5Y-j3-ten" secondAttribute="leading" id="czW-2t-OzR"/>
+                            <constraint firstAttribute="trailing" secondItem="v4u-KN-hzw" secondAttribute="trailing" id="vj2-lc-B2n"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Timer Name" id="HGz-It-ARl"/>
+                    <connections>
+                        <outlet property="buttonContainerView" destination="v4u-KN-hzw" id="3Ye-AX-Y2H"/>
+                        <outlet property="cancelButton" destination="Af6-TZ-w8D" id="INa-3G-gzA"/>
+                        <outlet property="pauseButton" destination="QG6-oj-cvw" id="tFJ-XY-Bed"/>
+                        <outlet property="startButton" destination="7pJ-HM-oJ3" id="tXt-5Q-djk"/>
+                        <outlet property="timerLabel" destination="gNE-jW-xA7" id="twm-vG-5h2"/>
+                        <outlet property="timerPicker" destination="Nib-n8-qqC" id="uz9-CU-Doa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="olB-nD-QLg" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="973" y="485"/>
         </scene>
     </scenes>
 </document>
