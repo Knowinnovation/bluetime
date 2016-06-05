@@ -10,11 +10,8 @@ import UIKit
 import MultipeerConnectivity
 
 protocol TimeServiceManagerDelegate {
-//    func foundPeer()
-//    func lostPeer()
-//    func invitationWasReceived(fromPeer: String)
-    func timeDataChanged(data: TimeData)
-    
+    func invitationWasReceived(name: String)
+    func timeDataReceived(data: TimeData)
 }
 
 class TimeServiceManager: NSObject {
@@ -24,7 +21,6 @@ class TimeServiceManager: NSObject {
     let serviceType = "timer-countdown"
     let peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
     let advertiser:MCNearbyServiceAdvertiser
-//    let browser:MCNearbyServiceBrowser
     
     var foundPeers = [MCPeerID]()
     var invitationHandler: ((Bool, MCSession)->Void)!
@@ -39,17 +35,25 @@ class TimeServiceManager: NSObject {
     
     override init() {
         self.advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
-//        self.browser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         super.init()
         self.advertiser.delegate = self
         self.advertiser.startAdvertisingPeer()
-//        self.browser.delegate = self
-//        self.browser.startBrowsingForPeers()
     }
     
     deinit {
         self.advertiser.stopAdvertisingPeer()
-//        self.browser.stopBrowsingForPeers()
+    }
+    
+    func sendTimeData(data: TimeData) {
+        if session.connectedPeers.count > 0 {
+            do {
+                try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(data),
+                                          toPeers: self.session.connectedPeers,
+                                          withMode: MCSessionSendDataMode.Reliable)
+            } catch _ {
+                NSLog("%@", "Error, could not send data!")
+            }
+        }
     }
 
 }
@@ -64,40 +68,9 @@ extension TimeServiceManager: MCNearbyServiceAdvertiserDelegate {
                                     withContext context: NSData?,
                                     invitationHandler: (Bool, MCSession) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
-        invitationHandler(true, self.session)
-//        self.invitationHandler = invitationHandler
-//        delegate?.invitationWasReceived(peerID.displayName)
+        self.invitationHandler = invitationHandler
+        delegate?.invitationWasReceived(peerID.displayName)
     }
-}
-
-extension TimeServiceManager : MCNearbyServiceBrowserDelegate {
-    
-    func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError) {
-        NSLog("%@", "didNotStartBrowsingForPeers: \(error)")
-    }
-    
-    func browser(browser: MCNearbyServiceBrowser,
-                   foundPeer peerID: MCPeerID,
-                             withDiscoveryInfo info: [String : String]?) {
-        NSLog("%@", "foundPeer: \(peerID)")
-        foundPeers.append(peerID)
-//        delegate?.foundPeer()
-//        NSLog("%@", "invitePeer: \(peerID)")
-//        browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 10)
-    }
-    
-    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
-        NSLog("%@", "lostPeer: \(peerID)")
-        for (index, aPeer) in foundPeers.enumerate() {
-            if aPeer == peerID {
-                foundPeers.removeAtIndex(index)
-                break
-            }
-        }
-        
-//        delegate?.lostPeer()
-    }
-    
 }
 
 extension MCSessionState {
@@ -107,7 +80,6 @@ extension MCSessionState {
         case .NotConnected: return "NotConnected"
         case .Connecting: return "Connecting"
         case .Connected: return "Connected"
-//        default: return "Unknown"
         }
     }
     
@@ -121,6 +93,7 @@ extension TimeServiceManager : MCSessionDelegate {
     
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
         NSLog("%@", "didReceiveData: \(data)")
+        delegate?.timeDataReceived(NSKeyedUnarchiver.unarchiveObjectWithData(data) as! TimeData)
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

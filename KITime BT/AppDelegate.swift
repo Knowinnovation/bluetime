@@ -8,19 +8,6 @@
 
 import UIKit
 
-enum TimerState: String {
-    case Stopped = "stopped"
-    case Paused = "paused"
-    case Running = "running"
-    case Finished = "finished"
-    case None = "none"
-}
-
-enum StopType: NSInteger {
-    case Hard = 0
-    case Soft = 1
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

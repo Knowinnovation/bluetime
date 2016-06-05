@@ -17,16 +17,13 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var timerPicker: UIPickerView!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var buttonContainerView: UIView!
+    @IBOutlet weak var stopTypeSelector: UISegmentedControl!
     
     var minsLabel: UILabel!
     var secsLabel: UILabel!
     
-    var time: NSInteger = 300
-    var startTime: NSTimeInterval!
-    var timeState: TimerState = .Stopped
-    var stopType: StopType = .Hard
+    var timeData: TimeData = TimeData()
     
-    //The timer variable to reference for invalidation
     var timer = NSTimer()
     
     let timeService = TimeServiceManager()
@@ -59,12 +56,95 @@ class TimerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func startPressed() {
+        
+        
+        // Commit and send
+        timeData.timeChange = true
+        commitChanges()
+        timeService.sendTimeData(timeData)
+    }
+    
+    @IBAction func pausePressed() {
+        
+        
+        // Commit and send
+        timeData.timeChange = true
+        commitChanges()
+        timeService.sendTimeData(timeData)
+    }
+    
+    @IBAction func cancelPressed() {
+        
+        // Commit and send
+        timeData.timeChange = true
+        commitChanges()
+        timeService.sendTimeData(timeData)
+    }
+    
+    @IBAction func changedStopType(sender: UISegmentedControl) {
+        timeData.stopType = StopType(rawValue: sender.selectedSegmentIndex)!
+        
+        // Not time change, just commit and send
+        commitChanges()
+        timeService.sendTimeData(timeData)
+    }
+    
     @IBAction func invitePeers(sender: AnyObject) {
         let inviteView = MCBrowserViewController.init(serviceType: timeService.serviceType, session: timeService.session);
         inviteView.delegate = self
         self.presentViewController(inviteView, animated: true, completion: nil)
     }
     
+    // Observes changes to the TimeData, then applies those changes to the app
+    func commitChanges() {
+        if timeData.timeChange == true {
+            
+        } else {
+            // No change in time or what not, just hard/soft stop
+            NSLog("%d", timeData.stopType.rawValue)
+            stopTypeSelector.selectedSegmentIndex = timeData.stopType.rawValue
+        }
+        timeData.timeChange = false
+    }
+    
+    // Runs during the timer loop
+    func updateTime() {
+        if timeData.timer <= 0 && timeData.stopType == .Hard {
+            self.finishTimer()
+        }
+        self.updateLabel() //Update the label
+        timeData.timer -= 1 //Count down the time
+    }
+    
+    // Upon timer completion, this runs
+    func finishTimer() {
+        
+    }
+    
+    func updateLabel() {
+        
+    }
+    
+    // Fades picker/timer in and out based on current state
+    func animateState() {
+        if timeData.timeState == .Running {
+            UIView.animateWithDuration(0.5) {
+                self.timerPicker.alpha = 0.0
+                self.timerLabel.alpha = 1.0
+            }
+        } else if timeData.timeState == .Stopped {
+            UIView.animateWithDuration(0.5) {
+                self.timerPicker.alpha = 1.0
+                self.timerLabel.alpha = 0.0
+            }
+        } else {
+            self.timerPicker.alpha = 0.0
+            self.timerLabel.alpha = 1.0
+        }
+    }
+    
+    // Changes view based on rotation of device
     func rotated() {
         minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22)
         secsLabel.frame = CGRectMake(self.view.frame.size.width/2+48, 162/2-11, 44, 22)
@@ -85,6 +165,7 @@ class TimerViewController: UIViewController {
 }
 
 extension TimerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
     }
@@ -122,13 +203,6 @@ extension TimerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension TimerViewController: TimeServiceManagerDelegate {
-    func foundPeer() {
-        
-    }
-    
-    func lostPeer() {
-        
-    }
     
     func invitationWasReceived(fromPeer: String) {
         let alert = UIAlertController(title: "", message: "\(fromPeer) wants to chat with you.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -143,26 +217,24 @@ extension TimerViewController: TimeServiceManagerDelegate {
         
         alert.addAction(acceptAction)
         alert.addAction(declineAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func timeDataChanged(data: TimeData) {
-        
+    func timeDataReceived(data: TimeData) {
+        self.timeData = data
+        commitChanges()
     }
     
 }
 
 extension TimerViewController: MCBrowserViewControllerDelegate {
+    
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
-        NSLog("%@", "Finished")
-//        for (_, aPeer) in timeService.foundPeers.enumerate() {
-//            browserViewController.browser?.invitePeer(aPeer, toSession: timeService.session, withContext: nil, timeout: 10)
-//
-//        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func browserViewControllerWasCancelled(browserViewController: MCBrowserViewController) {
-        NSLog("%@", "Cancelled")
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
