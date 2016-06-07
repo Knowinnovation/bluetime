@@ -16,12 +16,15 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var cancelButton:UIButton!
     @IBOutlet weak var inviteButton:UIButton!
     @IBOutlet weak var timerPicker: UIPickerView!
+    @IBOutlet weak var timerView: UIView!
+    @IBOutlet weak var fullscreenButton:UIButton!
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var stopTypeSelector: UISegmentedControl!
     
     var minsLabel: UILabel!
     var secsLabel: UILabel!
+    var isFullscreen: Bool = false
         
     var displayTime: Double = 0
     var startTime: NSTimeInterval = -1
@@ -29,7 +32,7 @@ class TimerViewController: UIViewController {
     var duration: Double = 300
     var timerIsRunning: Bool = false
     var timerFinished: Bool = false
-    var timerCancelled: Bool = false
+    var timerCancelled: Bool = true
     
     var timeUponExit: NSDate!
     
@@ -50,6 +53,7 @@ class TimerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         timeService.delegate = self
+        UIApplication.sharedApplication().idleTimerDisabled = true
         
         startButton.layer.cornerRadius = 10;
         pauseButton.layer.cornerRadius = 10;
@@ -123,6 +127,14 @@ class TimerViewController: UIViewController {
         let inviteView = MCBrowserViewController.init(serviceType: timeService.serviceType, session: timeService.session);
         inviteView.delegate = self
         self.presentViewController(inviteView, animated: true, completion: nil)
+    }
+    
+    @IBAction func toggleFullscreen() {
+        if isFullscreen {
+            
+        } else {
+            
+        }
     }
     
     func start() {
@@ -311,16 +323,16 @@ class TimerViewController: UIViewController {
         if timerIsRunning {
             UIView.animateWithDuration(0.5) {
                 self.timerPicker.alpha = 0.0
-                self.timerLabel.alpha = 1.0
+                self.timerView.alpha = 1.0
             }
         } else if timerCancelled {
             UIView.animateWithDuration(0.5) {
                 self.timerPicker.alpha = 1.0
-                self.timerLabel.alpha = 0.0
+                self.timerView.alpha = 0.0
             }
         } else {
             self.timerPicker.alpha = 0.0
-            self.timerLabel.alpha = 1.0
+            self.timerView.alpha = 1.0
         }
     }
     
