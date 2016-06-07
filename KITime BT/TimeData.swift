@@ -10,8 +10,9 @@ import UIKit
 
 class TimeData: NSObject, NSCoding {
     
+    var action: String = "stop"
     var timeState: TimerState = .Stopped
-    var timer: Int = 300
+    var timer: Double = 300
     var startTime: NSTimeInterval = -1
     var stopType: StopType = .Hard
     var timeChange: Bool = false
@@ -19,7 +20,7 @@ class TimeData: NSObject, NSCoding {
     required convenience init(coder decoder: NSCoder) {
         self.init()
         timeState = TimerState(rawValue: decoder.decodeObjectForKey("timeState") as! String)!
-        timer = decoder.decodeObjectForKey("timer") as! Int
+        timer = decoder.decodeObjectForKey("timer") as! Double
         startTime = decoder.decodeObjectForKey("startTime") as! NSTimeInterval
         stopType = StopType(rawValue: decoder.decodeObjectForKey("stopType") as! Int)!
         timeChange = decoder.decodeObjectForKey("timeChange") as! Bool

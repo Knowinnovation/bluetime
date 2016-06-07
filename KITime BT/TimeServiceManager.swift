@@ -11,7 +11,7 @@ import MultipeerConnectivity
 
 protocol TimeServiceManagerDelegate {
     func invitationWasReceived(name: String)
-    func timeDataReceived(data: TimeData)
+    func changesReceived(data: Dictionary<String, AnyObject>)
 }
 
 class TimeServiceManager: NSObject {
@@ -22,7 +22,7 @@ class TimeServiceManager: NSObject {
     let peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
     let advertiser:MCNearbyServiceAdvertiser
     
-    var foundPeers = [MCPeerID]()
+//    var foundPeers = [MCPeerID]()
     var invitationHandler: ((Bool, MCSession)->Void)!
     
     var delegate: TimeServiceManagerDelegate?
@@ -44,7 +44,7 @@ class TimeServiceManager: NSObject {
         self.advertiser.stopAdvertisingPeer()
     }
     
-    func sendTimeData(data: TimeData) {
+    func sendTimeData(data: Dictionary<String, AnyObject>) {
         if session.connectedPeers.count > 0 {
             do {
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(data),
@@ -92,8 +92,7 @@ extension TimeServiceManager : MCSessionDelegate {
     }
     
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
-        NSLog("%@", "didReceiveData: \(data)")
-        delegate?.timeDataReceived(NSKeyedUnarchiver.unarchiveObjectWithData(data) as! TimeData)
+        delegate?.changesReceived(NSKeyedUnarchiver.unarchiveObjectWithData(data) as! Dictionary<String, AnyObject>)
     }
     
     func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

@@ -33,8 +33,8 @@
                                     <constraint firstAttribute="height" constant="162" id="F8o-9D-SHn"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="dataSource" destination="yNW-BH-EVg" id="5af-Fz-0Np"/>
-                                    <outlet property="delegate" destination="yNW-BH-EVg" id="lTO-mm-Fx3"/>
+                                    <outlet property="dataSource" destination="yNW-BH-EVg" id="UCD-uM-fSN"/>
+                                    <outlet property="delegate" destination="yNW-BH-EVg" id="mfP-SQ-mwA"/>
                                 </connections>
                             </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4u-KN-hzw" userLabel="Button Container View">
@@ -162,6 +162,7 @@
                     <connections>
                         <outlet property="buttonContainerView" destination="v4u-KN-hzw" id="3Ye-AX-Y2H"/>
                         <outlet property="cancelButton" destination="Af6-TZ-w8D" id="INa-3G-gzA"/>
+                        <outlet property="inviteButton" destination="iMt-rt-yGn" id="Oze-1t-Imq"/>
                         <outlet property="pauseButton" destination="QG6-oj-cvw" id="tFJ-XY-Bed"/>
                         <outlet property="startButton" destination="7pJ-HM-oJ3" id="tXt-5Q-djk"/>
                         <outlet property="stopTypeSelector" destination="Ubt-GZ-E3Z" id="8xG-FQ-xJQ"/>
