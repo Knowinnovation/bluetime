@@ -22,9 +22,7 @@ class TimerViewController: UIViewController {
     
     var minsLabel: UILabel!
     var secsLabel: UILabel!
-    
-//    var timeData: TimeData = TimeData()
-    
+        
     var displayTime: Double = 0
     var startTime: NSTimeInterval = -1
     var stopType: StopType = .Hard
@@ -38,6 +36,16 @@ class TimerViewController: UIViewController {
     var timer = NSTimer()
     
     let timeService = TimeServiceManager()
+    
+    lazy var connectingAlert: UIAlertController = {
+        var alert = UIAlertController(title: "Connecting", message: "\n\n\n", preferredStyle: UIAlertControllerStyle.Alert)
+        let spinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+        spinner.center = CGPointMake(130.5, 65.5);
+        spinner.color = UIColor.blackColor();
+        spinner.startAnimating();
+        alert.view.addSubview(spinner)
+        return alert
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +69,10 @@ class TimerViewController: UIViewController {
         timerPicker.selectRow(5, inComponent: 0, animated: false)
         pauseButton.hidden = true
         cancelButton.hidden = true
+        
+        timerCancelled = true
+        timerIsRunning = false
+        timerFinished = false
         
         //Update the view for rotation and add listener for rotation
         self.rotated()
@@ -118,6 +130,8 @@ class TimerViewController: UIViewController {
         if !timerIsRunning {
             NSLog("Starting")
             timerIsRunning = true
+            timerCancelled = false
+            timerFinished = false
             displayTime = duration
             animateState()
             updateButtons()
@@ -151,6 +165,8 @@ class TimerViewController: UIViewController {
         if timerIsRunning {
             timer.invalidate()
             timerIsRunning = false
+            timerCancelled = false
+            timerFinished = false
             
             //Calculate the new duration based on how much time passed
             NSLog("%.2f", NSDate.timeIntervalSinceReferenceDate() - startTime)
@@ -292,7 +308,6 @@ class TimerViewController: UIViewController {
     
     // Fades picker/timer in and out based on current state
     func animateState() {
-        NSLog("Animating")
         if timerIsRunning {
             UIView.animateWithDuration(0.5) {
                 self.timerPicker.alpha = 0.0
@@ -367,8 +382,39 @@ extension TimerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 
 extension TimerViewController: TimeServiceManagerDelegate {
     
+    func sendFullData() {
+        let data: Dictionary<String, AnyObject> = ["action":"dataDump",
+                                                   "displayTime":displayTime,
+                                                   "duration":duration,
+                                                   "startTime":startTime,
+                                                   "stopType":stopType.rawValue,
+                                                   "timerFinished": timerFinished,
+                                                   "timerCancelled":timerCancelled]
+        
+        timeService.sendTimeData(data)
+    }
+    
+    func showConnecting() {
+        self.presentViewController(connectingAlert, animated: true, completion: nil)
+    }
+    
+    func hideConnecting(failed: Bool) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        if failed {
+            let alert = UIAlertController(title: "Failed to Connect", message: "We couldn't establish a connection with the peer. You can go back and try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            let declineAction = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            alert.addAction(declineAction)
+            
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
     func invitationWasReceived(fromPeer: String) {
-        let alert = UIAlertController(title: "", message: "\(fromPeer) wants to chat with you.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "", message: "\(fromPeer) wants to share a timer with you.", preferredStyle: UIAlertControllerStyle.Alert)
         
         let acceptAction: UIAlertAction = UIAlertAction(title: "Accept", style: UIAlertActionStyle.Default) { (alertAction) -> Void in
             self.timeService.invitationHandler?(true, self.timeService.session)
@@ -405,6 +451,24 @@ extension TimerViewController: TimeServiceManagerDelegate {
                 let (min, sec) = self.secondsToMinutesSeconds(data["duration"] as! Int)
                 self.timerPicker.selectRow(min, inComponent: 0, animated: true)
                 self.timerPicker.selectRow(sec, inComponent: 1, animated: true)
+            case "dataDump":
+                self.startTime = data["startTime"] as! NSTimeInterval
+                self.duration = data["duration"] as! Double
+                self.displayTime = data["displayTime"] as! Double
+                self.stopType = StopType(rawValue: data["stopType"] as! Int)!
+                self.timerCancelled = data["timerCancelled"] as! Bool
+                self.timerFinished = data["timerFinished"] as! Bool
+                self.timerIsRunning = false
+                
+                NSLog("running: %d, canceled: %d, finished: %d", self.timerIsRunning, self.timerCancelled, self.timerFinished)
+                
+                let (min, sec) = self.secondsToMinutesSeconds(data["duration"] as! Int)
+                self.timerPicker.selectRow(min, inComponent: 0, animated: true)
+                self.timerPicker.selectRow(sec, inComponent: 1, animated: true)
+                
+                self.animateState()
+                self.updateLabel()
+                self.updateButtons()
             default:
                 break
             }

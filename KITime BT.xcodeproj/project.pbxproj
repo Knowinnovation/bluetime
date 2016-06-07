@@ -16,7 +16,6 @@
 		FD9EFFC81CFCD7D800BDBCA7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9EFFC71CFCD7D800BDBCA7 /* MultipeerConnectivity.framework */; };
 		FD9EFFCA1CFCF8F000BDBCA7 /* TimeServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */; };
 		FD9EFFCC1D00A24D00BDBCA7 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */; };
-		FD9EFFCE1D00A96C00BDBCA7 /* TimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFCD1D00A96C00BDBCA7 /* TimeData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 		FD9EFFC71CFCD7D800BDBCA7 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeServiceManager.swift; sourceTree = "<group>"; };
 		FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
-		FD9EFFCD1D00A96C00BDBCA7 /* TimeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +68,6 @@
 				FD3D190C1D04860D00F53BFA /* TimerEnums.swift */,
 				FD9EFFC31CFCD3B100BDBCA7 /* TimerViewController.swift */,
 				FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */,
-				FD9EFFCD1D00A96C00BDBCA7 /* TimeData.swift */,
 				FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */,
 				FD9EFFB51CFCCB6500BDBCA7 /* Main.storyboard */,
 				FD9EFFB81CFCCB6500BDBCA7 /* Assets.xcassets */,
@@ -171,7 +168,6 @@
 				FD9EFFC41CFCD3B100BDBCA7 /* TimerViewController.swift in Sources */,
 				FD9EFFCA1CFCF8F000BDBCA7 /* TimeServiceManager.swift in Sources */,
 				FD9EFFCC1D00A24D00BDBCA7 /* TimerButton.swift in Sources */,
-				FD9EFFCE1D00A96C00BDBCA7 /* TimeData.swift in Sources */,
 				FD3D190D1D04860D00F53BFA /* TimerEnums.swift in Sources */,
 				FD9EFFB21CFCCB6500BDBCA7 /* AppDelegate.swift in Sources */,
 			);

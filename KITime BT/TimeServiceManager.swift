@@ -10,6 +10,9 @@ import UIKit
 import MultipeerConnectivity
 
 protocol TimeServiceManagerDelegate {
+    func sendFullData()
+    func showConnecting()
+    func hideConnecting(failed: Bool)
     func invitationWasReceived(name: String)
     func changesReceived(data: Dictionary<String, AnyObject>)
 }
@@ -24,6 +27,7 @@ class TimeServiceManager: NSObject {
     
 //    var foundPeers = [MCPeerID]()
     var invitationHandler: ((Bool, MCSession)->Void)!
+    var isInvitee: (Bool, fromWhom: MCPeerID!) = (false, nil)
     
     var delegate: TimeServiceManagerDelegate?
     
@@ -70,6 +74,7 @@ extension TimeServiceManager: MCNearbyServiceAdvertiserDelegate {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
         self.invitationHandler = invitationHandler
         delegate?.invitationWasReceived(peerID.displayName)
+        isInvitee = (true, peerID)
     }
 }
 
@@ -89,6 +94,23 @@ extension TimeServiceManager : MCSessionDelegate {
     
     func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
+        switch state {
+        case .Connected:
+            delegate?.hideConnecting(false)
+            if !isInvitee.0 {
+                delegate?.sendFullData()
+            }
+            break
+        case .Connecting:
+            delegate?.showConnecting()
+            break
+        case .NotConnected:
+            delegate?.hideConnecting(true)
+            if peerID.isEqual(isInvitee.fromWhom) {
+                isInvitee = (false, nil)
+            }
+        }
+        // Need to have functions for connecting and complete connecting
     }
     
     func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID) {
