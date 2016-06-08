@@ -8,6 +8,7 @@
 
 import UIKit
 import MultipeerConnectivity
+import AVFoundation
 
 class TimerViewController: UIViewController {
     
@@ -41,6 +42,8 @@ class TimerViewController: UIViewController {
     var timer = NSTimer()
     
     let timeService = TimeServiceManager()
+    
+    var audioPlayer: AVAudioPlayer = AVAudioPlayer()
     
     lazy var connectingAlert: UIAlertController = {
         var alert = UIAlertController(title: "Connecting", message: "\n\n\n", preferredStyle: UIAlertControllerStyle.Alert)
@@ -234,22 +237,39 @@ class TimerViewController: UIViewController {
         updateLabel()
         
         // Play sound here
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: "/Library/Ringtones/Duck.m4r")!)
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.play()
+            let alert = UIAlertController(title: "Timer done", message: nil, preferredStyle:.Alert)
+            alert.addAction(UIAlertAction(title: "Done", style: .Default) {
+                UIAlertAction in
+                self.audioPlayer.stop()
+                })
+            self.presentViewController(alert, animated: true, completion: nil)
+        } catch {
+            debugPrint("\(error)")
+        }
+        
     }
     
     func postDelay() {
-        if checkForFinish() { return }
+        
         displayTime -= 1 //Bring timer count down again
         updateLabel()
+        if checkForFinish() { return }
         if timerIsRunning {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(TimerViewController.updateTime), userInfo: nil, repeats: true) //Start the repetitive timer 1 second apart each
         }
+        
     }
     
     // Runs during the timer loop
     func updateTime() {
-        if checkForFinish() { return }
+        
         displayTime -= 1 //Count down the time
         self.updateLabel() //Update the label
+        if checkForFinish() { return }
     }
     
     func updateLabel() {
@@ -312,9 +332,9 @@ class TimerViewController: UIViewController {
             inviteButton.hidden = false
             pauseButton.hidden = true
         } else if timerFinished && !timerCancelled && !timerIsRunning {
-            cancelButton.hidden = true
+            cancelButton.hidden = false
             startButton.hidden = true
-            inviteButton.hidden = true
+            inviteButton.hidden = false
             pauseButton.hidden = true
         } else if !timerFinished && !timerCancelled && !timerIsRunning {
             cancelButton.hidden = false
