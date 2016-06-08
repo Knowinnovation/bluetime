@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Timer Name-->
+        <!--Timer View Controller-->
         <scene sceneID="faQ-Qr-l22">
             <objects>
                 <viewController id="yNW-BH-EVg" customClass="TimerViewController" customModule="KITime_BT" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,6 +28,20 @@
                                     <outlet property="delegate" destination="yNW-BH-EVg" id="mfP-SQ-mwA"/>
                                 </connections>
                             </pickerView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ubt-GZ-E3Z">
+                                <rect key="frame" x="12" y="162" width="576" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="KGl-gy-Syd"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Hard Stop"/>
+                                    <segment title="Soft Stop"/>
+                                </segments>
+                                <color key="tintColor" red="0.21960784310000001" green="0.58823529409999997" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changedStopType:" destination="yNW-BH-EVg" eventType="valueChanged" id="NJ0-sz-mGj"/>
+                                </connections>
+                            </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4u-KN-hzw" userLabel="Button Container View">
                                 <rect key="frame" x="0.0" y="198" width="600" height="402"/>
                                 <subviews>
@@ -117,28 +131,11 @@
                                     <constraint firstItem="QG6-oj-cvw" firstAttribute="centerY" secondItem="v4u-KN-hzw" secondAttribute="centerY" id="yIg-Ap-XIV"/>
                                 </constraints>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ubt-GZ-E3Z">
-                                <rect key="frame" x="12" y="162" width="576" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="KGl-gy-Syd"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Hard Stop"/>
-                                    <segment title="Soft Stop"/>
-                                </segments>
-                                <color key="tintColor" red="0.21960784310000001" green="0.58823529409999997" blue="0.68627450980000004" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="changedStopType:" destination="yNW-BH-EVg" eventType="valueChanged" id="NJ0-sz-mGj"/>
-                                </connections>
-                            </segmentedControl>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ep-Tf-NTh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="162"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNE-jW-xA7">
                                         <rect key="frame" x="16" y="0.0" width="568" height="162"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="162" id="Oy4-XS-qrn"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="75"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -160,19 +157,54 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" priority="750" constant="162" id="7v8-cX-kox"/>
                                     <constraint firstAttribute="trailing" secondItem="gNE-jW-xA7" secondAttribute="trailing" constant="16" id="AkQ-pI-6NT"/>
                                     <constraint firstAttribute="trailing" secondItem="fho-fV-OvQ" secondAttribute="trailing" constant="16" id="Mte-cl-ZJq"/>
                                     <constraint firstItem="gNE-jW-xA7" firstAttribute="top" secondItem="8Ep-Tf-NTh" secondAttribute="top" id="eWY-nD-a4g"/>
                                     <constraint firstItem="gNE-jW-xA7" firstAttribute="leading" secondItem="8Ep-Tf-NTh" secondAttribute="leading" constant="16" id="irh-mh-bTR"/>
                                     <constraint firstAttribute="bottom" secondItem="fho-fV-OvQ" secondAttribute="bottom" constant="8" id="rat-LX-Hwc"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="162" id="rq6-EC-86c"/>
+                                    <constraint firstAttribute="bottom" secondItem="gNE-jW-xA7" secondAttribute="bottom" id="zKC-VZ-1sQ"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9c-8J-sz3">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="120" translatesAutoresizingMaskIntoConstraints="NO" id="u41-41-70f">
+                                        <rect key="frame" x="8" y="8" width="584" height="584"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="120"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tD6-Sh-Ib4">
+                                        <rect key="frame" x="546" y="546" width="46" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="GrH-Vg-Z9T"/>
+                                            <constraint firstAttribute="width" constant="46" id="aky-I3-CgF"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.40682946120000002" green="0.40682946120000002" blue="0.40682946120000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="fullscreen_exit">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleFullscreen" destination="yNW-BH-EVg" eventType="touchUpInside" id="o6T-aJ-RoM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tD6-Sh-Ib4" secondAttribute="trailing" constant="8" id="5GQ-8I-mXV"/>
+                                    <constraint firstAttribute="bottom" secondItem="tD6-Sh-Ib4" secondAttribute="bottom" constant="8" id="Nc8-wL-RPM"/>
+                                    <constraint firstAttribute="bottom" secondItem="u41-41-70f" secondAttribute="bottom" constant="8" id="ea4-2c-LDo"/>
+                                    <constraint firstItem="u41-41-70f" firstAttribute="top" secondItem="O9c-8J-sz3" secondAttribute="top" constant="8" id="lci-Bh-zFT"/>
+                                    <constraint firstItem="u41-41-70f" firstAttribute="leading" secondItem="O9c-8J-sz3" secondAttribute="leading" constant="8" id="q32-dy-pWw"/>
+                                    <constraint firstAttribute="trailing" secondItem="u41-41-70f" secondAttribute="trailing" constant="8" id="yNM-8V-cyl"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="v4u-KN-hzw" firstAttribute="leading" secondItem="t5Y-j3-ten" secondAttribute="leading" id="1DE-3l-jgX"/>
+                            <constraint firstItem="ToR-0m-oFv" firstAttribute="top" secondItem="O9c-8J-sz3" secondAttribute="bottom" id="3Ef-ul-MIM"/>
                             <constraint firstItem="8Ep-Tf-NTh" firstAttribute="top" secondItem="t5Y-j3-ten" secondAttribute="topMargin" id="AOQ-vy-Dm1"/>
                             <constraint firstItem="Ubt-GZ-E3Z" firstAttribute="centerX" secondItem="Nib-n8-qqC" secondAttribute="centerX" id="HTw-TT-70v"/>
                             <constraint firstAttribute="trailing" secondItem="Nib-n8-qqC" secondAttribute="trailing" id="JCI-u6-QWD"/>
@@ -184,21 +216,26 @@
                             <constraint firstItem="Nib-n8-qqC" firstAttribute="top" secondItem="t5Y-j3-ten" secondAttribute="top" id="b9S-l3-Yme"/>
                             <constraint firstItem="Nib-n8-qqC" firstAttribute="leading" secondItem="t5Y-j3-ten" secondAttribute="leading" id="czW-2t-OzR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8Ep-Tf-NTh" secondAttribute="trailing" constant="-20" id="mpI-m7-uqI"/>
+                            <constraint firstItem="O9c-8J-sz3" firstAttribute="leading" secondItem="t5Y-j3-ten" secondAttribute="leadingMargin" constant="-20" id="pmS-c9-VcN"/>
+                            <constraint firstItem="O9c-8J-sz3" firstAttribute="top" secondItem="t5Y-j3-ten" secondAttribute="topMargin" id="sid-Ng-UZs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="O9c-8J-sz3" secondAttribute="trailing" constant="-20" id="ub5-fn-NdY"/>
                             <constraint firstAttribute="trailing" secondItem="v4u-KN-hzw" secondAttribute="trailing" id="vj2-lc-B2n"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Timer Name" id="HGz-It-ARl"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="buttonContainerView" destination="v4u-KN-hzw" id="3Ye-AX-Y2H"/>
                         <outlet property="cancelButton" destination="Af6-TZ-w8D" id="INa-3G-gzA"/>
                         <outlet property="fullscreenButton" destination="fho-fV-OvQ" id="eUB-Kq-ToE"/>
+                        <outlet property="fullscreenLabel" destination="u41-41-70f" id="7RP-wZ-gU1"/>
+                        <outlet property="fullscreenView" destination="O9c-8J-sz3" id="Lkw-bk-ZDU"/>
                         <outlet property="inviteButton" destination="iMt-rt-yGn" id="Oze-1t-Imq"/>
                         <outlet property="pauseButton" destination="QG6-oj-cvw" id="tFJ-XY-Bed"/>
                         <outlet property="startButton" destination="7pJ-HM-oJ3" id="tXt-5Q-djk"/>
                         <outlet property="stopTypeSelector" destination="Ubt-GZ-E3Z" id="8xG-FQ-xJQ"/>
                         <outlet property="timerLabel" destination="gNE-jW-xA7" id="twm-vG-5h2"/>
                         <outlet property="timerPicker" destination="Nib-n8-qqC" id="uz9-CU-Doa"/>
-                        <outlet property="timerView" destination="8Ep-Tf-NTh" id="92M-Fy-O06"/>
+                        <outlet property="timerView" destination="8Ep-Tf-NTh" id="zL3-Pg-LbT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olB-nD-QLg" sceneMemberID="firstResponder"/>
@@ -208,5 +245,6 @@
     </scenes>
     <resources>
         <image name="fullscreen" width="46" height="46"/>
+        <image name="fullscreen_exit" width="46" height="46"/>
     </resources>
 </document>

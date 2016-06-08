@@ -21,6 +21,8 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var stopTypeSelector: UISegmentedControl!
+    @IBOutlet weak var fullscreenView: UIView!
+    @IBOutlet weak var fullscreenLabel: UILabel!
     
     var minsLabel: UILabel!
     var secsLabel: UILabel!
@@ -74,12 +76,16 @@ class TimerViewController: UIViewController {
         pauseButton.hidden = true
         cancelButton.hidden = true
         
+        fullscreenView.hidden = true
+        fullscreenLabel.adjustsFontSizeToFitWidth = true
+        
+        
         timerCancelled = true
         timerIsRunning = false
         timerFinished = false
         
         //Update the view for rotation and add listener for rotation
-        self.rotated()
+        rotated()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
@@ -131,9 +137,12 @@ class TimerViewController: UIViewController {
     
     @IBAction func toggleFullscreen() {
         if isFullscreen {
-            
+            // set back to 162...
+            fullscreenView.hidden = true
+            isFullscreen = false
         } else {
-            
+            fullscreenView.hidden = false
+            isFullscreen = true
         }
     }
     
@@ -247,10 +256,13 @@ class TimerViewController: UIViewController {
         if displayTime >= 0 {
             if displayTime < 60 {
                 timerLabel.textColor = UIColor.redColor()
+                fullscreenLabel.textColor = UIColor.redColor()
             } else if displayTime < 120 {
                 timerLabel.textColor = UIColor.orangeColor()
+                fullscreenLabel.textColor = UIColor.orangeColor()
             } else {
                 timerLabel.textColor = UIColor.blackColor()
+                fullscreenLabel.textColor = UIColor.blackColor()
             }
             var timeToShow: Double!;
             if !timerIsRunning && timerCancelled {
@@ -260,12 +272,16 @@ class TimerViewController: UIViewController {
             }
             let (m,s) = secondsToMinutesSeconds(Int(timeToShow))
             self.timerLabel.text = String(format: "%02d:%02d",m,s)
+            self.fullscreenLabel.text = String(format: "%02d:%02d",m,s)
             if timerFinished {
                 timerLabel.textColor = UIColor.redColor()
                 self.timerLabel.text = String("00:00")
+                fullscreenLabel.textColor = UIColor.redColor()
+                self.fullscreenLabel.text = String("00:00")
             }
         } else {
             timerLabel.textColor = UIColor.redColor()
+            fullscreenLabel.textColor = UIColor.redColor()
             var timeToShow: Double!
             if timerCancelled {
                 timeToShow = getTimeFromPicker()
@@ -274,9 +290,12 @@ class TimerViewController: UIViewController {
             }
             let (m,s) = secondsToMinutesSeconds(Int(abs(timeToShow)))
             self.timerLabel.text = String(format: "+%02d:%02d",m,s)
+            self.fullscreenLabel.text = String(format: "+%02d:%02d",m,s)
             if timerFinished {
                 timerLabel.textColor = UIColor.redColor()
                 self.timerLabel.text = String("00:00")
+                fullscreenLabel.textColor = UIColor.redColor()
+                self.fullscreenLabel.text = String("00:00")
             }
         }
     }
@@ -336,6 +355,11 @@ class TimerViewController: UIViewController {
         }
     }
     
+    // Updates the font size of the full screen label
+    func updateFSFontSize() {
+        
+    }
+    
     // Changes view based on rotation of device
     func rotated() {
         minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22)
@@ -351,7 +375,18 @@ class TimerViewController: UIViewController {
             startButton.frame = newFrame
             pauseButton.frame = newFrame
         }
+        
 //        startButton.layer.cornerRadius = startButton.bounds.size.height/2
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            print("Landscape")
+            fullscreenLabel.font = UIFont.systemFontOfSize(180, weight: UIFontWeightUltraLight)
+        } else {
+            print("Portrait")
+            fullscreenLabel.font = UIFont.systemFontOfSize(120, weight: UIFontWeightUltraLight)
+        }
     }
     
 }
