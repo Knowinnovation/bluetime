@@ -9,6 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 import AVFoundation
+import WatchConnectivity
 
 class TimerViewController: UIViewController {
     
@@ -16,6 +17,7 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var pauseButton:UIButton!
     @IBOutlet weak var cancelButton:UIButton!
     @IBOutlet weak var inviteButton:UIButton!
+    @IBOutlet weak var settingsButton:UIButton!
     @IBOutlet weak var timerPicker: UIPickerView!
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var fullscreenButton:UIButton!
@@ -37,11 +39,20 @@ class TimerViewController: UIViewController {
     var timerFinished: Bool = false
     var timerCancelled: Bool = true
     
-    var timeUponExit: NSDate!
+    var timeUponExit: NSTimeInterval = -1
     
     var timer = NSTimer()
     
     let timeService = TimeServiceManager()
+    
+    var session: WCSession? {
+        didSet {
+            if let session = session {
+                session.delegate = self
+                session.activateSession()
+            }
+        }
+    }
     
     var audioPlayer: AVAudioPlayer = AVAudioPlayer()
     
@@ -64,6 +75,7 @@ class TimerViewController: UIViewController {
         pauseButton.layer.cornerRadius = 10;
         cancelButton.layer.cornerRadius = 10;
         inviteButton.layer.cornerRadius = 10;
+        settingsButton.layer.cornerRadius = 10;
         
         minsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22))
         minsLabel.font = UIFont.systemFontOfSize(17.0)
@@ -90,6 +102,12 @@ class TimerViewController: UIViewController {
         //Update the view for rotation and add listener for rotation
         rotated()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        
+        //add observers for when view disappears and reappears
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.appWillTerminate(_:)), name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.appEnteredForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.appBecameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -325,21 +343,25 @@ class TimerViewController: UIViewController {
             cancelButton.hidden = true
             startButton.hidden = true
             inviteButton.hidden = true
+            settingsButton.hidden = true
             pauseButton.hidden = false
         } else if timerCancelled && !timerIsRunning && !timerFinished {
             cancelButton.hidden = true
             startButton.hidden = false
             inviteButton.hidden = false
+            settingsButton.hidden = false
             pauseButton.hidden = true
         } else if timerFinished && !timerCancelled && !timerIsRunning {
             cancelButton.hidden = false
             startButton.hidden = true
             inviteButton.hidden = false
+            settingsButton.hidden = false
             pauseButton.hidden = true
         } else if !timerFinished && !timerCancelled && !timerIsRunning {
             cancelButton.hidden = false
             startButton.hidden = false
             inviteButton.hidden = false
+            settingsButton.hidden = false
             pauseButton.hidden = true
         }
     }
@@ -407,6 +429,43 @@ class TimerViewController: UIViewController {
             print("Portrait")
             fullscreenLabel.font = UIFont.systemFontOfSize(120, weight: UIFontWeightUltraLight)
         }
+    }
+    
+    //create observers when app reopens
+    func appBecameActive(note: NSNotification) {
+        print("Became Active")
+        print("\(timerIsRunning)")
+        if timerIsRunning {
+            timerIsRunning = false
+            startTime = NSDate.timeIntervalSinceReferenceDate()
+            duration -= startTime - timeUponExit
+            start()
+        }
+    }
+    
+    //create observers when app reopens
+    func appEnteredForeground(note: NSNotification) {
+        print("Entered Foreground")
+    }
+    
+    func appWillResignActive(note: NSNotification) {
+        print("Entered Background")
+//        timerIsRunning = false
+        timeUponExit = NSDate.timeIntervalSinceReferenceDate()
+        duration = displayTime
+        timer.invalidate()
+    }
+    
+    //remove all observers
+    func appWillTerminate(note: NSNotification) {
+        print("App Terminated")
+//        timerIsRunning = false
+        timer.invalidate()
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "com.knowinnovation.kitime.watchRequestClockStateChange", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
     
 }
@@ -541,6 +600,10 @@ extension TimerViewController: TimeServiceManagerDelegate {
             }
         }
     }
+    
+}
+
+extension TimerViewController: WCSessionDelegate {
     
 }
 

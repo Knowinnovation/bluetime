@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BlueTime Watch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>KITime BT.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>FD3D19371D08A09200F53BFA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>FD9EFFAD1CFCCB6500BDBCA7</key>
 		<dict>
 			<key>primary</key>

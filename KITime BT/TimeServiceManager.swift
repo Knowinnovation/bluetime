@@ -54,7 +54,7 @@ class TimeServiceManager: NSObject {
                 try self.session.sendData(NSKeyedArchiver.archivedDataWithRootObject(data),
                                           toPeers: self.session.connectedPeers,
                                           withMode: MCSessionSendDataMode.Reliable)
-            } catch _ {
+            } catch {
                 NSLog("%@", "Error, could not send data!")
             }
         }
@@ -72,8 +72,12 @@ extension TimeServiceManager: MCNearbyServiceAdvertiserDelegate {
                                     withContext context: NSData?,
                                     invitationHandler: (Bool, MCSession) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
-        self.invitationHandler = invitationHandler
-        delegate?.invitationWasReceived(peerID.displayName)
+        if UserSettings.sharedSettings().autoAccept {
+            invitationHandler(true, self.session)
+        } else {
+            self.invitationHandler = invitationHandler
+            delegate?.invitationWasReceived(peerID.displayName)
+        }
         isInvitee = (true, peerID)
     }
 }
@@ -97,15 +101,19 @@ extension TimeServiceManager : MCSessionDelegate {
         switch state {
         case .Connected:
             delegate?.hideConnecting(false)
-            if !isInvitee.0 {
+            if isInvitee.0 {
                 delegate?.sendFullData()
             }
             break
         case .Connecting:
-            delegate?.showConnecting()
+            if !UserSettings.sharedSettings().autoAccept {
+                delegate?.showConnecting()
+            }
             break
         case .NotConnected:
-            delegate?.hideConnecting(true)
+            if !UserSettings.sharedSettings().autoAccept {
+                delegate?.hideConnecting(true)
+            }
             if peerID.isEqual(isInvitee.fromWhom) {
                 isInvitee = (false, nil)
             }
