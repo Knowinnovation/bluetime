@@ -14,12 +14,25 @@
                             <fontDescription key="font" type="system" pointSize="40"/>
                             <calendarUnit key="units" minute="YES" second="YES"/>
                         </timer>
-                        <button width="1" height="0.29999999999999999" alignment="left" title="Start" id="3MR-nf-pmF"/>
-                        <button width="1" height="0.29999999999999999" alignment="left" title="Cancel" enabled="NO" id="SYW-7E-upy"/>
+                        <button width="1" height="0.29999999999999999" alignment="left" title="Start" id="3MR-nf-pmF">
+                            <connections>
+                                <action selector="startStop" destination="AgC-eL-Hgc" id="nvP-1P-SFy"/>
+                            </connections>
+                        </button>
+                        <button width="1" height="0.29999999999999999" alignment="left" title="Cancel" enabled="NO" id="SYW-7E-upy">
+                            <connections>
+                                <action selector="cancel" destination="AgC-eL-Hgc" id="LkJ-Id-uzd"/>
+                            </connections>
+                        </button>
                     </items>
+                    <connections>
+                        <outlet property="cancelButton" destination="SYW-7E-upy" id="6tj-ha-cR0"/>
+                        <outlet property="startStopButton" destination="3MR-nf-pmF" id="5zd-L3-rUL"/>
+                        <outlet property="timerLabel" destination="6TJ-Tz-9JS" id="dHh-Te-1eZ"/>
+                    </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="565" y="477"/>
+            <point key="canvasLocation" x="559" y="443"/>
         </scene>
     </scenes>
 </document>

@@ -45,6 +45,8 @@ class TimerViewController: UIViewController {
     
     let timeService = TimeServiceManager()
     
+    var audioPlayer: AVAudioPlayer = AVAudioPlayer()
+    
     var session: WCSession? {
         didSet {
             if let session = session {
@@ -53,8 +55,6 @@ class TimerViewController: UIViewController {
             }
         }
     }
-    
-    var audioPlayer: AVAudioPlayer = AVAudioPlayer()
     
     lazy var connectingAlert: UIAlertController = {
         var alert = UIAlertController(title: "Connecting", message: "\n\n\n", preferredStyle: UIAlertControllerStyle.Alert)
@@ -94,6 +94,9 @@ class TimerViewController: UIViewController {
         fullscreenView.hidden = true
         fullscreenLabel.adjustsFontSizeToFitWidth = true
         
+        if WCSession.isSupported() {
+            session = WCSession.defaultSession()
+        }
         
         timerCancelled = true
         timerIsRunning = false
@@ -121,11 +124,13 @@ class TimerViewController: UIViewController {
             duration = getTimeFromPicker()
             startTime = NSDate.timeIntervalSinceReferenceDate()
             timeService.sendTimeData(["action":"start", "startTime": startTime, "duration": duration])
+            session?.sendMessage(["action":"start", "startTime": startTime, "duration": duration], replyHandler: nil, errorHandler: nil)
             start()
         } else if !timerCancelled && !timerIsRunning {
             // Paused, should resume
             startTime = NSDate.timeIntervalSinceReferenceDate()
             timeService.sendTimeData(["action":"start", "startTime": startTime, "duration": duration])
+            session?.sendMessage(["action":"start", "startTime": startTime, "duration": duration], replyHandler: nil, errorHandler: nil)
             start()
         }
     }
@@ -135,6 +140,7 @@ class TimerViewController: UIViewController {
         if timerIsRunning {
             pause()
             timeService.sendTimeData(["action":"pause", "duration": duration])
+            session?.sendMessage(["action":"pause", "duration": duration], replyHandler: nil, errorHandler: nil)
         }
     }
     
@@ -142,12 +148,14 @@ class TimerViewController: UIViewController {
         if !timerCancelled && !timerIsRunning {
             cancel()
             timeService.sendTimeData(["action":"cancel"])
+            session?.sendMessage(["action":"cancel"], replyHandler: nil, errorHandler: nil)
         }
     }
     
     @IBAction func changedStopType(sender: UISegmentedControl) {
         stopType = StopType(rawValue: sender.selectedSegmentIndex)!
         timeService.sendTimeData(["action":"changeStopType", "stopType": stopType.rawValue])
+        
     }
     
     @IBAction func invitePeers(sender: AnyObject) {
@@ -496,6 +504,7 @@ extension TimerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         }
         duration = getTimeFromPicker()
         timeService.sendTimeData(["action":"selectDuration", "duration": duration])
+        session?.sendMessage(["action":"selectDuration", "duration": duration], replyHandler: nil, errorHandler: nil)
     }
     
     func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
@@ -515,9 +524,11 @@ extension TimerViewController: TimeServiceManagerDelegate {
                                                    "startTime":startTime,
                                                    "stopType":stopType.rawValue,
                                                    "timerFinished": timerFinished,
-                                                   "timerCancelled":timerCancelled]
+                                                   "timerCancelled":timerCancelled,
+                                                   "timerIsRunning":timerIsRunning]
         
         timeService.sendTimeData(data)
+        session?.sendMessage(data, replyHandler: nil, errorHandler: nil)
     }
     
     func showConnecting() {
@@ -586,6 +597,11 @@ extension TimerViewController: TimeServiceManagerDelegate {
                 self.timerFinished = data["timerFinished"] as! Bool
                 self.timerIsRunning = false
                 
+                let running = data["timerIsRunning"] as! Bool
+                if running {
+                    self.start()
+                }
+                
                 NSLog("running: %d, canceled: %d, finished: %d", self.timerIsRunning, self.timerCancelled, self.timerFinished)
                 
                 let (min, sec) = self.secondsToMinutesSeconds(data["duration"] as! Int)
@@ -604,6 +620,35 @@ extension TimerViewController: TimeServiceManagerDelegate {
 }
 
 extension TimerViewController: WCSessionDelegate {
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        NSOperationQueue.mainQueue().addOperationWithBlock {
+            NSLog("Changes received")
+            switch message["action"] as! String {
+            case "start":
+                self.startTime = message["startTime"] as! NSTimeInterval
+                self.duration = message["duration"] as! Double
+                self.start()
+            case "pause":
+                self.duration = message["duration"] as! Double
+                self.pause()
+            case "cancel":
+                self.cancel()
+            case "initialData":
+                let data: Dictionary<String, AnyObject> = ["action":"dataDump",
+                    "displayTime":self.displayTime,
+                    "duration":self.duration,
+                    "startTime":self.startTime,
+                    "stopType":self.stopType.rawValue,
+                    "timerFinished": self.timerFinished,
+                    "timerCancelled":self.timerCancelled,
+                    "timerIsRunning":self.timerIsRunning]
+                replyHandler(data)
+            default:
+                break
+            }
+        }
+    }
     
 }
 
