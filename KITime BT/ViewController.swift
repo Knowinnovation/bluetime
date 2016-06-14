@@ -179,12 +179,12 @@ class ViewController: UIViewController {
     @IBAction func toggleFullscreen() {
         if isFullscreen {
             // set back to 162...
-//            fullscreenView.hidden = true
-            timerView.frame.size.height = 162
+            fullscreenView.hidden = true
+//            timerView.frame.size.height = 162
             isFullscreen = false
         } else {
-//            fullscreenView.hidden = false
-            timerView.frame.size.height = self.view.frame.size.height
+            fullscreenView.hidden = false
+//            timerView.frame.size.height = self.view.frame.size.height
             isFullscreen = true
         }
     }
