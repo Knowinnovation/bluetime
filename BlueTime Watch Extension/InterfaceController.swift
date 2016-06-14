@@ -127,6 +127,8 @@ class InterfaceController: WKInterfaceController {
         let date = NSDate(timeIntervalSinceReferenceDate: NSDate.timeIntervalSinceReferenceDate()+duration)
         timerLabel.setDate(date)
         
+        elapsedTime = 0
+        
         updateButtons()
     }
     

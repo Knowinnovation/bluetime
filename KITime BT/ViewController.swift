@@ -1,5 +1,5 @@
 //
-//  TimerViewController.swift
+//  ViewController.swift
 //  KITime BT
 //
 //  Created by Drew Dunne on 5/30/16.
@@ -11,7 +11,7 @@ import MultipeerConnectivity
 import AVFoundation
 import WatchConnectivity
 
-class TimerViewController: UIViewController {
+class ViewController: UIViewController {
     
     @IBOutlet weak var startButton:UIButton!
     @IBOutlet weak var pauseButton:UIButton!
@@ -21,31 +21,28 @@ class TimerViewController: UIViewController {
     @IBOutlet weak var timerPicker: UIPickerView!
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var fullscreenButton:UIButton!
-//    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var stopTypeSelector: UISegmentedControl!
     @IBOutlet weak var fullscreenView: UIView!
-//    @IBOutlet weak var fullscreenLabel: UILabel!
     
     @IBOutlet weak var timerLabel: UITimerLabel!
     @IBOutlet weak var fullscreenLabel: UITimerLabel!
     
     var minsLabel: UILabel!
     var secsLabel: UILabel!
+    
     var isFullscreen: Bool = false
-        
-    var displayTime: Double = 0
-    var startTime: NSTimeInterval = -1
     var stopType: StopType = .Hard
+    
+    var elapsedTime: NSTimeInterval = 0
+    var startTime: NSTimeInterval = -1
     var duration: Double = 300
-    var fullDuration: Double = 300
+    
     var timerIsRunning: Bool = false
     var timerFinished: Bool = false
     var timerCancelled: Bool = true
     
     var timeUponExit: NSTimeInterval = -1
-    
-    var timer = NSTimer()
     
     let timeService = TimeServiceManager()
     
@@ -108,13 +105,13 @@ class TimerViewController: UIViewController {
         
         //Update the view for rotation and add listener for rotation
         rotated()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         //add observers for when view disappears and reappears
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.appWillTerminate(_:)), name: UIApplicationWillTerminateNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.appEnteredForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TimerViewController.appBecameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillTerminate(_:)), name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appEnteredForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appBecameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -126,16 +123,19 @@ class TimerViewController: UIViewController {
         if timerCancelled && !timerIsRunning {
             // Fresh timer, set duration to picker
             duration = getTimeFromPicker()
-            fullDuration = getTimeFromPicker()
             startTime = NSDate.timeIntervalSinceReferenceDate()
-            timeService.sendTimeData(["action":"start", "startTime": startTime, "duration": duration])
-            session?.sendMessage(["action":"start", "startTime": startTime, "duration": fullDuration], replyHandler: nil, errorHandler: nil)
+            
+            let data: Dictionary<String, AnyObject> = ["action":"start", "startTime": startTime, "duration": duration, "elapsedTime": elapsedTime]
+            timeService.sendTimeData(data)
+            session?.sendMessage(data, replyHandler: nil, errorHandler: nil)
             start()
         } else if !timerCancelled && !timerIsRunning {
             // Paused, should resume
             startTime = NSDate.timeIntervalSinceReferenceDate()
-            timeService.sendTimeData(["action":"start", "startTime": startTime, "duration": duration])
-            session?.sendMessage(["action":"start", "startTime": startTime, "duration": fullDuration], replyHandler: nil, errorHandler: nil)
+            
+            let data: Dictionary<String, AnyObject> = ["action":"start", "startTime": startTime, "duration": duration, "elapsedTime": elapsedTime]
+            timeService.sendTimeData(data)
+            session?.sendMessage(data, replyHandler: nil, errorHandler: nil)
             start()
         }
     }
@@ -144,8 +144,8 @@ class TimerViewController: UIViewController {
         // Only pause if running
         if timerIsRunning {
             pause()
-            timeService.sendTimeData(["action":"pause", "duration": duration])
-            session?.sendMessage(["action":"pause", "duration": fullDuration], replyHandler: nil, errorHandler: nil)
+            timeService.sendTimeData(["action":"pause", "elapsedTime": elapsedTime])
+            session?.sendMessage(["action":"pause", "elapsedTime": elapsedTime], replyHandler: nil, errorHandler: nil)
         }
     }
     
@@ -183,11 +183,9 @@ class TimerViewController: UIViewController {
     func start() {
         // Only if the timer is not already running should something happen
         if !timerIsRunning {
-            NSLog("Starting")
             timerIsRunning = true
             timerCancelled = false
             timerFinished = false
-            displayTime = duration
             animateState()
             updateButtons()
             
@@ -210,7 +208,7 @@ class TimerViewController: UIViewController {
             
             if timerIsRunning {
                 // Run the delayed time
-                NSTimer.scheduledTimerWithTimeInterval(delay, target: self, selector: #selector(TimerViewController.postDelay), userInfo: nil, repeats: false)
+                NSTimer.scheduledTimerWithTimeInterval(delay, target: self, selector: #selector(ViewController.postDelay), userInfo: nil, repeats: false)
             }
         }
     }
@@ -290,7 +288,7 @@ class TimerViewController: UIViewController {
         updateLabel()
         if checkForFinish() { return }
         if timerIsRunning {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(TimerViewController.updateTime), userInfo: nil, repeats: true) //Start the repetitive timer 1 second apart each
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateTime), userInfo: nil, repeats: true) //Start the repetitive timer 1 second apart each
         }
         
     }
@@ -483,7 +481,7 @@ class TimerViewController: UIViewController {
     
 }
 
-extension TimerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 2
@@ -520,7 +518,7 @@ extension TimerViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
-extension TimerViewController: TimeServiceManagerDelegate {
+extension ViewController: TimeServiceManagerDelegate {
     
     func sendFullData() {
         let data: Dictionary<String, AnyObject> = ["action":"dataDump",
@@ -624,7 +622,7 @@ extension TimerViewController: TimeServiceManagerDelegate {
     
 }
 
-extension TimerViewController: WCSessionDelegate {
+extension ViewController: WCSessionDelegate {
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -657,7 +655,7 @@ extension TimerViewController: WCSessionDelegate {
     
 }
 
-extension TimerViewController: MCBrowserViewControllerDelegate {
+extension ViewController: MCBrowserViewControllerDelegate {
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
         self.dismissViewControllerAnimated(true, completion: nil)
