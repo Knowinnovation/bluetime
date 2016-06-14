@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Timer View Controller-->
+        <!--View Controller-->
         <scene sceneID="faQ-Qr-l22">
             <objects>
-                <viewController id="yNW-BH-EVg" customClass="TimerViewController" customModule="KITime_BT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yNW-BH-EVg" customClass="ViewController" customModule="KITime_BT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b3j-2C-Uv4"/>
                         <viewControllerLayoutGuide type="bottom" id="ToR-0m-oFv"/>
@@ -152,7 +152,7 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Ep-Tf-NTh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="162"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNE-jW-xA7">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gNE-jW-xA7" customClass="UITimerLabel" customModule="KITime_BT" customModuleProvider="target">
                                         <rect key="frame" x="16" y="0.0" width="568" height="162"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="75"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -187,7 +187,7 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9c-8J-sz3">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="120" translatesAutoresizingMaskIntoConstraints="NO" id="u41-41-70f">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumFontSize="120" translatesAutoresizingMaskIntoConstraints="NO" id="u41-41-70f" customClass="UITimerLabel" customModule="KITime_BT" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="584" height="584"/>
                                         <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="120"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -242,19 +242,19 @@
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="buttonContainerView" destination="v4u-KN-hzw" id="3Ye-AX-Y2H"/>
-                        <outlet property="cancelButton" destination="Af6-TZ-w8D" id="INa-3G-gzA"/>
-                        <outlet property="fullscreenButton" destination="fho-fV-OvQ" id="eUB-Kq-ToE"/>
-                        <outlet property="fullscreenLabel" destination="u41-41-70f" id="7RP-wZ-gU1"/>
-                        <outlet property="fullscreenView" destination="O9c-8J-sz3" id="Lkw-bk-ZDU"/>
-                        <outlet property="inviteButton" destination="iMt-rt-yGn" id="Oze-1t-Imq"/>
-                        <outlet property="pauseButton" destination="QG6-oj-cvw" id="tFJ-XY-Bed"/>
-                        <outlet property="settingsButton" destination="MPo-CV-3hE" id="RUC-wB-G7Q"/>
-                        <outlet property="startButton" destination="7pJ-HM-oJ3" id="tXt-5Q-djk"/>
-                        <outlet property="stopTypeSelector" destination="Ubt-GZ-E3Z" id="8xG-FQ-xJQ"/>
-                        <outlet property="timerLabel" destination="gNE-jW-xA7" id="twm-vG-5h2"/>
-                        <outlet property="timerPicker" destination="Nib-n8-qqC" id="uz9-CU-Doa"/>
-                        <outlet property="timerView" destination="8Ep-Tf-NTh" id="zL3-Pg-LbT"/>
+                        <outlet property="buttonContainerView" destination="v4u-KN-hzw" id="vKy-N3-pX3"/>
+                        <outlet property="cancelButton" destination="Af6-TZ-w8D" id="5bh-aR-gkS"/>
+                        <outlet property="fullscreenButton" destination="fho-fV-OvQ" id="xov-4Q-se0"/>
+                        <outlet property="fullscreenLabel" destination="u41-41-70f" id="Sev-t1-L6j"/>
+                        <outlet property="fullscreenView" destination="O9c-8J-sz3" id="vqQ-lU-ZkO"/>
+                        <outlet property="inviteButton" destination="iMt-rt-yGn" id="RGq-v1-GVY"/>
+                        <outlet property="pauseButton" destination="QG6-oj-cvw" id="dI0-AQ-3fF"/>
+                        <outlet property="settingsButton" destination="MPo-CV-3hE" id="iTv-Xv-0bi"/>
+                        <outlet property="startButton" destination="7pJ-HM-oJ3" id="CTY-ix-cOy"/>
+                        <outlet property="stopTypeSelector" destination="Ubt-GZ-E3Z" id="xaX-lw-hga"/>
+                        <outlet property="timerLabel" destination="gNE-jW-xA7" id="Z6Y-Uj-HZ2"/>
+                        <outlet property="timerPicker" destination="Nib-n8-qqC" id="zy8-jy-iDc"/>
+                        <outlet property="timerView" destination="8Ep-Tf-NTh" id="I95-QT-UoY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olB-nD-QLg" sceneMemberID="firstResponder"/>

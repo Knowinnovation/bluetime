@@ -16,8 +16,8 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var cancelButton: WKInterfaceButton!
     @IBOutlet weak var timerLabel: WKInterfaceTimer!
     
-    var displayTime: Double = 0
     var startTime: NSTimeInterval = -1
+    var pauseTime: NSTimeInterval = -1
     var duration: Double = 300
     var elapsedTime: NSTimeInterval = 0
     var timer: NSTimer?
@@ -51,6 +51,22 @@ class InterfaceController: WKInterfaceController {
             session = WCSession.defaultSession()
             session!.sendMessage(["action":"initialData"], replyHandler: { (response) -> Void in
                 
+                self.startTime = response["startTime"] as! NSTimeInterval
+                self.duration = response["duration"] as! Double
+                self.elapsedTime = response["elapsedTime"] as! NSTimeInterval
+                self.pauseTime = response["pauseTime"] as! Double
+                self.timerCancelled = response["timerCancelled"] as! Bool
+                self.timerFinished = response["timerFinished"] as! Bool
+                self.timerIsRunning = false
+                
+                let running = response["timerIsRunning"] as! Bool
+                if running {
+                    self.start()
+                }
+                
+                NSLog("running: %d, canceled: %d, finished: %d", self.timerIsRunning, self.timerCancelled, self.timerFinished)
+                
+                self.updateButtons()
                 }, errorHandler: { (error) -> Void in
                     print(error)
             })
@@ -70,27 +86,26 @@ class InterfaceController: WKInterfaceController {
     
     @IBAction func startStopPressed() {
         if timerIsRunning {
-//            duration -= NSDate.timeIntervalSinceReferenceDate() - startTime
-            startStop()
-            session!.sendMessage(["action":"pause", "duration":duration], replyHandler: { (response) -> Void in
+            pauseTime = NSDate.timeIntervalSinceReferenceDate()
+            pause()
+            session!.sendMessage(["action":"pause", "pauseTime":pauseTime], replyHandler: { (response) -> Void in
                 
                 }, errorHandler: { (error) -> Void in
                     print(error)
             })
         } else {
             startTime = NSDate.timeIntervalSinceReferenceDate()
-            startStop()
-            session!.sendMessage(["action":"start", "duration":duration, "startTime":startTime], replyHandler: { (response) -> Void in
+            session!.sendMessage(["action":"start", "duration":duration, "startTime":startTime, "elapsedTime":elapsedTime], replyHandler: { (response) -> Void in
                 
                 }, errorHandler: { (error) -> Void in
                     print(error)
             })
+            start()
         }
     }
     
     @IBAction func cancelPressed() {
         cancel()
-        
         session!.sendMessage(["action":"cancel"], replyHandler: { (response) -> Void in
             
             }, errorHandler: { (error) -> Void in
@@ -98,24 +113,35 @@ class InterfaceController: WKInterfaceController {
         })
     }
     
-    func startStop() {
-        if timerIsRunning {
-            timerLabel.stop()
-            timer!.invalidate()
-            elapsedTime += NSDate.timeIntervalSinceReferenceDate() - startTime
-            let date = NSDate(timeIntervalSinceNow: duration - elapsedTime)
-            timerLabel.setDate(date)
-            timerIsRunning = false
-            startStopButton.setTitle("Start")
-        } else {
-            timer = NSTimer.scheduledTimerWithTimeInterval(duration - elapsedTime, target: self, selector: #selector(InterfaceController.timeDone), userInfo: nil, repeats: false)
-            let date = NSDate(timeIntervalSinceNow: duration - elapsedTime)
-            timerLabel.setDate(date)
-            timerLabel.start()
+    func start() {
+        if !timerIsRunning {
             timerIsRunning = true
-            startStopButton.setTitle("Pause")
+            timerCancelled = false
+            timerFinished = false
+            updateButtons()
+            
+            elapsedTime += NSDate.timeIntervalSinceReferenceDate() - startTime
+            
+            timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime+1))
+            timerLabel.start()
+            
+            // It's possible the delay caused the timer to end, then we need to finish the timer
+            if timerFinished { return }
         }
-        updateButtons()
+    }
+    
+    func pause() {
+        if timerIsRunning {
+            timerIsRunning = false
+            timerCancelled = false
+            timerFinished = false
+            
+            timerLabel.stop()
+            elapsedTime += pauseTime - startTime
+            timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime+1))
+            
+            updateButtons()
+        }
     }
     
     func cancel() {
@@ -124,24 +150,10 @@ class InterfaceController: WKInterfaceController {
         timerCancelled = true
         
         timerLabel.stop()
-        let date = NSDate(timeIntervalSinceReferenceDate: NSDate.timeIntervalSinceReferenceDate()+duration)
+        let date = NSDate(timeIntervalSinceReferenceDate: NSDate.timeIntervalSinceReferenceDate()+duration+1)
         timerLabel.setDate(date)
         
         elapsedTime = 0
-        
-        updateButtons()
-    }
-    
-    func timeDone() {
-        
-    }
-    
-    
-    // Upon timer completion, this runs
-    func finishTimer() {
-        timerFinished = true
-        timerIsRunning = false
-        timerCancelled = false
         
         updateButtons()
     }
@@ -174,10 +186,11 @@ extension InterfaceController: WCSessionDelegate {
         case "start":
             self.startTime = message["startTime"] as! NSTimeInterval
             self.duration = message["duration"] as! Double
-            self.startStop()
+            self.elapsedTime = message["elapsedTime"] as! NSTimeInterval
+            self.start()
         case "pause":
-            self.duration = message["duration"] as! Double
-            self.startStop()
+            self.pauseTime = message["pauseTime"] as! NSTimeInterval
+            self.pause()
         case "cancel":
             self.cancel()
         case "selectDuration":
@@ -187,14 +200,15 @@ extension InterfaceController: WCSessionDelegate {
         case "dataDump":
             self.startTime = message["startTime"] as! NSTimeInterval
             self.duration = message["duration"] as! Double
-            self.displayTime = message["displayTime"] as! Double
+            self.elapsedTime = message["elapsedTime"] as! NSTimeInterval
+            self.pauseTime = message["pauseTime"] as! NSTimeInterval
             self.timerCancelled = message["timerCancelled"] as! Bool
             self.timerFinished = message["timerFinished"] as! Bool
             self.timerIsRunning = false
             
             let running = message["timerIsRunning"] as! Bool
             if running {
-                self.startStop()
+                self.start()
             }
             
             self.updateButtons()

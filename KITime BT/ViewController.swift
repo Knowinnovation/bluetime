@@ -11,6 +11,11 @@ import MultipeerConnectivity
 import AVFoundation
 import WatchConnectivity
 
+enum StopType: Int {
+    case Hard = 0
+    case Soft = 1
+}
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var startButton:UIButton!
@@ -36,6 +41,7 @@ class ViewController: UIViewController {
     
     var elapsedTime: NSTimeInterval = 0
     var startTime: NSTimeInterval = -1
+    var pauseTime: NSTimeInterval = -1
     var duration: Double = 300
     
     var timerIsRunning: Bool = false
@@ -70,13 +76,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         timeService.delegate = self
+        timerLabel.delegate = self
+        fullscreenLabel.delegate = self
         UIApplication.sharedApplication().idleTimerDisabled = true
         
         startButton.layer.cornerRadius = 10;
         pauseButton.layer.cornerRadius = 10;
         cancelButton.layer.cornerRadius = 10;
-        inviteButton.layer.cornerRadius = 10;
-        settingsButton.layer.cornerRadius = 10;
         
         minsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22))
         minsLabel.font = UIFont.systemFontOfSize(17.0)
@@ -143,9 +149,10 @@ class ViewController: UIViewController {
     @IBAction func pausePressed() {
         // Only pause if running
         if timerIsRunning {
+            pauseTime = NSDate.timeIntervalSinceReferenceDate()
             pause()
-            timeService.sendTimeData(["action":"pause", "elapsedTime": elapsedTime])
-            session?.sendMessage(["action":"pause", "elapsedTime": elapsedTime], replyHandler: nil, errorHandler: nil)
+            timeService.sendTimeData(["action":"pause", "pauseTime": pauseTime])
+            session?.sendMessage(["action":"pause", "pauseTime": pauseTime], replyHandler: nil, errorHandler: nil)
         }
     }
     
@@ -172,10 +179,12 @@ class ViewController: UIViewController {
     @IBAction func toggleFullscreen() {
         if isFullscreen {
             // set back to 162...
-            fullscreenView.hidden = true
+//            fullscreenView.hidden = true
+            timerView.frame.size.height = 162
             isFullscreen = false
         } else {
-            fullscreenView.hidden = false
+//            fullscreenView.hidden = false
+            timerView.frame.size.height = self.view.frame.size.height
             isFullscreen = true
         }
     }
@@ -189,45 +198,27 @@ class ViewController: UIViewController {
             animateState()
             updateButtons()
             
-            // Calculate the delay from when the start button was actually pushed
-            let numSecsPassed = NSDate.timeIntervalSinceReferenceDate()
-            let diff = numSecsPassed - startTime
-            var delay = 1.0 - diff
-            //If coming in while started update the displayTime to match the actual based on how much has passed
-            if diff > 1.0 {
-                delay = 1.0 - ((numSecsPassed - floor(numSecsPassed)) - (startTime - floor(startTime)))
-                displayTime -= floor(numSecsPassed) - floor(startTime)
-                
-            }
+            elapsedTime += NSDate.timeIntervalSinceReferenceDate() - startTime
+            
+            timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
+            timerLabel.start()
             
             // It's possible the delay caused the timer to end, then we need to finish the timer
-            if checkForFinish() { return }
-            
-            // Otherwise update the label
-            updateLabel()
-            
-            if timerIsRunning {
-                // Run the delayed time
-                NSTimer.scheduledTimerWithTimeInterval(delay, target: self, selector: #selector(ViewController.postDelay), userInfo: nil, repeats: false)
-            }
+            if timerFinished { return }
         }
     }
     
     func pause() {
         // Only pause if the timer is running
         if timerIsRunning {
-            timer.invalidate()
             timerIsRunning = false
             timerCancelled = false
             timerFinished = false
             
-            //Calculate the new duration based on how much time passed
-            NSLog("%.2f", NSDate.timeIntervalSinceReferenceDate() - startTime)
-//            duration -= (floor(NSDate.timeIntervalSinceReferenceDate()) - floor(startTime))
-//            displayTime = duration
-            duration = displayTime
+            timerLabel.stop()
+            elapsedTime += pauseTime - startTime
+            timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
             
-            updateLabel()
             updateButtons()
         }
     }
@@ -235,39 +226,33 @@ class ViewController: UIViewController {
     func cancel() {
         // Only allow canceled when canceled
         if !timerIsRunning && !timerCancelled {
-            timer.invalidate()
             timerIsRunning = false
             timerFinished = false
             timerCancelled = true
             
+            elapsedTime = 0
+            timerLabel.setDate(NSDate(timeIntervalSinceNow: duration))
+            
             updateButtons()
-            updateLabel()
             animateState()
         }
     }
     
-    // Checks if the clock needs to be stopped, then stops it
-    func checkForFinish() -> Bool {
-        if displayTime <= 0 && stopType == .Hard {
-            finishTimer()
-            return true
-        }
-        return false
-    }
-    
     // Upon timer completion, this runs
     func finishTimer() {
-        timer.invalidate()
         timerFinished = true
         timerIsRunning = false
         timerCancelled = false
         
+        timerLabel.stop()
+        timerLabel.setDate(NSDate())
+        
         updateButtons()
-        updateLabel()
         
         // Play sound here
         do {
             audioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: "/Library/Ringtones/Duck.m4r")!)
+            NSLog("Playing Sound")
             audioPlayer.numberOfLoops = -1
             audioPlayer.play()
             let alert = UIAlertController(title: "Timer done", message: nil, preferredStyle:.Alert)
@@ -280,73 +265,6 @@ class ViewController: UIViewController {
             debugPrint("\(error)")
         }
         
-    }
-    
-    func postDelay() {
-        
-        displayTime -= 1 //Bring timer count down again
-        updateLabel()
-        if checkForFinish() { return }
-        if timerIsRunning {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ViewController.updateTime), userInfo: nil, repeats: true) //Start the repetitive timer 1 second apart each
-        }
-        
-    }
-    
-    // Runs during the timer loop
-    func updateTime() {
-        
-        displayTime -= 1 //Count down the time
-        self.updateLabel() //Update the label
-        if checkForFinish() { return }
-    }
-    
-    func updateLabel() {
-        if displayTime >= 0 {
-            if displayTime < 60 {
-                timerLabel.textColor = UIColor.redColor()
-                fullscreenLabel.textColor = UIColor.redColor()
-            } else if displayTime < 120 {
-                timerLabel.textColor = UIColor.orangeColor()
-                fullscreenLabel.textColor = UIColor.orangeColor()
-            } else {
-                timerLabel.textColor = UIColor.blackColor()
-                fullscreenLabel.textColor = UIColor.blackColor()
-            }
-            var timeToShow: Double!;
-            if !timerIsRunning && timerCancelled {
-                timeToShow = getTimeFromPicker()
-            } else {
-                timeToShow = displayTime
-            }
-            let (m,s) = secondsToMinutesSeconds(Int(timeToShow))
-            self.timerLabel.text = String(format: "%02d:%02d",m,s)
-            self.fullscreenLabel.text = String(format: "%02d:%02d",m,s)
-            if timerFinished {
-                timerLabel.textColor = UIColor.redColor()
-                self.timerLabel.text = String("00:00")
-                fullscreenLabel.textColor = UIColor.redColor()
-                self.fullscreenLabel.text = String("00:00")
-            }
-        } else {
-            timerLabel.textColor = UIColor.redColor()
-            fullscreenLabel.textColor = UIColor.redColor()
-            var timeToShow: Double!
-            if timerCancelled {
-                timeToShow = getTimeFromPicker()
-            } else {
-                timeToShow = displayTime
-            }
-            let (m,s) = secondsToMinutesSeconds(Int(abs(timeToShow)))
-            self.timerLabel.text = String(format: "+%02d:%02d",m,s)
-            self.fullscreenLabel.text = String(format: "+%02d:%02d",m,s)
-            if timerFinished {
-                timerLabel.textColor = UIColor.redColor()
-                self.timerLabel.text = String("00:00")
-                fullscreenLabel.textColor = UIColor.redColor()
-                self.fullscreenLabel.text = String("00:00")
-            }
-        }
     }
     
     func updateButtons() {
@@ -408,11 +326,6 @@ class ViewController: UIViewController {
         }
     }
     
-    // Updates the font size of the full screen label
-    func updateFSFontSize() {
-        
-    }
-    
     // Changes view based on rotation of device
     func rotated() {
         minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22)
@@ -446,12 +359,12 @@ class ViewController: UIViewController {
     func appBecameActive(note: NSNotification) {
         print("Became Active")
         print("\(timerIsRunning)")
-        if timerIsRunning {
-            timerIsRunning = false
-            startTime = NSDate.timeIntervalSinceReferenceDate()
-            duration -= startTime - timeUponExit
-            start()
-        }
+//        if timerIsRunning {
+//            timerIsRunning = false
+//            startTime = NSDate.timeIntervalSinceReferenceDate()
+//            duration -= startTime - timeUponExit
+//            start()
+//        }
     }
     
     //create observers when app reopens
@@ -463,15 +376,14 @@ class ViewController: UIViewController {
         print("Entered Background")
 //        timerIsRunning = false
         timeUponExit = NSDate.timeIntervalSinceReferenceDate()
-        duration = displayTime
-        timer.invalidate()
+        
     }
     
     //remove all observers
     func appWillTerminate(note: NSNotification) {
         print("App Terminated")
 //        timerIsRunning = false
-        timer.invalidate()
+        
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillTerminateNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -479,6 +391,15 @@ class ViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
     
+}
+
+extension ViewController: UITimerLabelDelegate {
+    func timerDidReachZero(timer: UITimerLabel) {
+        NSLog("Reached Zero")
+        if self.stopType == .Hard {
+            finishTimer()
+        }
+    }
 }
 
 extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -522,9 +443,10 @@ extension ViewController: TimeServiceManagerDelegate {
     
     func sendFullData() {
         let data: Dictionary<String, AnyObject> = ["action":"dataDump",
-                                                   "displayTime":displayTime,
+                                                   "elapsedTime":elapsedTime,
                                                    "duration":duration,
                                                    "startTime":startTime,
+                                                   "pauseTime":pauseTime,
                                                    "stopType":stopType.rawValue,
                                                    "timerFinished": timerFinished,
                                                    "timerCancelled":timerCancelled,
@@ -577,9 +499,10 @@ extension ViewController: TimeServiceManagerDelegate {
             case "start":
                 self.startTime = data["startTime"] as! NSTimeInterval
                 self.duration = data["duration"] as! Double
+                self.elapsedTime = data["elapsedTime"] as! NSTimeInterval
                 self.start()
             case "pause":
-                self.duration = data["duration"] as! Double
+                self.pauseTime = data["pauseTime"] as! Double
                 self.pause()
             case "cancel":
                 self.cancel()
@@ -594,7 +517,8 @@ extension ViewController: TimeServiceManagerDelegate {
             case "dataDump":
                 self.startTime = data["startTime"] as! NSTimeInterval
                 self.duration = data["duration"] as! Double
-                self.displayTime = data["displayTime"] as! Double
+                self.elapsedTime = data["elapsedTime"] as! NSTimeInterval
+                self.pauseTime = data["pauseTime"] as! Double
                 self.stopType = StopType(rawValue: data["stopType"] as! Int)!
                 self.timerCancelled = data["timerCancelled"] as! Bool
                 self.timerFinished = data["timerFinished"] as! Bool
@@ -612,7 +536,6 @@ extension ViewController: TimeServiceManagerDelegate {
                 self.timerPicker.selectRow(sec, inComponent: 1, animated: true)
                 
                 self.animateState()
-                self.updateLabel()
                 self.updateButtons()
             default:
                 break
@@ -627,19 +550,22 @@ extension ViewController: WCSessionDelegate {
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         NSOperationQueue.mainQueue().addOperationWithBlock {
             NSLog("Changes received")
+            self.timeService.sendTimeData(message)
             switch message["action"] as! String {
             case "start":
                 self.startTime = message["startTime"] as! NSTimeInterval
                 self.duration = message["duration"] as! Double
+                self.elapsedTime = message["elapsedTime"] as! Double
                 self.start()
             case "pause":
-                self.duration = message["duration"] as! Double
+                self.pauseTime = message["pauseTime"] as! NSTimeInterval
                 self.pause()
             case "cancel":
                 self.cancel()
             case "initialData":
                 let data: Dictionary<String, AnyObject> = ["action":"dataDump",
-                    "displayTime":self.displayTime,
+                    "pauseTime":self.pauseTime,
+                    "elapsedTime":self.elapsedTime,
                     "duration":self.duration,
                     "startTime":self.startTime,
                     "stopType":self.stopType.rawValue,

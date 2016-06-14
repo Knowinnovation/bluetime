@@ -5,6 +5,8 @@
 //  Copyright © 2016 Drew Dunne. All rights reserved.
 //
 
+// This version of UITimerLabel has been modified from the original
+
 import UIKit
 
 @objc protocol UITimerLabelDelegate {
@@ -66,6 +68,7 @@ class UITimerLabel: UILabel {
         let time = self.runToDate!.timeIntervalSinceNow + 1
         self.setTimeDisplay(time)
         if floor(time) == 0 {
+            NSLog("At zero")
             delegate?.timerDidReachZero?(self)
         }
     }
@@ -73,9 +76,17 @@ class UITimerLabel: UILabel {
     // Formats the time interval for displaying
     private func setTimeDisplay(displayTime: NSTimeInterval) {
         if displayTime >= 0 {
+            if displayTime < 60 {
+                self.textColor = UIColor.redColor()
+            } else if displayTime < 120 {
+                self.textColor = UIColor.orangeColor()
+            } else {
+                self.textColor = UIColor.blackColor()
+            }
             let (m,s) = secondsToMinutesSeconds(Int(displayTime))
             self.text = String(format: "%02d:%02d",m,s)
         } else {
+            self.textColor = UIColor.redColor()
             let (m,s) = secondsToMinutesSeconds(Int(abs(displayTime)))
             self.text = String(format: "+%02d:%02d",m,s)
         }

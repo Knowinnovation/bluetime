@@ -24,10 +24,8 @@ class TimerButton: UIButton {
     override var enabled: Bool {
         didSet {
             if enabled {
-                //self.backgroundColor = UIColor.whiteColor()
                 self.alpha = 1.0
             } else {
-                //self.backgroundColor = UIColor(white: 1.0, alpha: 0.5)
                 self.alpha = 0.0
             }
             
