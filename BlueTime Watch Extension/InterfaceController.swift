@@ -19,6 +19,8 @@ class InterfaceController: WKInterfaceController {
     var displayTime: Double = 0
     var startTime: NSTimeInterval = -1
     var duration: Double = 300
+    var elapsedTime: NSTimeInterval = 0
+    var timer: NSTimer?
     var timerIsRunning: Bool = false
     var timerFinished: Bool = false
     var timerCancelled: Bool = true
@@ -66,22 +68,57 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
-    @IBAction func startStop() {
+    @IBAction func startStopPressed() {
+        if timerIsRunning {
+//            duration -= NSDate.timeIntervalSinceReferenceDate() - startTime
+            startStop()
+            session!.sendMessage(["action":"pause", "duration":duration], replyHandler: { (response) -> Void in
+                
+                }, errorHandler: { (error) -> Void in
+                    print(error)
+            })
+        } else {
+            startTime = NSDate.timeIntervalSinceReferenceDate()
+            startStop()
+            session!.sendMessage(["action":"start", "duration":duration, "startTime":startTime], replyHandler: { (response) -> Void in
+                
+                }, errorHandler: { (error) -> Void in
+                    print(error)
+            })
+        }
+    }
+    
+    @IBAction func cancelPressed() {
+        cancel()
+        
+        session!.sendMessage(["action":"cancel"], replyHandler: { (response) -> Void in
+            
+            }, errorHandler: { (error) -> Void in
+                print(error)
+        })
+    }
+    
+    func startStop() {
         if timerIsRunning {
             timerLabel.stop()
-            let date = NSDate(timeIntervalSinceReferenceDate: NSDate.timeIntervalSinceReferenceDate()+duration)
+            timer!.invalidate()
+            elapsedTime += NSDate.timeIntervalSinceReferenceDate() - startTime
+            let date = NSDate(timeIntervalSinceNow: duration - elapsedTime)
             timerLabel.setDate(date)
             timerIsRunning = false
+            startStopButton.setTitle("Start")
         } else {
-            let date = NSDate(timeIntervalSinceReferenceDate: startTime+duration)
+            timer = NSTimer.scheduledTimerWithTimeInterval(duration - elapsedTime, target: self, selector: #selector(InterfaceController.timeDone), userInfo: nil, repeats: false)
+            let date = NSDate(timeIntervalSinceNow: duration - elapsedTime)
             timerLabel.setDate(date)
             timerLabel.start()
             timerIsRunning = true
+            startStopButton.setTitle("Pause")
         }
         updateButtons()
     }
     
-    @IBAction func cancel() {
+    func cancel() {
         timerFinished = false
         timerIsRunning = false
         timerCancelled = true
@@ -91,6 +128,10 @@ class InterfaceController: WKInterfaceController {
         timerLabel.setDate(date)
         
         updateButtons()
+    }
+    
+    func timeDone() {
+        
     }
     
     

@@ -16,12 +16,12 @@
                         </timer>
                         <button width="1" height="0.29999999999999999" alignment="left" title="Start" id="3MR-nf-pmF">
                             <connections>
-                                <action selector="startStop" destination="AgC-eL-Hgc" id="nvP-1P-SFy"/>
+                                <action selector="startStopPressed" destination="AgC-eL-Hgc" id="RS7-0m-gl7"/>
                             </connections>
                         </button>
                         <button width="1" height="0.29999999999999999" alignment="left" title="Cancel" enabled="NO" id="SYW-7E-upy">
                             <connections>
-                                <action selector="cancel" destination="AgC-eL-Hgc" id="LkJ-Id-uzd"/>
+                                <action selector="cancelPressed" destination="AgC-eL-Hgc" id="ryR-VU-VYK"/>
                             </connections>
                         </button>
                     </items>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yNW-BH-EVg">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -94,15 +93,14 @@
                                             <action selector="pausePressed" destination="yNW-BH-EVg" eventType="touchUpInside" id="tyh-JW-1eP"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMt-rt-yGn" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="364" width="80" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMt-rt-yGn">
+                                        <rect key="frame" x="68" y="350" width="44" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="k6a-xC-kjp"/>
-                                            <constraint firstAttribute="width" constant="80" id="y9p-ak-nHL"/>
+                                            <constraint firstAttribute="height" constant="44" id="4fe-a3-cV3"/>
+                                            <constraint firstAttribute="width" constant="44" id="WGp-Ov-iSI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Invite">
+                                        <state key="normal" image="ki-invite">
                                             <color key="titleColor" red="0.0" green="0.52971073575451122" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -113,15 +111,14 @@
                                             <action selector="invitePeers:" destination="yNW-BH-EVg" eventType="touchUpInside" id="Nsd-Lr-OeH"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPo-CV-3hE" customClass="TimerButton" customModule="KITime_BT" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="80" height="30"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPo-CV-3hE">
+                                        <rect key="frame" x="8" y="350" width="44" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="dlg-zX-lFG"/>
-                                            <constraint firstAttribute="height" constant="30" id="wNr-Bw-C81"/>
+                                            <constraint firstAttribute="height" constant="44" id="e3N-6G-cEy"/>
+                                            <constraint firstAttribute="width" constant="44" id="o23-zo-PIr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Settings">
+                                        <state key="normal" image="ki-settings">
                                             <color key="titleColor" red="0.0" green="0.52971073580000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -136,18 +133,18 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="7pJ-HM-oJ3" secondAttribute="centerX" id="25h-F8-F2O"/>
+                                    <constraint firstAttribute="bottom" secondItem="MPo-CV-3hE" secondAttribute="bottom" constant="8" id="71Q-Vy-ZQw"/>
                                     <constraint firstItem="QG6-oj-cvw" firstAttribute="centerX" secondItem="v4u-KN-hzw" secondAttribute="centerX" id="9TY-Df-M2K"/>
+                                    <constraint firstAttribute="bottom" secondItem="iMt-rt-yGn" secondAttribute="bottom" constant="8" id="9ck-Ua-4mi"/>
+                                    <constraint firstItem="MPo-CV-3hE" firstAttribute="leading" secondItem="v4u-KN-hzw" secondAttribute="leading" constant="8" id="HIr-da-YNq"/>
                                     <constraint firstAttribute="trailing" secondItem="Af6-TZ-w8D" secondAttribute="trailing" constant="8" id="JSu-80-Ldp"/>
-                                    <constraint firstAttribute="bottom" secondItem="iMt-rt-yGn" secondAttribute="bottom" constant="8" id="Nxj-BB-oUf"/>
-                                    <constraint firstItem="MPo-CV-3hE" firstAttribute="top" secondItem="v4u-KN-hzw" secondAttribute="top" constant="8" id="Ufl-vt-tzO"/>
                                     <constraint firstItem="QG6-oj-cvw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v4u-KN-hzw" secondAttribute="top" constant="16" id="Vb5-Yu-0O6"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7pJ-HM-oJ3" secondAttribute="bottom" constant="16" id="aNc-K4-bSF"/>
-                                    <constraint firstItem="iMt-rt-yGn" firstAttribute="leading" secondItem="v4u-KN-hzw" secondAttribute="leading" constant="8" id="hn7-Va-J2k"/>
                                     <constraint firstAttribute="bottom" secondItem="Af6-TZ-w8D" secondAttribute="bottom" constant="8" id="ljb-kz-6gI"/>
-                                    <constraint firstItem="MPo-CV-3hE" firstAttribute="leading" secondItem="v4u-KN-hzw" secondAttribute="leading" constant="8" id="lxA-E3-DV3"/>
                                     <constraint firstAttribute="centerY" secondItem="7pJ-HM-oJ3" secondAttribute="centerY" id="oAv-ad-OaU"/>
                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QG6-oj-cvw" secondAttribute="bottom" constant="16" id="oLh-YV-6FS"/>
                                     <constraint firstAttribute="centerX" secondItem="7pJ-HM-oJ3" secondAttribute="centerX" id="t5l-W0-qZ3"/>
+                                    <constraint firstItem="iMt-rt-yGn" firstAttribute="leading" secondItem="MPo-CV-3hE" secondAttribute="trailing" constant="16" id="vKJ-xS-x4V"/>
                                     <constraint firstItem="7pJ-HM-oJ3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v4u-KN-hzw" secondAttribute="top" constant="16" id="vPN-oO-3un"/>
                                     <constraint firstItem="QG6-oj-cvw" firstAttribute="centerY" secondItem="v4u-KN-hzw" secondAttribute="centerY" id="yIg-Ap-XIV"/>
                                 </constraints>
@@ -345,5 +342,7 @@
     <resources>
         <image name="fullscreen" width="46" height="46"/>
         <image name="fullscreen_exit" width="46" height="46"/>
+        <image name="ki-invite" width="44" height="44"/>
+        <image name="ki-settings" width="44" height="44"/>
     </resources>
 </document>
