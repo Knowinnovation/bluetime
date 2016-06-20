@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD11798D1D18725700C4DA53 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD11798C1D18725700C4DA53 /* AboutViewController.swift */; };
+		FD11798F1D18728500C4DA53 /* Dax-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD11798E1D18728500C4DA53 /* Dax-Regular.ttf */; };
 		FD24861A1D1083BA00583C53 /* UITimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2486191D1083BA00583C53 /* UITimerLabel.swift */; };
 		FD24861D1D108C7700583C53 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD24861B1D10861000583C53 /* ViewController.swift */; };
 		FD26B7C81D09A0A200A8CC72 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD26B7C71D09A0A200A8CC72 /* UserSettings.swift */; };
@@ -71,6 +73,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		FD11798C1D18725700C4DA53 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		FD11798E1D18728500C4DA53 /* Dax-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dax-Regular.ttf"; sourceTree = "<group>"; };
 		FD2486191D1083BA00583C53 /* UITimerLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITimerLabel.swift; sourceTree = "<group>"; };
 		FD24861B1D10861000583C53 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FD26B7C71D09A0A200A8CC72 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
@@ -85,7 +89,7 @@
 		FD3D194B1D08A09200F53BFA /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		FD3D194D1D08A09200F53BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD3D194F1D08A09200F53BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD9EFFAE1CFCCB6500BDBCA7 /* KITime BT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KITime BT.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD9EFFAE1CFCCB6500BDBCA7 /* BlueTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD9EFFB61CFCCB6500BDBCA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FD9EFFB81CFCCB6500BDBCA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,7 +156,7 @@
 		FD9EFFAF1CFCCB6500BDBCA7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FD9EFFAE1CFCCB6500BDBCA7 /* KITime BT.app */,
+				FD9EFFAE1CFCCB6500BDBCA7 /* BlueTime.app */,
 				FD3D19381D08A09200F53BFA /* BlueTime Watch.app */,
 				FD3D19441D08A09200F53BFA /* BlueTime Watch Extension.appex */,
 			);
@@ -162,9 +166,11 @@
 		FD9EFFB01CFCCB6500BDBCA7 /* KITime BT */ = {
 			isa = PBXGroup;
 			children = (
+				FD11798E1D18728500C4DA53 /* Dax-Regular.ttf */,
 				FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */,
 				FD24861B1D10861000583C53 /* ViewController.swift */,
 				FD26B7C91D09A1DA00A8CC72 /* SettingsViewController.swift */,
+				FD11798C1D18725700C4DA53 /* AboutViewController.swift */,
 				FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */,
 				FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */,
 				FD26B7C71D09A0A200A8CC72 /* UserSettings.swift */,
@@ -214,9 +220,9 @@
 			productReference = FD3D19441D08A09200F53BFA /* BlueTime Watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
-		FD9EFFAD1CFCCB6500BDBCA7 /* KITime BT */ = {
+		FD9EFFAD1CFCCB6500BDBCA7 /* BlueTime */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FD9EFFC01CFCCB6500BDBCA7 /* Build configuration list for PBXNativeTarget "KITime BT" */;
+			buildConfigurationList = FD9EFFC01CFCCB6500BDBCA7 /* Build configuration list for PBXNativeTarget "BlueTime" */;
 			buildPhases = (
 				FD9EFFAA1CFCCB6500BDBCA7 /* Sources */,
 				FD9EFFAB1CFCCB6500BDBCA7 /* Frameworks */,
@@ -228,9 +234,9 @@
 			dependencies = (
 				FD3D19511D08A09200F53BFA /* PBXTargetDependency */,
 			);
-			name = "KITime BT";
+			name = BlueTime;
 			productName = "KITime BT";
-			productReference = FD9EFFAE1CFCCB6500BDBCA7 /* KITime BT.app */;
+			productReference = FD9EFFAE1CFCCB6500BDBCA7 /* BlueTime.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -257,7 +263,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FD9EFFA91CFCCB6500BDBCA7 /* Build configuration list for PBXProject "KITime BT" */;
+			buildConfigurationList = FD9EFFA91CFCCB6500BDBCA7 /* Build configuration list for PBXProject "BlueTime" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -270,7 +276,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FD9EFFAD1CFCCB6500BDBCA7 /* KITime BT */,
+				FD9EFFAD1CFCCB6500BDBCA7 /* BlueTime */,
 				FD3D19371D08A09200F53BFA /* BlueTime Watch */,
 				FD3D19431D08A09200F53BFA /* BlueTime Watch Extension */,
 			);
@@ -302,6 +308,7 @@
 				FD9EFFBC1CFCCB6500BDBCA7 /* LaunchScreen.storyboard in Resources */,
 				FD9EFFB91CFCCB6500BDBCA7 /* Assets.xcassets in Resources */,
 				FD9EFFB71CFCCB6500BDBCA7 /* Main.storyboard in Resources */,
+				FD11798F1D18728500C4DA53 /* Dax-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +334,7 @@
 				FD9EFFCC1D00A24D00BDBCA7 /* TimerButton.swift in Sources */,
 				FD24861A1D1083BA00583C53 /* UITimerLabel.swift in Sources */,
 				FD26B7C81D09A0A200A8CC72 /* UserSettings.swift in Sources */,
+				FD11798D1D18725700C4DA53 /* AboutViewController.swift in Sources */,
 				FD9EFFB21CFCCB6500BDBCA7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -382,7 +390,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = BlueTime_Watch_Extension;
 				INFOPLIST_FILE = "BlueTime Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.knowinnovation.KITime-BT.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.BlueTime.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -399,7 +407,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = BlueTime_Watch_Extension;
 				INFOPLIST_FILE = "BlueTime Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.knowinnovation.KITime-BT.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.BlueTime.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -414,7 +422,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "BlueTime Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.knowinnovation.KITime-BT.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.BlueTime.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -429,7 +437,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "BlueTime Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.knowinnovation.KITime-BT.watchkitapp.watchkitextension";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.BlueTime.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -531,8 +539,8 @@
 				INFOPLIST_FILE = "KITime BT/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.knowinnovation.KITime-BT";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.BlueTime;
+				PRODUCT_NAME = BlueTime;
 			};
 			name = Debug;
 		};
@@ -544,8 +552,8 @@
 				INFOPLIST_FILE = "KITime BT/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.knowinnovation.KITime-BT";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.BlueTime;
+				PRODUCT_NAME = BlueTime;
 			};
 			name = Release;
 		};
@@ -570,7 +578,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FD9EFFA91CFCCB6500BDBCA7 /* Build configuration list for PBXProject "KITime BT" */ = {
+		FD9EFFA91CFCCB6500BDBCA7 /* Build configuration list for PBXProject "BlueTime" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FD9EFFBE1CFCCB6500BDBCA7 /* Debug */,
@@ -579,7 +587,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FD9EFFC01CFCCB6500BDBCA7 /* Build configuration list for PBXNativeTarget "KITime BT" */ = {
+		FD9EFFC01CFCCB6500BDBCA7 /* Build configuration list for PBXNativeTarget "BlueTime" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FD9EFFC11CFCCB6500BDBCA7 /* Debug */,

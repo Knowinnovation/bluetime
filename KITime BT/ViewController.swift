@@ -202,6 +202,8 @@ class ViewController: UIViewController {
             
             timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
             timerLabel.start()
+            fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
+            fullscreenLabel.start()
             
             // It's possible the delay caused the timer to end, then we need to finish the timer
             if timerFinished { return }
@@ -216,8 +218,10 @@ class ViewController: UIViewController {
             timerFinished = false
             
             timerLabel.stop()
+            fullscreenLabel.stop()
             elapsedTime += pauseTime - startTime
             timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
+            fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
             
             updateButtons()
         }
@@ -232,6 +236,7 @@ class ViewController: UIViewController {
             
             elapsedTime = 0
             timerLabel.setDate(NSDate(timeIntervalSinceNow: duration))
+            fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: duration))
             
             updateButtons()
             animateState()
@@ -246,6 +251,8 @@ class ViewController: UIViewController {
         
         timerLabel.stop()
         timerLabel.setDate(NSDate())
+        fullscreenLabel.stop()
+        fullscreenLabel.setDate(NSDate())
         
         updateButtons()
         
