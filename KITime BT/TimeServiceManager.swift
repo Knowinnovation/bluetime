@@ -24,10 +24,15 @@ class TimeServiceManager: NSObject {
     let serviceType = "timer-countdown"
     let peerID = MCPeerID(displayName: UIDevice.currentDevice().name)
     let advertiser:MCNearbyServiceAdvertiser
+    let browser:MCNearbyServiceBrowser
     
 //    var foundPeers = [MCPeerID]()
     var invitationHandler: ((Bool, MCSession)->Void)!
     var isInvitee: (Bool, fromWhom: MCPeerID!) = (false, nil)
+    
+    var lastConnection: MCPeerID!
+    
+    var isReconnecting: Bool = false
     
     var delegate: TimeServiceManagerDelegate?
     
@@ -39,8 +44,10 @@ class TimeServiceManager: NSObject {
     
     override init() {
         self.advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
+        self.browser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         super.init()
         self.advertiser.delegate = self
+        self.browser.delegate = self
         self.advertiser.startAdvertisingPeer()
     }
     
@@ -59,6 +66,16 @@ class TimeServiceManager: NSObject {
             }
         }
     }
+    
+    func attemptReconnect() {
+        isReconnecting = true
+        browser.startBrowsingForPeers()
+        NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: #selector(TimeServiceManager.stopReconnectAttempt), userInfo: nil, repeats: false)
+    }
+    
+    @objc private func stopReconnectAttempt() {
+        browser.stopBrowsingForPeers()
+    }
 
 }
 
@@ -72,13 +89,26 @@ extension TimeServiceManager: MCNearbyServiceAdvertiserDelegate {
                                     withContext context: NSData?,
                                     invitationHandler: (Bool, MCSession) -> Void) {
         NSLog("%@", "didReceiveInvitationFromPeer \(peerID)")
-        if UserSettings.sharedSettings().autoAccept {
+        if UserSettings.sharedSettings().autoAccept || isReconnecting {
             invitationHandler(true, self.session)
         } else {
             self.invitationHandler = invitationHandler
             delegate?.invitationWasReceived(peerID.displayName)
         }
         isInvitee = (true, peerID)
+    }
+}
+
+extension TimeServiceManager: MCNearbyServiceBrowserDelegate {
+    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        if peerID.isEqual(lastConnection) {
+            browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 15)
+            browser.stopBrowsingForPeers()
+        }
+    }
+    
+    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        NSLog("%@", "lostPeer \(peerID)")
     }
 }
 
@@ -100,8 +130,10 @@ extension TimeServiceManager : MCSessionDelegate {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
         switch state {
         case .Connected:
-            delegate?.hideConnecting(false)
+            isReconnecting = false
+            lastConnection = peerID
             if isInvitee.0 {
+                delegate?.hideConnecting(false)
                 delegate?.sendFullData()
             }
             break

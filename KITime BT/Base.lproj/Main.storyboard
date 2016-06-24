@@ -147,6 +147,7 @@
                                             <constraint firstAttribute="height" constant="46" id="0tz-Wv-gQs"/>
                                             <constraint firstAttribute="width" constant="105" id="RJe-eJ-DvT"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Pause">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -162,6 +163,7 @@
                                             <constraint firstAttribute="width" constant="105" id="AAE-Qx-4dP"/>
                                             <constraint firstAttribute="height" constant="46" id="RDg-Y4-QYQ"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Start">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>

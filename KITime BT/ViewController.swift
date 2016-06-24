@@ -48,8 +48,6 @@ class ViewController: UIViewController {
     var timerFinished: Bool = false
     var timerCancelled: Bool = true
     
-    var timeUponExit: NSTimeInterval = -1
-    
     let timeService = TimeServiceManager()
     
     var audioPlayer: AVAudioPlayer!
@@ -116,9 +114,7 @@ class ViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         //add observers for when view disappears and reappears
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillTerminate(_:)), name: UIApplicationWillTerminateNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appEnteredForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appBecameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
@@ -360,25 +356,8 @@ class ViewController: UIViewController {
     //create observers when app reopens
     func appBecameActive(note: NSNotification) {
         print("Became Active")
-        print("\(timerIsRunning)")
-//        if timerIsRunning {
-//            timerIsRunning = false
-//            startTime = NSDate.timeIntervalSinceReferenceDate()
-//            duration -= startTime - timeUponExit
-//            start()
-//        }
-    }
-    
-    //create observers when app reopens
-    func appEnteredForeground(note: NSNotification) {
-        print("Entered Foreground")
-    }
-    
-    func appWillResignActive(note: NSNotification) {
-        print("Entered Background")
-//        timerIsRunning = false
-        timeUponExit = NSDate.timeIntervalSinceReferenceDate()
-        
+        // Try to reconnect with last device
+        self.timeService.attemptReconnect()
     }
     
     //remove all observers
@@ -386,11 +365,8 @@ class ViewController: UIViewController {
         print("App Terminated")
 //        timerIsRunning = false
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillResignActiveNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillTerminateNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "com.knowinnovation.kitime.watchRequestClockStateChange", object: nil)
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
     
 }
@@ -543,7 +519,9 @@ extension ViewController: TimeServiceManagerDelegate {
                 self.animateState()
                 self.updateButtons()
             case "dismissTimerDone":
-                self.audioPlayer.stop()
+                if self.audioPlayer != nil {
+                    self.audioPlayer.stop()
+                }
                 self.timerDoneAlert?.dismissViewControllerAnimated(true, completion: nil)
             default:
                 break
