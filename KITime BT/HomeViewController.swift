@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  KITime BT
 //
 //  Created by Drew Dunne on 5/30/16.
@@ -11,19 +11,20 @@ import MultipeerConnectivity
 import AVFoundation
 import WatchConnectivity
 
-enum StopType: Int {
-    case Hard = 0
-    case Soft = 1
-}
+//enum StopType: Int {
+//    case Hard = 0
+//    case Soft = 1
+//}
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     @IBOutlet weak var startButton:UIButton!
     @IBOutlet weak var pauseButton:UIButton!
     @IBOutlet weak var cancelButton:UIButton!
     @IBOutlet weak var inviteButton:UIButton!
     @IBOutlet weak var settingsButton:UIButton!
-    @IBOutlet weak var timerPicker: UIPickerView!
+//    @IBOutlet weak var timerPicker: UIPickerView!
+    var timerPicker: TimeScrollPicker!
     @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var fullscreenButton:UIButton!
     @IBOutlet weak var buttonContainerView: UIView!
@@ -52,7 +53,7 @@ class ViewController: UIViewController {
     
     let timeService = TimeServiceManager()
     
-    var audioPlayer: AVAudioPlayer!
+    var audioPlayer: AVAudioPlayer = AVAudioPlayer()
     
     var session: WCSession? {
         didSet {
@@ -62,8 +63,6 @@ class ViewController: UIViewController {
             }
         }
     }
-    
-    var timerDoneAlert: UIAlertController?
     
     lazy var connectingAlert: UIAlertController = {
         var alert = UIAlertController(title: "Connecting", message: "\n\n\n", preferredStyle: UIAlertControllerStyle.Alert)
@@ -86,17 +85,27 @@ class ViewController: UIViewController {
         pauseButton.layer.cornerRadius = 10;
         cancelButton.layer.cornerRadius = 10;
         
-        minsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22))
-        minsLabel.font = UIFont.systemFontOfSize(17.0)
-        minsLabel.text = "mins"
-        timerPicker.addSubview(minsLabel)
+//        minsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22))
+//        minsLabel.font = UIFont.systemFontOfSize(17.0)
+//        minsLabel.text = "mins"
+//        timerPicker.addSubview(minsLabel)
+//        
+//        secsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2+48, 162/2-11, 44, 22))
+//        secsLabel.font = UIFont.systemFontOfSize(17.0)
+//        secsLabel.text = "secs"
+//        timerPicker.addSubview(secsLabel)
         
-        secsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2+48, 162/2-11, 44, 22))
-        secsLabel.font = UIFont.systemFontOfSize(17.0)
-        secsLabel.text = "secs"
-        timerPicker.addSubview(secsLabel)
+        timerPicker = TimeScrollPicker(frame: CGRectMake(20,24, self.view.frame.size.width-40, 162))
+        timerPicker.delegate = self
+        timerPicker.setSelectedTime(300)
+        self.view.addSubview(timerPicker)
+        self.view.sendSubviewToBack(timerPicker)
         
-        timerPicker.selectRow(5, inComponent: 0, animated: false)
+        timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
+        fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
+        
+//        timerPicker.selectRow(5, inComponent: 0, animated: false)
+        
         pauseButton.hidden = true
         cancelButton.hidden = true
         
@@ -113,13 +122,13 @@ class ViewController: UIViewController {
         
         //Update the view for rotation and add listener for rotation
         rotated()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         //add observers for when view disappears and reappears
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillTerminate(_:)), name: UIApplicationWillTerminateNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appEnteredForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appBecameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.appWillResignActive(_:)), name: UIApplicationWillResignActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.appWillTerminate(_:)), name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.appEnteredForeground(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(HomeViewController.appBecameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -130,7 +139,7 @@ class ViewController: UIViewController {
     @IBAction func startPressed() {
         if timerCancelled && !timerIsRunning {
             // Fresh timer, set duration to picker
-            duration = getTimeFromPicker()
+//            duration = getTimeFromPicker()
             startTime = NSDate.timeIntervalSinceReferenceDate()
             
             let data: Dictionary<String, AnyObject> = ["action":"start", "startTime": startTime, "duration": duration, "elapsedTime": elapsedTime]
@@ -175,7 +184,6 @@ class ViewController: UIViewController {
     @IBAction func invitePeers(sender: AnyObject) {
         let inviteView = MCBrowserViewController.init(serviceType: timeService.serviceType, session: timeService.session);
         inviteView.delegate = self
-        inviteView.maximumNumberOfPeers = 2
         self.presentViewController(inviteView, animated: true, completion: nil)
     }
     
@@ -265,18 +273,16 @@ class ViewController: UIViewController {
             NSLog("Playing Sound")
             audioPlayer.numberOfLoops = -1
             audioPlayer.play()
+            let alert = UIAlertController(title: "Timer done", message: nil, preferredStyle:.Alert)
+            alert.addAction(UIAlertAction(title: "Done", style: .Default) {
+                UIAlertAction in
+                self.audioPlayer.stop()
+                })
+            self.presentViewController(alert, animated: true, completion: nil)
         } catch {
             debugPrint("\(error)")
         }
-        timerDoneAlert = UIAlertController(title: "Timer done", message: nil, preferredStyle:.Alert)
-        timerDoneAlert?.addAction(UIAlertAction(title: "Done", style: .Default) {
-            UIAlertAction in
-            if self.audioPlayer != nil {
-                self.audioPlayer.stop()
-            }
-            self.timeService.sendTimeData(["action":"dismissTimerDone"])
-            })
-        self.presentViewController(timerDoneAlert!, animated: true, completion: nil)
+        
     }
     
     func updateButtons() {
@@ -307,13 +313,13 @@ class ViewController: UIViewController {
         }
     }
     
-    //Get the total duration (seconds) from the picker
-    func getTimeFromPicker() -> Double {
-        let minsToSecs = timerPicker.selectedRowInComponent(0)*60
-        let secs = timerPicker.selectedRowInComponent(1)
-        let time = Double(minsToSecs + secs)
-        return time
-    }
+//    //Get the total duration (seconds) from the picker
+//    func getTimeFromPicker() -> Double {
+//        let minsToSecs = timerPicker.selectedRowInComponent(0)*60
+//        let secs = timerPicker.selectedRowInComponent(1)
+//        let time = Double(minsToSecs + secs)
+//        return time
+//    }
     
     //Convert the seconds into the minutes time and seconds time
     func secondsToMinutesSeconds (seconds : Int) -> (Int, Int) {
@@ -340,8 +346,8 @@ class ViewController: UIViewController {
     
     // Changes view based on rotation of device
     func rotated() {
-        minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22)
-        secsLabel.frame = CGRectMake(self.view.frame.size.width/2+48, 162/2-11, 44, 22)
+//        minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22)
+//        secsLabel.frame = CGRectMake(self.view.frame.size.width/2+48, 162/2-11, 44, 22)
 //        if self.view.frame.size.height <= 320 {
 //            var newFrame = startButton.frame
 //            newFrame.size.height = 75
@@ -353,7 +359,11 @@ class ViewController: UIViewController {
 //            startButton.frame = newFrame
 //            pauseButton.frame = newFrame
 //        }
-//        
+        if UIDevice.currentDevice().orientation.isLandscape.boolValue {
+            timerPicker.updateFrame(CGRectMake(20,8, self.view.frame.size.width-40, 162))
+        } else {
+            timerPicker.updateFrame(CGRectMake(20,24, self.view.frame.size.width-40, 162))
+        }
 //        startButton.layer.cornerRadius = startButton.bounds.size.height/2
     }
     
@@ -395,7 +405,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UITimerLabelDelegate {
+extension HomeViewController: UITimerLabelDelegate {
     func timerDidReachZero(timer: UITimerLabel) {
         NSLog("Reached Zero")
         if self.stopType == .Hard {
@@ -404,44 +414,52 @@ extension ViewController: UITimerLabelDelegate {
     }
 }
 
-extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 2
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 60
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(row)
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if component == 1 {
-            if row == 0 && pickerView.selectedRowInComponent(0) == 0 {
-                pickerView.selectRow(1, inComponent: 1, animated: true)
-            }
-        } else {
-            if row == 0 && pickerView.selectedRowInComponent(1) == 0 {
-                pickerView.selectRow(1, inComponent: 0, animated: true)
-            }
-        }
-        duration = getTimeFromPicker()
+//extension HomeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+//    
+//    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+//        return 2
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+//        return 60
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        return String(row)
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+//        if component == 1 {
+//            if row == 0 && pickerView.selectedRowInComponent(0) == 0 {
+//                pickerView.selectRow(1, inComponent: 1, animated: true)
+//            }
+//        } else {
+//            if row == 0 && pickerView.selectedRowInComponent(1) == 0 {
+//                pickerView.selectRow(1, inComponent: 0, animated: true)
+//            }
+//        }
+//        duration = getTimeFromPicker()
+//        timeService.sendTimeData(["action":"selectDuration", "duration": duration])
+//        session?.sendMessage(["action":"selectDuration", "duration": duration], replyHandler: nil, errorHandler: nil)
+//    }
+//    
+//    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+//        if component == 1 {
+//            return 120
+//        }
+//        return 50
+//    }
+//}
+
+extension HomeViewController: TimeScrollPickerDelegate {
+    func pickerDidSelectTime(seconds: Int) {
+        duration = Double(seconds)
         timeService.sendTimeData(["action":"selectDuration", "duration": duration])
         session?.sendMessage(["action":"selectDuration", "duration": duration], replyHandler: nil, errorHandler: nil)
     }
-    
-    func pickerView(pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        if component == 1 {
-            return 120
-        }
-        return 50
-    }
 }
 
-extension ViewController: TimeServiceManagerDelegate {
+extension HomeViewController: TimeServiceManagerDelegate {
     
     func sendFullData() {
         let data: Dictionary<String, AnyObject> = ["action":"dataDump",
@@ -514,11 +532,7 @@ extension ViewController: TimeServiceManagerDelegate {
                 self.stopTypeSelector.selectedSegmentIndex = self.stopType.rawValue
             case "selectDuration":
                 self.duration = data["duration"] as! Double
-                self.timerLabel.setDate(NSDate(timeIntervalSinceNow: self.duration-self.elapsedTime))
-                self.fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: self.duration-self.elapsedTime))
-                let (min, sec) = self.secondsToMinutesSeconds(data["duration"] as! Int)
-                self.timerPicker.selectRow(min, inComponent: 0, animated: true)
-                self.timerPicker.selectRow(sec, inComponent: 1, animated: true)
+                self.timerPicker.setSelectedTime(data["duration"] as! Int)
             case "dataDump":
                 self.startTime = data["startTime"] as! NSTimeInterval
                 self.duration = data["duration"] as! Double
@@ -536,15 +550,10 @@ extension ViewController: TimeServiceManagerDelegate {
                 
                 NSLog("running: %d, canceled: %d, finished: %d", self.timerIsRunning, self.timerCancelled, self.timerFinished)
                 
-                let (min, sec) = self.secondsToMinutesSeconds(data["duration"] as! Int)
-                self.timerPicker.selectRow(min, inComponent: 0, animated: true)
-                self.timerPicker.selectRow(sec, inComponent: 1, animated: true)
+                self.timerPicker.setSelectedTime(data["duration"] as! Int)
                 
                 self.animateState()
                 self.updateButtons()
-            case "dismissTimerDone":
-                self.audioPlayer.stop()
-                self.timerDoneAlert?.dismissViewControllerAnimated(true, completion: nil)
             default:
                 break
             }
@@ -553,7 +562,7 @@ extension ViewController: TimeServiceManagerDelegate {
     
 }
 
-extension ViewController: WCSessionDelegate {
+extension HomeViewController: WCSessionDelegate {
     
     func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
         NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -589,7 +598,7 @@ extension ViewController: WCSessionDelegate {
     
 }
 
-extension ViewController: MCBrowserViewControllerDelegate {
+extension HomeViewController: MCBrowserViewControllerDelegate {
     
     func browserViewControllerDidFinish(browserViewController: MCBrowserViewController) {
         self.dismissViewControllerAnimated(true, completion: nil)

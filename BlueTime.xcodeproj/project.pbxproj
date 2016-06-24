@@ -21,6 +21,7 @@
 		FD3D194C1D08A09200F53BFA /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3D194B1D08A09200F53BFA /* ExtensionDelegate.swift */; };
 		FD3D194E1D08A09200F53BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD3D194D1D08A09200F53BFA /* Assets.xcassets */; };
 		FD3D19521D08A09200F53BFA /* BlueTime Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = FD3D19381D08A09200F53BFA /* BlueTime Watch.app */; };
+		FD4F2F3E1D1C63F9000A1573 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4F2F3D1D1C63F9000A1573 /* HomeViewController.swift */; };
 		FD9EFFB21CFCCB6500BDBCA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */; };
 		FD9EFFB71CFCCB6500BDBCA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFB51CFCCB6500BDBCA7 /* Main.storyboard */; };
 		FD9EFFB91CFCCB6500BDBCA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFB81CFCCB6500BDBCA7 /* Assets.xcassets */; };
@@ -28,6 +29,8 @@
 		FD9EFFC81CFCD7D800BDBCA7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9EFFC71CFCD7D800BDBCA7 /* MultipeerConnectivity.framework */; };
 		FD9EFFCA1CFCF8F000BDBCA7 /* TimeServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */; };
 		FD9EFFCC1D00A24D00BDBCA7 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */; };
+		FDE991251D1B763100E3214B /* AudimatMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDE991241D1B763100E3214B /* AudimatMono-Light.ttf */; };
+		FDE991271D1B8EB300E3214B /* TimeScrollPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE991261D1B8EB300E3214B /* TimeScrollPicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +92,7 @@
 		FD3D194B1D08A09200F53BFA /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		FD3D194D1D08A09200F53BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD3D194F1D08A09200F53BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FD4F2F3D1D1C63F9000A1573 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FD9EFFAE1CFCCB6500BDBCA7 /* BlueTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FD9EFFB61CFCCB6500BDBCA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +102,8 @@
 		FD9EFFC71CFCD7D800BDBCA7 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
 		FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeServiceManager.swift; sourceTree = "<group>"; };
 		FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
+		FDE991241D1B763100E3214B /* AudimatMono-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AudimatMono-Light.ttf"; sourceTree = "<group>"; };
+		FDE991261D1B8EB300E3214B /* TimeScrollPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeScrollPicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,15 +172,18 @@
 		FD9EFFB01CFCCB6500BDBCA7 /* KITime BT */ = {
 			isa = PBXGroup;
 			children = (
+				FDE991241D1B763100E3214B /* AudimatMono-Light.ttf */,
 				FD11798E1D18728500C4DA53 /* Dax-Regular.ttf */,
 				FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */,
 				FD24861B1D10861000583C53 /* ViewController.swift */,
+				FD4F2F3D1D1C63F9000A1573 /* HomeViewController.swift */,
 				FD26B7C91D09A1DA00A8CC72 /* SettingsViewController.swift */,
 				FD11798C1D18725700C4DA53 /* AboutViewController.swift */,
 				FD9EFFC91CFCF8F000BDBCA7 /* TimeServiceManager.swift */,
 				FD9EFFCB1D00A24D00BDBCA7 /* TimerButton.swift */,
 				FD26B7C71D09A0A200A8CC72 /* UserSettings.swift */,
 				FD2486191D1083BA00583C53 /* UITimerLabel.swift */,
+				FDE991261D1B8EB300E3214B /* TimeScrollPicker.swift */,
 				FD9EFFB51CFCCB6500BDBCA7 /* Main.storyboard */,
 				FD9EFFB81CFCCB6500BDBCA7 /* Assets.xcassets */,
 				FD9EFFBA1CFCCB6500BDBCA7 /* LaunchScreen.storyboard */,
@@ -308,6 +317,7 @@
 				FD9EFFBC1CFCCB6500BDBCA7 /* LaunchScreen.storyboard in Resources */,
 				FD9EFFB91CFCCB6500BDBCA7 /* Assets.xcassets in Resources */,
 				FD9EFFB71CFCCB6500BDBCA7 /* Main.storyboard in Resources */,
+				FDE991251D1B763100E3214B /* AudimatMono-Light.ttf in Resources */,
 				FD11798F1D18728500C4DA53 /* Dax-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,7 +341,9 @@
 				FD9EFFCA1CFCF8F000BDBCA7 /* TimeServiceManager.swift in Sources */,
 				FD26B7CA1D09A1DA00A8CC72 /* SettingsViewController.swift in Sources */,
 				FD24861D1D108C7700583C53 /* ViewController.swift in Sources */,
+				FDE991271D1B8EB300E3214B /* TimeScrollPicker.swift in Sources */,
 				FD9EFFCC1D00A24D00BDBCA7 /* TimerButton.swift in Sources */,
+				FD4F2F3E1D1C63F9000A1573 /* HomeViewController.swift in Sources */,
 				FD24861A1D1083BA00583C53 /* UITimerLabel.swift in Sources */,
 				FD26B7C81D09A0A200A8CC72 /* UserSettings.swift in Sources */,
 				FD11798D1D18725700C4DA53 /* AboutViewController.swift in Sources */,
