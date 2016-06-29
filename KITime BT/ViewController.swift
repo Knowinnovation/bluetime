@@ -518,6 +518,9 @@ extension ViewController: TimeServiceManagerDelegate {
                 self.timerFinished = data["timerFinished"] as! Bool
                 self.timerIsRunning = false
                 
+                self.timerLabel.setDate(NSDate(timeIntervalSinceNow: self.duration-self.elapsedTime))
+                self.fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: self.duration-self.elapsedTime))
+                
                 let running = data["timerIsRunning"] as! Bool
                 if running {
                     self.start()
