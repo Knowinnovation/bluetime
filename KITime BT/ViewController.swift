@@ -48,6 +48,8 @@ class ViewController: UIViewController {
     var timerFinished: Bool = false
     var timerCancelled: Bool = true
     
+    var openFromTerm: Bool = true
+    
     let timeService = TimeServiceManager()
     
     var audioPlayer: AVAudioPlayer!
@@ -115,6 +117,7 @@ class ViewController: UIViewController {
         
         //add observers for when view disappears and reappears
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appWillTerminate(_:)), name: UIApplicationWillTerminateNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appEnteredBackground(_:)), name: UIApplicationDidEnterBackgroundNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.appBecameActive(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
 
@@ -198,6 +201,7 @@ class ViewController: UIViewController {
             updateButtons()
             
             elapsedTime += NSDate.timeIntervalSinceReferenceDate() - startTime
+            startTime = NSDate.timeIntervalSinceReferenceDate()
             
             timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
             timerLabel.start()
@@ -219,6 +223,7 @@ class ViewController: UIViewController {
             timerLabel.stop()
             fullscreenLabel.stop()
             elapsedTime += pauseTime - startTime
+            elapsedTime -= NSDate.timeIntervalSinceReferenceDate() - pauseTime
             timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
             fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
             
@@ -357,7 +362,15 @@ class ViewController: UIViewController {
     func appBecameActive(note: NSNotification) {
         print("Became Active")
         // Try to reconnect with last device
-        self.timeService.attemptReconnect()
+        // if repopen
+        if !openFromTerm {
+            self.timeService.attemptReconnect()
+        }
+    }
+    
+    func appEnteredBackground(note: NSNotification) {
+        print("Entered Background")
+        openFromTerm = false
     }
     
     //remove all observers
@@ -480,7 +493,7 @@ extension ViewController: TimeServiceManagerDelegate {
                 self.elapsedTime = data["elapsedTime"] as! NSTimeInterval
                 self.start()
             case "pause":
-                self.pauseTime = data["pauseTime"] as! Double
+                self.pauseTime = data["pauseTime"] as! NSTimeInterval
                 self.pause()
             case "cancel":
                 self.cancel()
@@ -499,7 +512,7 @@ extension ViewController: TimeServiceManagerDelegate {
                 self.startTime = data["startTime"] as! NSTimeInterval
                 self.duration = data["duration"] as! Double
                 self.elapsedTime = data["elapsedTime"] as! NSTimeInterval
-                self.pauseTime = data["pauseTime"] as! Double
+                self.pauseTime = data["pauseTime"] as! NSTimeInterval
                 self.stopType = StopType(rawValue: data["stopType"] as! Int)!
                 self.timerCancelled = data["timerCancelled"] as! Bool
                 self.timerFinished = data["timerFinished"] as! Bool
@@ -510,7 +523,7 @@ extension ViewController: TimeServiceManagerDelegate {
                     self.start()
                 }
                 
-                NSLog("running: %d, canceled: %d, finished: %d", self.timerIsRunning, self.timerCancelled, self.timerFinished)
+                NSLog("running: \(self.timerIsRunning), canceled: \(self.timerCancelled), finished: \(self.timerFinished)")
                 
                 let (min, sec) = self.secondsToMinutesSeconds(data["duration"] as! Int)
                 self.timerPicker.selectRow(min, inComponent: 0, animated: true)
@@ -541,7 +554,7 @@ extension ViewController: WCSessionDelegate {
             case "start":
                 self.startTime = message["startTime"] as! NSTimeInterval
                 self.duration = message["duration"] as! Double
-                self.elapsedTime = message["elapsedTime"] as! Double
+                self.elapsedTime = message["elapsedTime"] as! NSTimeInterval
                 self.start()
             case "pause":
                 self.pauseTime = message["pauseTime"] as! NSTimeInterval

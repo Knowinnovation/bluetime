@@ -68,6 +68,7 @@ class TimeServiceManager: NSObject {
     }
     
     func attemptReconnect() {
+        NSLog("Attempting Reconnect...")
         isReconnecting = true
         browser.startBrowsingForPeers()
         NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: #selector(TimeServiceManager.stopReconnectAttempt), userInfo: nil, repeats: false)
@@ -101,9 +102,13 @@ extension TimeServiceManager: MCNearbyServiceAdvertiserDelegate {
 
 extension TimeServiceManager: MCNearbyServiceBrowserDelegate {
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        if peerID.isEqual(lastConnection) {
-            browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 15)
-            browser.stopBrowsingForPeers()
+        NSLog("%@", "foundPeer \(peerID)")
+        if lastConnection != nil {
+            if peerID.displayName.isEqual(lastConnection.displayName) {
+                NSLog("%@", "Peer is last connection \(peerID)")
+                browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 15)
+                browser.stopBrowsingForPeers()
+            }
         }
     }
     
