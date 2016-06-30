@@ -102,6 +102,9 @@ class ViewController: UIViewController {
         fullscreenView.hidden = true
         fullscreenLabel.adjustsFontSizeToFitWidth = true
         
+        timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
+        fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime))
+        
         if WCSession.isSupported() {
             session = WCSession.defaultSession()
         }
