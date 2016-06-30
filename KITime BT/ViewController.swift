@@ -422,6 +422,8 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
             }
         }
         duration = getTimeFromPicker()
+        self.timerLabel.setDate(NSDate(timeIntervalSinceNow: self.duration-self.elapsedTime))
+        self.fullscreenLabel.setDate(NSDate(timeIntervalSinceNow: self.duration-self.elapsedTime))
         timeService.sendTimeData(["action":"selectDuration", "duration": duration])
         session?.sendMessage(["action":"selectDuration", "duration": duration], replyHandler: nil, errorHandler: nil)
     }
