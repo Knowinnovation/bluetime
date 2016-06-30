@@ -264,6 +264,9 @@ class ViewController: UIViewController {
         
         updateButtons()
         
+        let data: Dictionary<String, AnyObject> = ["action":"finish"]
+        session?.sendMessage(data, replyHandler: nil, errorHandler: nil)
+        
         // Play sound here
         do {
             audioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(string: "/Library/Ringtones/Duck.m4r")!)
@@ -503,6 +506,10 @@ extension ViewController: TimeServiceManagerDelegate {
                 self.pause()
             case "cancel":
                 self.cancel()
+                if self.audioPlayer != nil {
+                    self.audioPlayer.stop()
+                }
+                self.timerDoneAlert?.dismissViewControllerAnimated(true, completion: nil)
             case "changeStopType":
                 // No change in time or what not, just hard/soft stop
                 self.stopType = StopType(rawValue: data["stopType"] as! Int)!
@@ -540,6 +547,8 @@ extension ViewController: TimeServiceManagerDelegate {
                 
                 self.animateState()
                 self.updateButtons()
+                
+                self.session?.sendMessage(data, replyHandler: nil, errorHandler: nil)
             case "dismissTimerDone":
                 if self.audioPlayer != nil {
                     self.audioPlayer.stop()
@@ -570,6 +579,10 @@ extension ViewController: WCSessionDelegate {
                 self.pause()
             case "cancel":
                 self.cancel()
+                if self.audioPlayer != nil {
+                    self.audioPlayer.stop()
+                }
+                self.timerDoneAlert?.dismissViewControllerAnimated(true, completion: nil)
             case "initialData":
                 let data: Dictionary<String, AnyObject> = ["action":"dataDump",
                     "pauseTime":self.pauseTime,

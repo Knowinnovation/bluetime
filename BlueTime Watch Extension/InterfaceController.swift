@@ -47,6 +47,8 @@ class InterfaceController: WKInterfaceController {
         timerFinished = false
         updateButtons()
         
+        timerLabel.setDate(NSDate(timeIntervalSinceNow: duration+1))
+        
         if WCSession.isSupported() {
             session = WCSession.defaultSession()
             session!.sendMessage(["action":"initialData"], replyHandler: { (response) -> Void in
@@ -58,6 +60,8 @@ class InterfaceController: WKInterfaceController {
                 self.timerCancelled = response["timerCancelled"] as! Bool
                 self.timerFinished = response["timerFinished"] as! Bool
                 self.timerIsRunning = false
+                
+                self.timerLabel.setDate(NSDate(timeIntervalSinceNow: self.duration-self.elapsedTime+1))
                 
                 let running = response["timerIsRunning"] as! Bool
                 if running {
@@ -121,6 +125,7 @@ class InterfaceController: WKInterfaceController {
             updateButtons()
             
             elapsedTime += NSDate.timeIntervalSinceReferenceDate() - startTime
+            startTime = NSDate.timeIntervalSinceReferenceDate()
             
             timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime+1))
             timerLabel.start()
@@ -138,6 +143,7 @@ class InterfaceController: WKInterfaceController {
             
             timerLabel.stop()
             elapsedTime += pauseTime - startTime
+            elapsedTime -= NSDate.timeIntervalSinceReferenceDate() - pauseTime
             timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime+1))
             
             updateButtons()
@@ -196,7 +202,12 @@ extension InterfaceController: WCSessionDelegate {
         case "selectDuration":
             if timerCancelled {
                 duration = message["duration"] as! Double
+                timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime+1))
             }
+        case "finish":
+            self.timerFinished = true
+            self.timerIsRunning = false
+            self.updateButtons()
         case "dataDump":
             self.startTime = message["startTime"] as! NSTimeInterval
             self.duration = message["duration"] as! Double
