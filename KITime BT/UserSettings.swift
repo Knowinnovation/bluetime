@@ -12,10 +12,12 @@ class UserSettings: NSObject {
     
     // Settings
     var autoAccept: Bool = false
+    var autoFull: Bool = false
     
     override init() {
         super.init()
         autoAccept = false
+        autoFull = false
     }
     
     class func sharedSettings() -> UserSettings {

@@ -11,10 +11,12 @@ import UIKit
 class SettingsViewController: UITableViewController {
     
     @IBOutlet weak var autoAcceptSwitch: UISwitch!
+    @IBOutlet weak var autoFullscreenSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         autoAcceptSwitch.on = UserSettings.sharedSettings().autoAccept
+        autoFullscreenSwitch.on = UserSettings.sharedSettings().autoFull
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +30,10 @@ class SettingsViewController: UITableViewController {
     
     @IBAction func autoAcceptSwitchPressed() {
         UserSettings.sharedSettings().autoAccept = autoAcceptSwitch.on
+    }
+    
+    @IBAction func autoFullSwitchPressed() {
+        UserSettings.sharedSettings().autoFull = autoFullscreenSwitch.on
     }
 
 }
