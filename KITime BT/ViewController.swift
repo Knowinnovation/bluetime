@@ -24,7 +24,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var inviteButton:UIButton!
     @IBOutlet weak var settingsButton:UIButton!
     @IBOutlet weak var timerPicker: UIPickerView!
-    @IBOutlet weak var timerView: UIView!
     @IBOutlet weak var fullscreenButton:UIButton!
     @IBOutlet weak var buttonContainerView: UIView!
     @IBOutlet weak var stopTypeSelector: UISegmentedControl!
@@ -86,12 +85,12 @@ class ViewController: UIViewController {
         pauseButton.layer.cornerRadius = 10;
         cancelButton.layer.cornerRadius = 10;
         
-        minsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22))
+        minsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2-42, self.timerLabel.frame.height/2-11, 44, 22))
         minsLabel.font = UIFont.systemFontOfSize(17.0)
         minsLabel.text = "mins"
         timerPicker.addSubview(minsLabel)
         
-        secsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2+48, 162/2-11, 44, 22))
+        secsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2+48, self.timerLabel.frame.height/2-11, 44, 22))
         secsLabel.font = UIFont.systemFontOfSize(17.0)
         secsLabel.text = "secs"
         timerPicker.addSubview(secsLabel)
@@ -186,11 +185,9 @@ class ViewController: UIViewController {
         if isFullscreen {
             // set back to 162...
             fullscreenView.hidden = true
-//            timerView.frame.size.height = 162
             isFullscreen = false
         } else {
             fullscreenView.hidden = false
-//            timerView.frame.size.height = self.view.frame.size.height
             isFullscreen = true
         }
     }
@@ -333,23 +330,25 @@ class ViewController: UIViewController {
         if timerIsRunning {
             UIView.animateWithDuration(0.5) {
                 self.timerPicker.alpha = 0.0
-                self.timerView.alpha = 1.0
+                self.timerLabel.alpha = 1.0
             }
         } else if timerCancelled {
             UIView.animateWithDuration(0.5) {
                 self.timerPicker.alpha = 1.0
-                self.timerView.alpha = 0.0
+                self.timerLabel.alpha = 0.0
             }
         } else {
             self.timerPicker.alpha = 0.0
-            self.timerView.alpha = 1.0
+            self.timerLabel.alpha = 1.0
         }
     }
     
     // Changes view based on rotation of device
     func rotated() {
-        minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, 162/2-11, 44, 22)
-        secsLabel.frame = CGRectMake(self.view.frame.size.width/2+48, 162/2-11, 44, 22)
+//        print("rotated")
+//        print("\(self.view.frame.size.width)")
+        minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, self.timerLabel.frame.height/2-11, 44, 22)
+        secsLabel.frame = CGRectMake(self.view.frame.size.width/2+48, self.timerLabel.frame.height/2-11, 44, 22)
 //        if self.view.frame.size.height <= 320 {
 //            var newFrame = startButton.frame
 //            newFrame.size.height = 75
@@ -364,6 +363,14 @@ class ViewController: UIViewController {
 //        
 //        startButton.layer.cornerRadius = startButton.bounds.size.height/2
     }
+    
+//    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+//        print("trans")
+//        print("\(self.view.bounds.size.width)")
+//        minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, self.timerLabel.frame.height/2-11, 44, 22)
+//        secsLabel.frame = CGRectMake(self.view.frame.size.width/2+48, self.timerLabel.frame.height/2-11, 44, 22)
+//    }
     
     //create observers when app reopens
     func appBecameActive(note: NSNotification) {
