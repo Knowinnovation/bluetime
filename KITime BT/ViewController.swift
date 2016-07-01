@@ -85,12 +85,12 @@ class ViewController: UIViewController {
         pauseButton.layer.cornerRadius = 10;
         cancelButton.layer.cornerRadius = 10;
         
-        minsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2-42, self.timerLabel.frame.height/2-11, 44, 22))
+        minsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2-40, self.timerPicker.frame.height/2-11, 44, 22))
         minsLabel.font = UIFont.systemFontOfSize(17.0)
         minsLabel.text = "mins"
         timerPicker.addSubview(minsLabel)
         
-        secsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2+48, self.timerLabel.frame.height/2-11, 44, 22))
+        secsLabel = UILabel(frame: CGRectMake(self.view.frame.size.width/2+50, self.timerPicker.frame.height/2-11, 44, 22))
         secsLabel.font = UIFont.systemFontOfSize(17.0)
         secsLabel.text = "secs"
         timerPicker.addSubview(secsLabel)
@@ -350,8 +350,8 @@ class ViewController: UIViewController {
     func rotated() {
 //        print("rotated")
 //        print("\(self.view.frame.size.width)")
-        minsLabel.frame = CGRectMake(self.view.frame.size.width/2-42, self.timerLabel.frame.height/2-11, 44, 22)
-        secsLabel.frame = CGRectMake(self.view.frame.size.width/2+48, self.timerLabel.frame.height/2-11, 44, 22)
+        minsLabel.frame = CGRectMake(self.view.frame.size.width/2-40, self.timerPicker.frame.height/2-11, 44, 22)
+        secsLabel.frame = CGRectMake(self.view.frame.size.width/2+50, self.timerPicker.frame.height/2-11, 44, 22)
 //        if self.view.frame.size.height <= 320 {
 //            var newFrame = startButton.frame
 //            newFrame.size.height = 75
@@ -423,7 +423,7 @@ extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return String(row)
     }
-    
+
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if component == 1 {
             if row == 0 && pickerView.selectedRowInComponent(0) == 0 {

@@ -137,9 +137,10 @@ extension TimeServiceManager : MCSessionDelegate {
         case .Connected:
             isReconnecting = false
             lastConnection = peerID
-            delegate?.hideConnecting(false)
             if isInvitee.0 {
                 delegate?.sendFullData()
+            } else {
+                delegate?.hideConnecting(false)
             }
             break
         case .Connecting:
