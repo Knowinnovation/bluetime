@@ -16,7 +16,7 @@
 		FD26B7CC1D0A1B6C00A8CC72 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD26B7CB1D0A1B6C00A8CC72 /* WatchConnectivity.framework */; };
 		FD3D193C1D08A09200F53BFA /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD3D193A1D08A09200F53BFA /* Interface.storyboard */; };
 		FD3D193E1D08A09200F53BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD3D193D1D08A09200F53BFA /* Assets.xcassets */; };
-		FD3D19451D08A09200F53BFA /* KiTimer Watch.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FD3D19441D08A09200F53BFA /* KiTimer Watch.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FD3D19451D08A09200F53BFA /* KiTimer Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FD3D19441D08A09200F53BFA /* KiTimer Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FD3D194A1D08A09200F53BFA /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3D19491D08A09200F53BFA /* InterfaceController.swift */; };
 		FD3D194C1D08A09200F53BFA /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD3D194B1D08A09200F53BFA /* ExtensionDelegate.swift */; };
 		FD3D194E1D08A09200F53BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD3D194D1D08A09200F53BFA /* Assets.xcassets */; };
@@ -57,7 +57,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				FD3D19451D08A09200F53BFA /* KiTimer Watch.appex in Embed App Extensions */,
+				FD3D19451D08A09200F53BFA /* KiTimer Watch Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,7 +87,7 @@
 		FD3D193B1D08A09200F53BFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		FD3D193D1D08A09200F53BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD3D193F1D08A09200F53BFA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FD3D19441D08A09200F53BFA /* KiTimer Watch.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "KiTimer Watch.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD3D19441D08A09200F53BFA /* KiTimer Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "KiTimer Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD3D19491D08A09200F53BFA /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
 		FD3D194B1D08A09200F53BFA /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
 		FD3D194D1D08A09200F53BFA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 			children = (
 				FD9EFFAE1CFCCB6500BDBCA7 /* KiTimer.app */,
 				FD3D19381D08A09200F53BFA /* KiTimer Watch.app */,
-				FD3D19441D08A09200F53BFA /* KiTimer Watch.appex */,
+				FD3D19441D08A09200F53BFA /* KiTimer Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -229,7 +229,7 @@
 			);
 			name = "KiTimer Watch Extension";
 			productName = "BlueTime Watch Extension";
-			productReference = FD3D19441D08A09200F53BFA /* KiTimer Watch.appex */;
+			productReference = FD3D19441D08A09200F53BFA /* KiTimer Watch Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		FD9EFFAD1CFCCB6500BDBCA7 /* KiTimer */ = {
@@ -405,7 +405,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = BlueTime_Watch_Extension;
 				INFOPLIST_FILE = "BlueTime Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.kitimer.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer.watchkitapp;
 				PRODUCT_NAME = "KiTimer Watch";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -422,7 +422,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = BlueTime_Watch_Extension;
 				INFOPLIST_FILE = "BlueTime Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.kitimer.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer.watchkitapp;
 				PRODUCT_NAME = "KiTimer Watch";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -437,8 +437,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "BlueTime Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.kitimer.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "KiTimer Watch";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "KiTimer Watch Extension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -452,8 +452,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "BlueTime Watch Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.kitimer.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "KiTimer Watch";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "KiTimer Watch Extension";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -554,7 +554,7 @@
 				INFOPLIST_FILE = "KITime BT/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.kitimer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer;
 				PRODUCT_NAME = KiTimer;
 			};
 			name = Debug;
@@ -567,7 +567,7 @@
 				INFOPLIST_FILE = "KITime BT/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.kitimer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer;
 				PRODUCT_NAME = KiTimer;
 			};
 			name = Release;
