@@ -14,6 +14,7 @@
 		FD26B7C81D09A0A200A8CC72 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD26B7C71D09A0A200A8CC72 /* UserSettings.swift */; };
 		FD26B7CA1D09A1DA00A8CC72 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD26B7C91D09A1DA00A8CC72 /* SettingsViewController.swift */; };
 		FD26B7CC1D0A1B6C00A8CC72 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD26B7CB1D0A1B6C00A8CC72 /* WatchConnectivity.framework */; };
+		FD30B3E01D270DB000A62A16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFB51CFCCB6500BDBCA7 /* Main.storyboard */; };
 		FD3D193C1D08A09200F53BFA /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD3D193A1D08A09200F53BFA /* Interface.storyboard */; };
 		FD3D193E1D08A09200F53BFA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD3D193D1D08A09200F53BFA /* Assets.xcassets */; };
 		FD3D19451D08A09200F53BFA /* KiTimer Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FD3D19441D08A09200F53BFA /* KiTimer Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -23,7 +24,6 @@
 		FD3D19521D08A09200F53BFA /* KiTimer Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = FD3D19381D08A09200F53BFA /* KiTimer Watch.app */; };
 		FD4F2F3E1D1C63F9000A1573 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD4F2F3D1D1C63F9000A1573 /* HomeViewController.swift */; };
 		FD9EFFB21CFCCB6500BDBCA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9EFFB11CFCCB6500BDBCA7 /* AppDelegate.swift */; };
-		FD9EFFB71CFCCB6500BDBCA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFB51CFCCB6500BDBCA7 /* Main.storyboard */; };
 		FD9EFFB91CFCCB6500BDBCA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFB81CFCCB6500BDBCA7 /* Assets.xcassets */; };
 		FD9EFFBC1CFCCB6500BDBCA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD9EFFBA1CFCCB6500BDBCA7 /* LaunchScreen.storyboard */; };
 		FD9EFFC81CFCD7D800BDBCA7 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9EFFC71CFCD7D800BDBCA7 /* MultipeerConnectivity.framework */; };
@@ -240,6 +240,7 @@
 				FD9EFFAB1CFCCB6500BDBCA7 /* Frameworks */,
 				FD9EFFAC1CFCCB6500BDBCA7 /* Resources */,
 				FD3D195A1D08A09200F53BFA /* Embed Watch Content */,
+				FD30B3E11D270F6B00A62A16 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -318,14 +319,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD9EFFBC1CFCCB6500BDBCA7 /* LaunchScreen.storyboard in Resources */,
+				FD30B3E01D270DB000A62A16 /* Main.storyboard in Resources */,
 				FD9EFFB91CFCCB6500BDBCA7 /* Assets.xcassets in Resources */,
-				FD9EFFB71CFCCB6500BDBCA7 /* Main.storyboard in Resources */,
 				FDE991251D1B763100E3214B /* AudimatMono-Light.ttf in Resources */,
 				FD11798F1D18728500C4DA53 /* Dax-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FD30B3E11D270F6B00A62A16 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${DEVELOPER_BIN_DIR}/agvtool\" next-version -all\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FD3D19401D08A09200F53BFA /* Sources */ = {
@@ -555,11 +572,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 179;
 				INFOPLIST_FILE = "KITime BT/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer;
 				PRODUCT_NAME = KiTimer;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -568,11 +587,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 179;
 				INFOPLIST_FILE = "KITime BT/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer;
 				PRODUCT_NAME = KiTimer;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yNW-BH-EVg">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -287,7 +286,7 @@
         <!--Home View Controller-->
         <scene sceneID="pD0-oQ-mk7">
             <objects>
-                <viewController id="tIU-eh-Lry" customClass="HomeViewController" customModule="KiTimer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="home_view" id="tIU-eh-Lry" customClass="HomeViewController" customModule="KiTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w1X-0k-XZe"/>
                         <viewControllerLayoutGuide type="bottom" id="o9K-Fe-RI3"/>
@@ -573,26 +572,6 @@
                                             <segue destination="4Uh-RM-vPq" kind="show" id="ZmU-ro-nQX"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Swr-no-3bk" style="IBUITableViewCellStyleDefault" id="jG0-kP-CGd">
-                                        <rect key="frame" x="0.0" y="267" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jG0-kP-CGd" id="hYz-gR-e3c">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Legal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Swr-no-3bk">
-                                                    <rect key="frame" x="15" y="0.0" width="550" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="JL6-kY-c6I" kind="show" id="Asx-dy-58h"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -616,39 +595,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O1I-Pk-jr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2072" y="500"/>
-        </scene>
-        <!--Legal-->
-        <scene sceneID="VXt-J6-2l5">
-            <objects>
-                <viewController id="JL6-kY-c6I" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="pRG-z4-z8F"/>
-                        <viewControllerLayoutGuide type="bottom" id="TI7-Vh-6EE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tei-uf-ERp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Legal" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XIC-IZ-qMk">
-                                <rect key="frame" x="20" y="64" width="560" height="536"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="XIC-IZ-qMk" firstAttribute="top" secondItem="pRG-z4-z8F" secondAttribute="bottom" id="5Gk-iS-eo6"/>
-                            <constraint firstItem="XIC-IZ-qMk" firstAttribute="trailing" secondItem="tei-uf-ERp" secondAttribute="trailingMargin" id="LVd-mz-FqX"/>
-                            <constraint firstItem="XIC-IZ-qMk" firstAttribute="leading" secondItem="tei-uf-ERp" secondAttribute="leadingMargin" id="W7W-xq-CMH"/>
-                            <constraint firstItem="TI7-Vh-6EE" firstAttribute="top" secondItem="XIC-IZ-qMk" secondAttribute="bottom" id="iQa-aa-ak3"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Legal" id="k57-ed-KqH"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kNF-76-Npc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2789" y="902"/>
         </scene>
         <!--About-->
         <scene sceneID="gvU-85-V7F">
@@ -770,6 +716,6 @@ We work in the realm of creativity, problem solving, leadership, managing change
         <image name="ki-settings" width="44" height="44"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VsG-g8-Cbw"/>
+        <segue reference="D4d-pJ-Pfe"/>
     </inferredMetricsTieBreakers>
 </document>
