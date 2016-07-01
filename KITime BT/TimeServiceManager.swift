@@ -26,7 +26,8 @@ class TimeServiceManager: NSObject {
     let advertiser:MCNearbyServiceAdvertiser
     let browser:MCNearbyServiceBrowser
     
-//    var foundPeers = [MCPeerID]()
+    var connected: Bool = false
+    
     var invitationHandler: ((Bool, MCSession)->Void)!
     var isInvitee: (Bool, fromWhom: MCPeerID!) = (false, nil)
     
@@ -121,9 +122,12 @@ extension MCSessionState {
     
     func stringValue() -> String {
         switch(self) {
-        case .NotConnected: return "NotConnected"
-        case .Connecting: return "Connecting"
-        case .Connected: return "Connected"
+        case .NotConnected:
+            return "Not Connected"
+        case .Connecting:
+            return "Connecting"
+        case .Connected:
+            return "Connected"
         }
     }
     
@@ -135,6 +139,7 @@ extension TimeServiceManager : MCSessionDelegate {
         NSLog("%@", "peer \(peerID) didChangeState: \(state.stringValue())")
         switch state {
         case .Connected:
+            connected = true
             isReconnecting = false
             lastConnection = peerID
             if isInvitee.0 {
@@ -149,6 +154,7 @@ extension TimeServiceManager : MCSessionDelegate {
             }
             break
         case .NotConnected:
+            connected = true
             if !UserSettings.sharedSettings().autoAccept {
                 delegate?.hideConnecting(true)
             }

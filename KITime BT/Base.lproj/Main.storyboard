@@ -21,7 +21,7 @@
         <!--View Controller-->
         <scene sceneID="faQ-Qr-l22">
             <objects>
-                <viewController id="yNW-BH-EVg" customClass="ViewController" customModule="BlueTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yNW-BH-EVg" customClass="ViewController" customModule="KiTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="b3j-2C-Uv4"/>
                         <viewControllerLayoutGuide type="bottom" id="ToR-0m-oFv"/>
@@ -54,7 +54,7 @@
                                             <action selector="changedStopType:" destination="yNW-BH-EVg" eventType="valueChanged" id="NJ0-sz-mGj"/>
                                         </connections>
                                     </segmentedControl>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="75" translatesAutoresizingMaskIntoConstraints="NO" id="gNE-jW-xA7" customClass="UITimerLabel" customModule="BlueTime" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="75" translatesAutoresizingMaskIntoConstraints="NO" id="gNE-jW-xA7" customClass="UITimerLabel" customModule="KiTimer" customModuleProvider="target">
                                         <rect key="frame" x="8" y="0.0" width="584" height="216"/>
                                         <fontDescription key="fontDescription" name="AudimatMonoLight" family="Audimat Mono" pointSize="100"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -78,45 +78,11 @@
                                     <constraint firstItem="Ubt-GZ-E3Z" firstAttribute="top" secondItem="gNE-jW-xA7" secondAttribute="bottom" id="o4g-6r-OzM"/>
                                 </constraints>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9c-8J-sz3">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="clip" minimumFontSize="120" translatesAutoresizingMaskIntoConstraints="NO" id="u41-41-70f" customClass="UITimerLabel" customModule="BlueTime" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="584" height="584"/>
-                                        <fontDescription key="fontDescription" name="AudimatMonoLight" family="Audimat Mono" pointSize="300"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tD6-Sh-Ib4">
-                                        <rect key="frame" x="546" y="546" width="46" height="46"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="46" id="GrH-Vg-Z9T"/>
-                                            <constraint firstAttribute="width" constant="46" id="aky-I3-CgF"/>
-                                        </constraints>
-                                        <color key="tintColor" red="0.40682946120000002" green="0.40682946120000002" blue="0.40682946120000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" image="fullscreen_exit">
-                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="toggleFullscreen" destination="yNW-BH-EVg" eventType="touchUpInside" id="o6T-aJ-RoM"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="tD6-Sh-Ib4" secondAttribute="trailing" constant="8" id="5GQ-8I-mXV"/>
-                                    <constraint firstAttribute="bottom" secondItem="tD6-Sh-Ib4" secondAttribute="bottom" constant="8" id="Nc8-wL-RPM"/>
-                                    <constraint firstAttribute="bottom" secondItem="u41-41-70f" secondAttribute="bottom" constant="8" id="ea4-2c-LDo"/>
-                                    <constraint firstItem="u41-41-70f" firstAttribute="top" secondItem="O9c-8J-sz3" secondAttribute="top" constant="8" id="lci-Bh-zFT"/>
-                                    <constraint firstItem="u41-41-70f" firstAttribute="leading" secondItem="O9c-8J-sz3" secondAttribute="leading" constant="8" id="q32-dy-pWw"/>
-                                    <constraint firstAttribute="trailing" secondItem="u41-41-70f" secondAttribute="trailing" constant="8" id="yNM-8V-cyl"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4u-KN-hzw" userLabel="Button Container View">
                                 <rect key="frame" x="0.0" y="252" width="600" height="348"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMt-rt-yGn">
-                                        <rect key="frame" x="60" y="304" width="36" height="36"/>
+                                        <rect key="frame" x="8" y="304" width="36" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="4fe-a3-cV3"/>
                                             <constraint firstAttribute="width" constant="36" id="WGp-Ov-iSI"/>
@@ -134,10 +100,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MPo-CV-3hE">
-                                        <rect key="frame" x="8" y="304" width="36" height="36"/>
+                                        <rect key="frame" x="8" y="8" width="36" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="e3N-6G-cEy"/>
-                                            <constraint firstAttribute="width" constant="36" id="o23-zo-PIr"/>
+                                            <constraint firstAttribute="height" constant="36" id="oWC-W1-Swg"/>
+                                            <constraint firstAttribute="width" constant="36" id="twY-yy-9bG"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <state key="normal" image="ki-settings">
@@ -215,71 +181,70 @@
                                             <action selector="cancelPressed" destination="yNW-BH-EVg" eventType="touchUpInside" id="LLw-9E-Smv"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pJ-HM-oJ3" customClass="TimerButton" customModule="BlueTime" customModuleProvider="target">
-                                        <rect key="frame" x="255" y="156" width="90" height="90"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <imageView hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="connected" highlightedImage="connected" translatesAutoresizingMaskIntoConstraints="NO" id="r6S-de-dDt">
+                                        <rect key="frame" x="52" y="304" width="36" height="36"/>
+                                        <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="90" id="WSl-jS-TRC"/>
-                                            <constraint firstAttribute="height" priority="750" constant="90" id="WlD-SM-ReL"/>
+                                            <constraint firstAttribute="height" constant="36" id="9wd-mB-CzM"/>
+                                            <constraint firstAttribute="width" constant="36" id="FO8-He-etV"/>
                                         </constraints>
-                                        <state key="normal" title="Start">
-                                            <color key="titleColor" red="0.32549019610000002" green="0.84313725490000002" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="startPressed" destination="yNW-BH-EVg" eventType="touchUpInside" id="Ora-PV-F2c"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QG6-oj-cvw" customClass="TimerButton" customModule="BlueTime" customModuleProvider="target">
-                                        <rect key="frame" x="255" y="156" width="90" height="90"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="90" id="5co-mE-Kqx"/>
-                                            <constraint firstAttribute="height" priority="750" constant="90" id="BZW-s1-uZ0"/>
-                                        </constraints>
-                                        <state key="normal" title="Pause">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="pausePressed" destination="yNW-BH-EVg" eventType="touchUpInside" id="tyh-JW-1eP"/>
-                                        </connections>
-                                    </button>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="7pJ-HM-oJ3" secondAttribute="centerX" id="25h-F8-F2O"/>
                                     <constraint firstAttribute="bottom" secondItem="fho-fV-OvQ" secondAttribute="bottom" constant="8" id="2Hd-zJ-Qfz"/>
-                                    <constraint firstAttribute="bottom" secondItem="MPo-CV-3hE" secondAttribute="bottom" constant="8" id="71Q-Vy-ZQw"/>
                                     <constraint firstAttribute="trailing" secondItem="fho-fV-OvQ" secondAttribute="trailing" constant="8" id="7e6-5W-FnW"/>
                                     <constraint firstItem="cGe-Jr-3OM" firstAttribute="centerY" secondItem="v4u-KN-hzw" secondAttribute="centerY" priority="750" id="8HG-tr-Njn"/>
                                     <constraint firstItem="75H-yt-u4a" firstAttribute="centerY" secondItem="v4u-KN-hzw" secondAttribute="centerY" priority="750" id="8rZ-Ma-J3o"/>
-                                    <constraint firstItem="QG6-oj-cvw" firstAttribute="centerX" secondItem="v4u-KN-hzw" secondAttribute="centerX" id="9TY-Df-M2K"/>
                                     <constraint firstAttribute="bottom" secondItem="iMt-rt-yGn" secondAttribute="bottom" constant="8" id="9ck-Ua-4mi"/>
+                                    <constraint firstItem="MPo-CV-3hE" firstAttribute="leading" secondItem="v4u-KN-hzw" secondAttribute="leading" constant="8" id="FWL-u1-wGi"/>
                                     <constraint firstItem="75H-yt-u4a" firstAttribute="centerX" secondItem="v4u-KN-hzw" secondAttribute="centerX" id="GlM-TR-zB9"/>
-                                    <constraint firstItem="MPo-CV-3hE" firstAttribute="leading" secondItem="v4u-KN-hzw" secondAttribute="leading" constant="8" id="HIr-da-YNq"/>
+                                    <constraint firstItem="iMt-rt-yGn" firstAttribute="leading" secondItem="v4u-KN-hzw" secondAttribute="leading" constant="8" id="IJi-PY-AVE"/>
+                                    <constraint firstItem="MPo-CV-3hE" firstAttribute="top" secondItem="v4u-KN-hzw" secondAttribute="top" constant="8" id="KK3-0N-4OP"/>
                                     <constraint firstItem="cGe-Jr-3OM" firstAttribute="bottom" secondItem="v4u-KN-hzw" secondAttribute="bottom" multiplier="1:2" id="Qxt-U5-EOg"/>
                                     <constraint firstItem="Af6-TZ-w8D" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cGe-Jr-3OM" secondAttribute="bottom" constant="8" id="SlK-Sl-ZMU"/>
                                     <constraint firstItem="75H-yt-u4a" firstAttribute="bottom" secondItem="v4u-KN-hzw" secondAttribute="bottom" multiplier="1:2" id="SqL-jU-F5Y"/>
-                                    <constraint firstItem="QG6-oj-cvw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v4u-KN-hzw" secondAttribute="top" constant="16" id="Vb5-Yu-0O6"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="7pJ-HM-oJ3" secondAttribute="bottom" constant="16" id="aNc-K4-bSF"/>
                                     <constraint firstItem="Af6-TZ-w8D" firstAttribute="top" relation="greaterThanOrEqual" secondItem="75H-yt-u4a" secondAttribute="bottom" constant="8" id="fUy-TO-2zH"/>
+                                    <constraint firstAttribute="bottom" secondItem="r6S-de-dDt" secondAttribute="bottom" constant="8" id="iRA-nQ-tXa"/>
                                     <constraint firstItem="Af6-TZ-w8D" firstAttribute="centerX" secondItem="v4u-KN-hzw" secondAttribute="centerX" id="khE-s9-3Mn"/>
-                                    <constraint firstAttribute="centerY" secondItem="7pJ-HM-oJ3" secondAttribute="centerY" id="oAv-ad-OaU"/>
-                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QG6-oj-cvw" secondAttribute="bottom" constant="16" id="oLh-YV-6FS"/>
-                                    <constraint firstAttribute="centerX" secondItem="7pJ-HM-oJ3" secondAttribute="centerX" id="t5l-W0-qZ3"/>
-                                    <constraint firstItem="iMt-rt-yGn" firstAttribute="leading" secondItem="MPo-CV-3hE" secondAttribute="trailing" constant="16" id="vKJ-xS-x4V"/>
-                                    <constraint firstItem="7pJ-HM-oJ3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="v4u-KN-hzw" secondAttribute="top" constant="16" id="vPN-oO-3un"/>
-                                    <constraint firstItem="QG6-oj-cvw" firstAttribute="centerY" secondItem="v4u-KN-hzw" secondAttribute="centerY" id="yIg-Ap-XIV"/>
+                                    <constraint firstItem="r6S-de-dDt" firstAttribute="leading" secondItem="iMt-rt-yGn" secondAttribute="trailing" constant="8" id="og2-zo-ybe"/>
                                     <constraint firstAttribute="bottom" secondItem="Af6-TZ-w8D" secondAttribute="bottom" constant="8" id="yxu-a3-zqW"/>
                                     <constraint firstItem="cGe-Jr-3OM" firstAttribute="centerX" secondItem="v4u-KN-hzw" secondAttribute="centerX" id="zve-NM-Qnq"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="subviews">
-                                        <exclude reference="7pJ-HM-oJ3"/>
-                                        <exclude reference="QG6-oj-cvw"/>
-                                    </mask>
-                                </variation>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O9c-8J-sz3">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="clip" minimumFontSize="120" translatesAutoresizingMaskIntoConstraints="NO" id="u41-41-70f" customClass="UITimerLabel" customModule="KiTimer" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="8" width="584" height="584"/>
+                                        <fontDescription key="fontDescription" name="AudimatMonoLight" family="Audimat Mono" pointSize="300"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tD6-Sh-Ib4">
+                                        <rect key="frame" x="546" y="546" width="46" height="46"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="46" id="GrH-Vg-Z9T"/>
+                                            <constraint firstAttribute="width" constant="46" id="aky-I3-CgF"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.40682946120000002" green="0.40682946120000002" blue="0.40682946120000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="fullscreen_exit">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleFullscreen" destination="yNW-BH-EVg" eventType="touchUpInside" id="o6T-aJ-RoM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tD6-Sh-Ib4" secondAttribute="trailing" constant="8" id="5GQ-8I-mXV"/>
+                                    <constraint firstAttribute="bottom" secondItem="tD6-Sh-Ib4" secondAttribute="bottom" constant="8" id="Nc8-wL-RPM"/>
+                                    <constraint firstAttribute="bottom" secondItem="u41-41-70f" secondAttribute="bottom" constant="8" id="ea4-2c-LDo"/>
+                                    <constraint firstItem="u41-41-70f" firstAttribute="top" secondItem="O9c-8J-sz3" secondAttribute="top" constant="8" id="lci-Bh-zFT"/>
+                                    <constraint firstItem="u41-41-70f" firstAttribute="leading" secondItem="O9c-8J-sz3" secondAttribute="leading" constant="8" id="q32-dy-pWw"/>
+                                    <constraint firstAttribute="trailing" secondItem="u41-41-70f" secondAttribute="trailing" constant="8" id="yNM-8V-cyl"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -297,16 +262,12 @@
                             <constraint firstItem="Cwj-yT-Y53" firstAttribute="leading" secondItem="t5Y-j3-ten" secondAttribute="leadingMargin" constant="-20" id="v3A-nH-JfS"/>
                             <constraint firstAttribute="trailing" secondItem="v4u-KN-hzw" secondAttribute="trailing" id="vj2-lc-B2n"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="O9c-8J-sz3"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="buttonContainerView" destination="v4u-KN-hzw" id="vKy-N3-pX3"/>
                         <outlet property="cancelButton" destination="Af6-TZ-w8D" id="5bh-aR-gkS"/>
+                        <outlet property="connectedIcon" destination="r6S-de-dDt" id="h8U-Hl-iVM"/>
                         <outlet property="fullscreenButton" destination="fho-fV-OvQ" id="xov-4Q-se0"/>
                         <outlet property="fullscreenLabel" destination="u41-41-70f" id="Sev-t1-L6j"/>
                         <outlet property="fullscreenView" destination="O9c-8J-sz3" id="vqQ-lU-ZkO"/>
@@ -326,7 +287,7 @@
         <!--Home View Controller-->
         <scene sceneID="pD0-oQ-mk7">
             <objects>
-                <viewController id="tIU-eh-Lry" customClass="HomeViewController" customModule="BlueTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tIU-eh-Lry" customClass="HomeViewController" customModule="KiTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w1X-0k-XZe"/>
                         <viewControllerLayoutGuide type="bottom" id="o9K-Fe-RI3"/>
@@ -435,7 +396,7 @@
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVJ-Vb-ITd">
                                 <rect key="frame" x="0.0" y="28" width="600" height="162"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyK-0o-Tp1" customClass="UITimerLabel" customModule="BlueTime" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyK-0o-Tp1" customClass="UITimerLabel" customModule="KiTimer" customModuleProvider="target">
                                         <rect key="frame" x="16" y="0.0" width="568" height="162"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="162" id="6pr-oc-YQG"/>
@@ -457,7 +418,7 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nu4-7e-3H6">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="clip" minimumFontSize="120" translatesAutoresizingMaskIntoConstraints="NO" id="g09-Do-VFf" customClass="UITimerLabel" customModule="BlueTime" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="05:00" textAlignment="center" lineBreakMode="clip" minimumFontSize="120" translatesAutoresizingMaskIntoConstraints="NO" id="g09-Do-VFf" customClass="UITimerLabel" customModule="KiTimer" customModuleProvider="target">
                                         <rect key="frame" x="8" y="8" width="584" height="584"/>
                                         <fontDescription key="fontDescription" name="AudimatMonoLight" family="Audimat Mono" pointSize="300"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -526,7 +487,7 @@
         <!--Settings-->
         <scene sceneID="Xc8-mw-6Zw">
             <objects>
-                <tableViewController id="5Ph-rc-Gyr" customClass="SettingsViewController" customModule="BlueTime" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="5Ph-rc-Gyr" customClass="SettingsViewController" customModule="KiTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="98K-75-JUK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -692,7 +653,7 @@
         <!--About-->
         <scene sceneID="gvU-85-V7F">
             <objects>
-                <tableViewController id="4Uh-RM-vPq" customClass="AboutViewController" customModule="BlueTime" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4Uh-RM-vPq" customClass="AboutViewController" customModule="KiTimer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="WzR-bp-eTs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -800,6 +761,7 @@ We work in the realm of creativity, problem solving, leadership, managing change
         </scene>
     </scenes>
     <resources>
+        <image name="connected" width="36" height="36"/>
         <image name="fullscreen" width="46" height="46"/>
         <image name="fullscreen_blue" width="36" height="36"/>
         <image name="fullscreen_exit" width="46" height="46"/>

@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var pauseButton:UIButton!
     @IBOutlet weak var cancelButton:UIButton!
     @IBOutlet weak var inviteButton:UIButton!
+    @IBOutlet weak var connectedIcon:UIImageView!
     @IBOutlet weak var settingsButton:UIButton!
     @IBOutlet weak var timerPicker: UIPickerView!
     @IBOutlet weak var fullscreenButton:UIButton!
@@ -474,6 +475,8 @@ extension ViewController: TimeServiceManagerDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
         
         if failed {
+            connectedIcon.hidden = true
+            
             let alert = UIAlertController(title: "Failed to Connect", message: "We couldn't establish a connection with the peer. You can go back and try again.", preferredStyle: UIAlertControllerStyle.Alert)
             
             let declineAction = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
@@ -482,6 +485,8 @@ extension ViewController: TimeServiceManagerDelegate {
             alert.addAction(declineAction)
             
             self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            connectedIcon.hidden = false
         }
     }
     
