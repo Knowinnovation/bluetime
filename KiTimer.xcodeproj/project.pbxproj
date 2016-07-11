@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FDE528951D3432B6003CA630 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528941D3432B6003CA630 /* AppDelegate.swift */; };
+		FDE5289A1D3432B6003CA630 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDE528981D3432B6003CA630 /* Main.storyboard */; };
+		FDE5289F1D3432B6003CA630 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDE5289D1D3432B6003CA630 /* LaunchScreen.storyboard */; };
+		FDE528AC1D3432D2003CA630 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDE528AA1D3432D2003CA630 /* Interface.storyboard */; };
+		FDE528B51D3432D2003CA630 /* KiTimer Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = FDE528B41D3432D2003CA630 /* KiTimer Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FDE528BA1D3432D2003CA630 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528B91D3432D2003CA630 /* InterfaceController.swift */; };
+		FDE528BC1D3432D2003CA630 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528BB1D3432D2003CA630 /* ExtensionDelegate.swift */; };
+		FDE528BE1D3432D2003CA630 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE528BD1D3432D2003CA630 /* Assets.xcassets */; };
+		FDE528C21D3432D2003CA630 /* KiTimer Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = FDE528A81D3432D2003CA630 /* KiTimer Watch.app */; };
+		FDE528CC1D343321003CA630 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE528CB1D343321003CA630 /* Assets.xcassets */; };
+		FDE528DA1D343365003CA630 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528CD1D343365003CA630 /* AboutViewController.swift */; };
+		FDE528DB1D343365003CA630 /* AudimatMono-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDE528CE1D343365003CA630 /* AudimatMono-Light.ttf */; };
+		FDE528DC1D343365003CA630 /* Dax-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FDE528CF1D343365003CA630 /* Dax-Regular.ttf */; };
+		FDE528DE1D343365003CA630 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528D11D343365003CA630 /* SettingsViewController.swift */; };
+		FDE528DF1D343365003CA630 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528D21D343365003CA630 /* TimerButton.swift */; };
+		FDE528E21D343365003CA630 /* TimeScrollPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528D51D343365003CA630 /* TimeScrollPicker.swift */; };
+		FDE528E31D343365003CA630 /* TimeServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528D61D343365003CA630 /* TimeServiceManager.swift */; };
+		FDE528E41D343365003CA630 /* UITimerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528D71D343365003CA630 /* UITimerLabel.swift */; };
+		FDE528E51D343365003CA630 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528D81D343365003CA630 /* UserSettings.swift */; };
+		FDE528E81D343378003CA630 /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE528E71D343378003CA630 /* WatchConnectivity.framework */; };
+		FDE528EA1D34337E003CA630 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE528E91D34337E003CA630 /* MultipeerConnectivity.framework */; };
+		FDE528EC1D343417003CA630 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDE528EB1D343417003CA630 /* AVFoundation.framework */; };
+		FDE528EE1D34356C003CA630 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE528ED1D34356C003CA630 /* ViewController.swift */; };
+		FDE528F01D343793003CA630 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDE528EF1D343793003CA630 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FDE528B61D3432D2003CA630 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FDE528891D3432B6003CA630 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FDE528B31D3432D2003CA630;
+			remoteInfo = "KiTimer Watch Extension";
+		};
+		FDE528C01D3432D2003CA630 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FDE528891D3432B6003CA630 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FDE528A71D3432D2003CA630;
+			remoteInfo = "KiTimer Watch";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FDE528C61D3432D2003CA630 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				FDE528B51D3432D2003CA630 /* KiTimer Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDE528CA1D3432D2003CA630 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				FDE528C21D3432D2003CA630 /* KiTimer Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FDE528911D3432B6003CA630 /* KiTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KiTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDE528941D3432B6003CA630 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FDE528991D3432B6003CA630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FDE5289E1D3432B6003CA630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FDE528A01D3432B6003CA630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDE528A81D3432D2003CA630 /* KiTimer Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KiTimer Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDE528AB1D3432D2003CA630 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		FDE528AF1D3432D2003CA630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDE528B41D3432D2003CA630 /* KiTimer Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "KiTimer Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDE528B91D3432D2003CA630 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		FDE528BB1D3432D2003CA630 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		FDE528BD1D3432D2003CA630 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FDE528BF1D3432D2003CA630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDE528CB1D343321003CA630 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FDE528CD1D343365003CA630 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		FDE528CE1D343365003CA630 /* AudimatMono-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "AudimatMono-Light.ttf"; sourceTree = "<group>"; };
+		FDE528CF1D343365003CA630 /* Dax-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dax-Regular.ttf"; sourceTree = "<group>"; };
+		FDE528D11D343365003CA630 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		FDE528D21D343365003CA630 /* TimerButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
+		FDE528D51D343365003CA630 /* TimeScrollPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeScrollPicker.swift; sourceTree = "<group>"; };
+		FDE528D61D343365003CA630 /* TimeServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeServiceManager.swift; sourceTree = "<group>"; };
+		FDE528D71D343365003CA630 /* UITimerLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITimerLabel.swift; sourceTree = "<group>"; };
+		FDE528D81D343365003CA630 /* UserSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		FDE528E71D343378003CA630 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
+		FDE528E91D34337E003CA630 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		FDE528EB1D343417003CA630 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FDE528ED1D34356C003CA630 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FDE528EF1D343793003CA630 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FDE5288E1D3432B6003CA630 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDE528EC1D343417003CA630 /* AVFoundation.framework in Frameworks */,
+				FDE528EA1D34337E003CA630 /* MultipeerConnectivity.framework in Frameworks */,
+				FDE528E81D343378003CA630 /* WatchConnectivity.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDE528B11D3432D2003CA630 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FDE528881D3432B6003CA630 = {
+			isa = PBXGroup;
+			children = (
+				FDE528EB1D343417003CA630 /* AVFoundation.framework */,
+				FDE528E91D34337E003CA630 /* MultipeerConnectivity.framework */,
+				FDE528E71D343378003CA630 /* WatchConnectivity.framework */,
+				FDE528931D3432B6003CA630 /* KiTimer */,
+				FDE528A91D3432D2003CA630 /* KiTimer Watch */,
+				FDE528B81D3432D2003CA630 /* KiTimer Watch Extension */,
+				FDE528921D3432B6003CA630 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FDE528921D3432B6003CA630 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FDE528911D3432B6003CA630 /* KiTimer.app */,
+				FDE528A81D3432D2003CA630 /* KiTimer Watch.app */,
+				FDE528B41D3432D2003CA630 /* KiTimer Watch Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FDE528931D3432B6003CA630 /* KiTimer */ = {
+			isa = PBXGroup;
+			children = (
+				FDE528941D3432B6003CA630 /* AppDelegate.swift */,
+				FDE528ED1D34356C003CA630 /* ViewController.swift */,
+				FDE528CD1D343365003CA630 /* AboutViewController.swift */,
+				FDE528CE1D343365003CA630 /* AudimatMono-Light.ttf */,
+				FDE528CF1D343365003CA630 /* Dax-Regular.ttf */,
+				FDE528D11D343365003CA630 /* SettingsViewController.swift */,
+				FDE528D21D343365003CA630 /* TimerButton.swift */,
+				FDE528D51D343365003CA630 /* TimeScrollPicker.swift */,
+				FDE528D61D343365003CA630 /* TimeServiceManager.swift */,
+				FDE528D71D343365003CA630 /* UITimerLabel.swift */,
+				FDE528D81D343365003CA630 /* UserSettings.swift */,
+				FDE528981D3432B6003CA630 /* Main.storyboard */,
+				FDE528CB1D343321003CA630 /* Assets.xcassets */,
+				FDE5289D1D3432B6003CA630 /* LaunchScreen.storyboard */,
+				FDE528A01D3432B6003CA630 /* Info.plist */,
+			);
+			path = KiTimer;
+			sourceTree = "<group>";
+		};
+		FDE528A91D3432D2003CA630 /* KiTimer Watch */ = {
+			isa = PBXGroup;
+			children = (
+				FDE528AA1D3432D2003CA630 /* Interface.storyboard */,
+				FDE528EF1D343793003CA630 /* Assets.xcassets */,
+				FDE528AF1D3432D2003CA630 /* Info.plist */,
+			);
+			path = "KiTimer Watch";
+			sourceTree = "<group>";
+		};
+		FDE528B81D3432D2003CA630 /* KiTimer Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FDE528B91D3432D2003CA630 /* InterfaceController.swift */,
+				FDE528BB1D3432D2003CA630 /* ExtensionDelegate.swift */,
+				FDE528BD1D3432D2003CA630 /* Assets.xcassets */,
+				FDE528BF1D3432D2003CA630 /* Info.plist */,
+			);
+			path = "KiTimer Watch Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FDE528901D3432B6003CA630 /* KiTimer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDE528A31D3432B6003CA630 /* Build configuration list for PBXNativeTarget "KiTimer" */;
+			buildPhases = (
+				FDE5288D1D3432B6003CA630 /* Sources */,
+				FDE5288E1D3432B6003CA630 /* Frameworks */,
+				FDE5288F1D3432B6003CA630 /* Resources */,
+				FDE528CA1D3432D2003CA630 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDE528C11D3432D2003CA630 /* PBXTargetDependency */,
+			);
+			name = KiTimer;
+			productName = KiTimer;
+			productReference = FDE528911D3432B6003CA630 /* KiTimer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		FDE528A71D3432D2003CA630 /* KiTimer Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDE528C71D3432D2003CA630 /* Build configuration list for PBXNativeTarget "KiTimer Watch" */;
+			buildPhases = (
+				FDE528A61D3432D2003CA630 /* Resources */,
+				FDE528C61D3432D2003CA630 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FDE528B71D3432D2003CA630 /* PBXTargetDependency */,
+			);
+			name = "KiTimer Watch";
+			productName = "KiTimer Watch";
+			productReference = FDE528A81D3432D2003CA630 /* KiTimer Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		FDE528B31D3432D2003CA630 /* KiTimer Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDE528C31D3432D2003CA630 /* Build configuration list for PBXNativeTarget "KiTimer Watch Extension" */;
+			buildPhases = (
+				FDE528B01D3432D2003CA630 /* Sources */,
+				FDE528B11D3432D2003CA630 /* Frameworks */,
+				FDE528B21D3432D2003CA630 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "KiTimer Watch Extension";
+			productName = "KiTimer Watch Extension";
+			productReference = FDE528B41D3432D2003CA630 /* KiTimer Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FDE528891D3432B6003CA630 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Knowinnovation;
+				TargetAttributes = {
+					FDE528901D3432B6003CA630 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 373UA693F8;
+					};
+					FDE528A71D3432D2003CA630 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 373UA693F8;
+					};
+					FDE528B31D3432D2003CA630 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 373UA693F8;
+					};
+				};
+			};
+			buildConfigurationList = FDE5288C1D3432B6003CA630 /* Build configuration list for PBXProject "KiTimer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FDE528881D3432B6003CA630;
+			productRefGroup = FDE528921D3432B6003CA630 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FDE528901D3432B6003CA630 /* KiTimer */,
+				FDE528A71D3432D2003CA630 /* KiTimer Watch */,
+				FDE528B31D3432D2003CA630 /* KiTimer Watch Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FDE5288F1D3432B6003CA630 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDE528DB1D343365003CA630 /* AudimatMono-Light.ttf in Resources */,
+				FDE5289F1D3432B6003CA630 /* LaunchScreen.storyboard in Resources */,
+				FDE528CC1D343321003CA630 /* Assets.xcassets in Resources */,
+				FDE528DC1D343365003CA630 /* Dax-Regular.ttf in Resources */,
+				FDE5289A1D3432B6003CA630 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDE528A61D3432D2003CA630 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDE528F01D343793003CA630 /* Assets.xcassets in Resources */,
+				FDE528AC1D3432D2003CA630 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDE528B21D3432D2003CA630 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDE528BE1D3432D2003CA630 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FDE5288D1D3432B6003CA630 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDE528E41D343365003CA630 /* UITimerLabel.swift in Sources */,
+				FDE528DA1D343365003CA630 /* AboutViewController.swift in Sources */,
+				FDE528E31D343365003CA630 /* TimeServiceManager.swift in Sources */,
+				FDE528951D3432B6003CA630 /* AppDelegate.swift in Sources */,
+				FDE528EE1D34356C003CA630 /* ViewController.swift in Sources */,
+				FDE528DF1D343365003CA630 /* TimerButton.swift in Sources */,
+				FDE528E21D343365003CA630 /* TimeScrollPicker.swift in Sources */,
+				FDE528DE1D343365003CA630 /* SettingsViewController.swift in Sources */,
+				FDE528E51D343365003CA630 /* UserSettings.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDE528B01D3432D2003CA630 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDE528BC1D3432D2003CA630 /* ExtensionDelegate.swift in Sources */,
+				FDE528BA1D3432D2003CA630 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FDE528B71D3432D2003CA630 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FDE528B31D3432D2003CA630 /* KiTimer Watch Extension */;
+			targetProxy = FDE528B61D3432D2003CA630 /* PBXContainerItemProxy */;
+		};
+		FDE528C11D3432D2003CA630 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FDE528A71D3432D2003CA630 /* KiTimer Watch */;
+			targetProxy = FDE528C01D3432D2003CA630 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		FDE528981D3432B6003CA630 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDE528991D3432B6003CA630 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FDE5289D1D3432B6003CA630 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDE5289E1D3432B6003CA630 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FDE528AA1D3432D2003CA630 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDE528AB1D3432D2003CA630 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FDE528A11D3432B6003CA630 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FDE528A21D3432B6003CA630 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FDE528A41D3432B6003CA630 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = KiTimer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FDE528A51D3432B6003CA630 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = KiTimer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FDE528C41D3432D2003CA630 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "KiTimer Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		FDE528C51D3432D2003CA630 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "KiTimer Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+		FDE528C81D3432D2003CA630 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = KiTimer_Watch_Extension;
+				INFOPLIST_FILE = "KiTimer Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Debug;
+		};
+		FDE528C91D3432D2003CA630 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = KiTimer_Watch_Extension;
+				INFOPLIST_FILE = "KiTimer Watch/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.knowinnovation.KiTimer.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FDE5288C1D3432B6003CA630 /* Build configuration list for PBXProject "KiTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDE528A11D3432B6003CA630 /* Debug */,
+				FDE528A21D3432B6003CA630 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDE528A31D3432B6003CA630 /* Build configuration list for PBXNativeTarget "KiTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDE528A41D3432B6003CA630 /* Debug */,
+				FDE528A51D3432B6003CA630 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDE528C31D3432D2003CA630 /* Build configuration list for PBXNativeTarget "KiTimer Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDE528C41D3432D2003CA630 /* Debug */,
+				FDE528C51D3432D2003CA630 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDE528C71D3432D2003CA630 /* Build configuration list for PBXNativeTarget "KiTimer Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDE528C81D3432D2003CA630 /* Debug */,
+				FDE528C91D3432D2003CA630 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FDE528891D3432B6003CA630 /* Project object */;
+}

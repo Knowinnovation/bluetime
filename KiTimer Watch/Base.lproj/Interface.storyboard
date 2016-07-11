@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="y7Z-pq-BIc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="iAs-wY-YsY">
+            <objects>
+                <controller id="y7Z-pq-BIc" customClass="InterfaceController" customModule="KiTimer_Watch" customModuleProvider="target">
+                    <items>
+                        <timer width="1" height="0.40000000000000002" alignment="left" textAlignment="center" previewedSeconds="300" id="LCh-g0-IeD">
+                            <fontDescription key="font" type="system" pointSize="40"/>
+                            <calendarUnit key="units" minute="YES" second="YES"/>
+                        </timer>
+                        <button width="1" height="0.29999999999999999" alignment="left" title="Start" id="Zls-qb-Ov2">
+                            <connections>
+                                <action selector="startStopPressed" destination="y7Z-pq-BIc" id="VAf-iJ-Rhk"/>
+                            </connections>
+                        </button>
+                        <button width="1" height="0.29999999999999999" alignment="left" title="Cancel" enabled="NO" id="IEN-bh-31S">
+                            <connections>
+                                <action selector="cancelPressed" destination="y7Z-pq-BIc" id="Q5L-aJ-yki"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="cancelButton" destination="IEN-bh-31S" id="Xq0-x3-Q0u"/>
+                        <outlet property="startStopButton" destination="Zls-qb-Ov2" id="dAG-9i-9AV"/>
+                        <outlet property="timerLabel" destination="LCh-g0-IeD" id="eJt-65-Pft"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="221" y="378"/>
+        </scene>
+    </scenes>
+</document>
