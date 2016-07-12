@@ -471,8 +471,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBh-A2-7Id">
-                                                    <rect key="frame" x="8" y="8" width="584" height="217"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBh-A2-7Id">
+                                                    <rect key="frame" x="8" y="8" width="584" height="183"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <mutableString key="text">Knowinnovation specializes in facilitating and accelerating academic, scientific, interdisciplinary innovation. In the simplest terms: we help smart people have interesting conversations about complex questions. This leads to novel ideas and innovative research.
 We work in the realm of creativity, problem solving, leadership, managing change, research, technology – all the things that go hand-in-hand with innovation.
