@@ -410,7 +410,9 @@ class ViewController: UIViewController {
 
 extension ViewController: UITimerLabelDelegate {
     func timerDidReachZero(timer: UITimerLabel) {
-        NSLog("Reached Zero")
+        print("Reached Zero")
+        let data: Dictionary<String, AnyObject> = ["action":"reached0"]
+        session?.sendMessage(data, replyHandler: nil, errorHandler: nil)
         if self.stopType == .Hard {
             finishTimer()
         }

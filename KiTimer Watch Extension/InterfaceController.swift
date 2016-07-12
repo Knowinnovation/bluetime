@@ -206,9 +206,26 @@ extension InterfaceController: WCSessionDelegate {
                 timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime+1))
             }
         case "finish":
+            timerLabel.stop()
             self.timerFinished = true
             self.timerIsRunning = false
             self.updateButtons()
+        case "reached0":
+            print("Reached 0")
+            timerLabel.stop()
+            pauseTime = NSDate.timeIntervalSinceReferenceDate()
+            elapsedTime += pauseTime - startTime
+//            elapsedTime -= NSDate.timeIntervalSinceReferenceDate() - pauseTime
+            print("\(duration), \(elapsedTime)")
+            timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime+1))
+            startTime = NSDate.timeIntervalSinceReferenceDate()
+//            elapsedTime += NSDate.timeIntervalSinceReferenceDate() - startTime
+//            timerLabel.setDate(NSDate(timeIntervalSinceNow: duration-elapsedTime+1))
+            timerLabel.start()
+//            self.pause()
+//            self.start()
+//            timerLabel.stop()
+//            timerLabel.start()
         case "dataDump":
             self.startTime = message["startTime"] as! NSTimeInterval
             self.duration = message["duration"] as! Double
