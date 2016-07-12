@@ -12,6 +12,7 @@ import MultipeerConnectivity
 protocol TimeServiceManagerDelegate {
     func sendFullData()
     func showConnecting()
+    func updateConnectionIcon(connected: Bool)
     func hideConnecting(failed: Bool)
     func invitationWasReceived(name: String)
     func changesReceived(data: Dictionary<String, AnyObject>)
@@ -140,6 +141,7 @@ extension TimeServiceManager : MCSessionDelegate {
         switch state {
         case .Connected:
             connected = true
+            delegate?.updateConnectionIcon(connected)
             isReconnecting = false
             lastConnection = peerID
             if isInvitee.0 {
@@ -154,7 +156,8 @@ extension TimeServiceManager : MCSessionDelegate {
             }
             break
         case .NotConnected:
-            connected = true
+            connected = false
+            delegate?.updateConnectionIcon(connected)
             if !UserSettings.sharedSettings().autoAccept {
                 delegate?.hideConnecting(true)
             }

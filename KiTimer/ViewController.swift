@@ -474,6 +474,14 @@ extension ViewController: TimeServiceManagerDelegate {
         session?.sendMessage(data, replyHandler: nil, errorHandler: nil)
     }
     
+    func updateConnectionIcon(connected: Bool) {
+        if connected {
+            connectedIcon.hidden = false
+        } else {
+            connectedIcon.hidden = true
+        }
+    }
+    
     func showConnecting() {
         self.presentViewController(connectingAlert, animated: true, completion: nil)
     }
