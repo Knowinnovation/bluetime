@@ -11,18 +11,18 @@ import UIKit
 let mult:CGFloat = 10.0
 
 protocol TimeScrollPickerDelegate {
-    func pickerDidSelectTime(seconds: Int)
+    func pickerDidSelectTime(_ seconds: Int)
 }
 
 class TimeScrollPicker: UIView {
     
-    private var rightScrollView: UIScrollView!
-    private var leftScrollView: UIScrollView!
-    private var timeLabel: UILabel!
+    fileprivate var rightScrollView: UIScrollView!
+    fileprivate var leftScrollView: UIScrollView!
+    fileprivate var timeLabel: UILabel!
     
-    private var timerSlider2: UIView!
+    fileprivate var timerSlider2: UIView!
     
-    private var selectedTime: Int = 0
+    fileprivate var selectedTime: Int = 0
     var minSelectableTime: Int = 0
     var maxSelectableTime: Int = 3600
     
@@ -38,80 +38,80 @@ class TimeScrollPicker: UIView {
         commonInit()
     }
     
-    private func commonInit() {
-        timeLabel = UILabel(frame: CGRectMake(0,0, self.frame.size.width, self.frame.size.height))
-        timeLabel.textAlignment = .Center
+    fileprivate func commonInit() {
+        timeLabel = UILabel(frame: CGRect(x: 0,y: 0, width: self.frame.size.width, height: self.frame.size.height))
+        timeLabel.textAlignment = .center
 //        timeLabel.font = UIFont.systemFontOfSize(26, weight: UIFontWeightUltraLight)
         let size = self.frame.size.width/320 * 50
         timeLabel.font = UIFont(name: "Audimat Mono", size: size)
-        timeLabel.textColor = UIColor.darkTextColor()
+        timeLabel.textColor = UIColor.darkText
         self.addSubview(timeLabel)
         
-        leftScrollView = UIScrollView(frame: CGRectMake(0,0, self.frame.size.width/2, self.frame.size.height))
+        leftScrollView = UIScrollView(frame: CGRect(x: 0,y: 0, width: self.frame.size.width/2, height: self.frame.size.height))
         leftScrollView.bounces = false
-        leftScrollView.contentSize = CGSizeMake(leftScrollView.frame.width/2, 59*mult+leftScrollView.frame.height)
+        leftScrollView.contentSize = CGSize(width: leftScrollView.frame.width/2, height: 59*mult+leftScrollView.frame.height)
         leftScrollView.scrollsToTop = false
         leftScrollView.maximumZoomScale = 1
         leftScrollView.minimumZoomScale = 1
         leftScrollView.delegate = self
         leftScrollView.showsVerticalScrollIndicator = false
-        let timerSlider = UIView(frame: CGRectMake(0,0,70, leftScrollView.contentSize.height))
+        let timerSlider = UIView(frame: CGRect(x: 0,y: 0,width: 70, height: leftScrollView.contentSize.height))
         timerSlider.backgroundColor = UIColor(patternImage: UIImage(named: "timeslider.png")!)
         leftScrollView.addSubview(timerSlider)
         self.addSubview(leftScrollView)
         
-        rightScrollView = UIScrollView(frame: CGRectMake(self.frame.size.width/2,0, self.frame.size.width/2, self.frame.size.height))
+        rightScrollView = UIScrollView(frame: CGRect(x: self.frame.size.width/2,y: 0, width: self.frame.size.width/2, height: self.frame.size.height))
         rightScrollView.bounces = false
-        rightScrollView.contentSize = CGSizeMake(rightScrollView.frame.width, 59*mult+rightScrollView.frame.height)
+        rightScrollView.contentSize = CGSize(width: rightScrollView.frame.width, height: 59*mult+rightScrollView.frame.height)
         rightScrollView.scrollsToTop = false
         rightScrollView.maximumZoomScale = 1
         rightScrollView.minimumZoomScale = 1
         rightScrollView.delegate = self
         rightScrollView.showsVerticalScrollIndicator = false
-        timerSlider2 = UIView(frame: CGRectMake(rightScrollView.frame.width-70,0,70, leftScrollView.contentSize.height))
+        timerSlider2 = UIView(frame: CGRect(x: rightScrollView.frame.width-70,y: 0,width: 70, height: leftScrollView.contentSize.height))
         let scrollImage = UIImage(named: "timeslider.png")!
-        timerSlider2.backgroundColor = UIColor(patternImage: UIImage(CGImage: scrollImage.CGImage!, scale: scrollImage.scale, orientation: .UpMirrored))
+        timerSlider2.backgroundColor = UIColor(patternImage: UIImage(cgImage: scrollImage.cgImage!, scale: scrollImage.scale, orientation: .upMirrored))
         rightScrollView.addSubview(timerSlider2)
         self.addSubview(rightScrollView)
         
         updateLabel()
     }
     
-    func updateFrame(frame: CGRect) {
+    func updateFrame(_ frame: CGRect) {
         self.frame = frame
-        timeLabel.frame = CGRectMake(0,0, self.frame.size.width, self.frame.size.height)
+        timeLabel.frame = CGRect(x: 0,y: 0, width: self.frame.size.width, height: self.frame.size.height)
         let size = self.frame.size.width/320 * 50
         timeLabel.font = UIFont(name: "Audimat Mono", size: size)
         
-        leftScrollView.frame = CGRectMake(0,0, self.frame.size.width, self.frame.size.height)
-        leftScrollView.contentSize = CGSizeMake(leftScrollView.frame.width/2, 59*mult+leftScrollView.frame.height)
+        leftScrollView.frame = CGRect(x: 0,y: 0, width: self.frame.size.width, height: self.frame.size.height)
+        leftScrollView.contentSize = CGSize(width: leftScrollView.frame.width/2, height: 59*mult+leftScrollView.frame.height)
         
-        rightScrollView.frame = CGRectMake(self.frame.size.width/2,0, self.frame.size.width/2, self.frame.size.height)
-        rightScrollView.contentSize = CGSizeMake(rightScrollView.frame.width, 59*mult+rightScrollView.frame.height)
-        timerSlider2.frame = CGRectMake(rightScrollView.frame.width-70,0,70, leftScrollView.contentSize.height)
+        rightScrollView.frame = CGRect(x: self.frame.size.width/2,y: 0, width: self.frame.size.width/2, height: self.frame.size.height)
+        rightScrollView.contentSize = CGSize(width: rightScrollView.frame.width, height: 59*mult+rightScrollView.frame.height)
+        timerSlider2.frame = CGRect(x: rightScrollView.frame.width-70,y: 0,width: 70, height: leftScrollView.contentSize.height)
     }
     
-    func setSelectedTime(seconds: Int) {
+    func setSelectedTime(_ seconds: Int) {
         let (min, secs) = secondsToMinutesSeconds(seconds)
         selectedTime = seconds
         updateLabel()
-        leftScrollView.contentOffset = CGPointMake(0, CGFloat(min)*mult)
-        rightScrollView.contentOffset = CGPointMake(0, CGFloat(secs)*mult)
+        leftScrollView.contentOffset = CGPoint(x: 0, y: CGFloat(min)*mult)
+        rightScrollView.contentOffset = CGPoint(x: 0, y: CGFloat(secs)*mult)
     }
     
-    private func updateLabel() {
+    fileprivate func updateLabel() {
         let (min, secs) = secondsToMinutesSeconds(selectedTime)
         timeLabel.text = String(format: "%02dm %02ds", min, secs)
     }
     
-    private func secondsToMinutesSeconds (seconds : Int) -> (Int, Int) {
+    fileprivate func secondsToMinutesSeconds (_ seconds : Int) -> (Int, Int) {
         return ( (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 
 }
 
 extension TimeScrollPicker: UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         selectedTime = Int(round(leftScrollView.contentOffset.y/mult))*60 + Int(round(rightScrollView.contentOffset.y/mult))
         updateLabel()
         delegate?.pickerDidSelectTime(selectedTime)

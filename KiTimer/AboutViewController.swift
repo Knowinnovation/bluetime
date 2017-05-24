@@ -21,11 +21,11 @@ class AboutViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 && indexPath.row == 1 {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 1 && (indexPath as NSIndexPath).row == 1 {
             // Open Website
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://knowinnovation.com")!)
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            UIApplication.shared.openURL(URL(string: "http://knowinnovation.com")!)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
 

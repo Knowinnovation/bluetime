@@ -15,8 +15,8 @@ class SettingsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        autoAcceptSwitch.on = UserSettings.sharedSettings().autoAccept
-        autoFullscreenSwitch.on = UserSettings.sharedSettings().autoFull
+        autoAcceptSwitch.isOn = UserSettings.sharedSettings().autoAccept
+        autoFullscreenSwitch.isOn = UserSettings.sharedSettings().autoFull
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,15 +25,15 @@ class SettingsViewController: UITableViewController {
     }
     
     @IBAction func done() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func autoAcceptSwitchPressed() {
-        UserSettings.sharedSettings().autoAccept = autoAcceptSwitch.on
+        UserSettings.sharedSettings().autoAccept = autoAcceptSwitch.isOn
     }
     
     @IBAction func autoFullSwitchPressed() {
-        UserSettings.sharedSettings().autoFull = autoFullscreenSwitch.on
+        UserSettings.sharedSettings().autoFull = autoFullscreenSwitch.isOn
     }
 
 }

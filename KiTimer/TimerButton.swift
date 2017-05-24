@@ -10,20 +10,20 @@ import UIKit
 
 class TimerButton: UIButton {
 
-    override var highlighted: Bool {
+    override var isHighlighted: Bool {
         didSet {
-            if highlighted {
+            if isHighlighted {
                 self.backgroundColor = UIColor(white: 0.60, alpha: 1.0)
             } else {
-                self.backgroundColor = UIColor.whiteColor()
+                self.backgroundColor = UIColor.white
             }
             
         }
     }
     
-    override var enabled: Bool {
+    override var isEnabled: Bool {
         didSet {
-            if enabled {
+            if isEnabled {
                 self.alpha = 1.0
             } else {
                 self.alpha = 0.0
