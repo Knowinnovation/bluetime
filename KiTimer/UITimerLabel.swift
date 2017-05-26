@@ -10,13 +10,13 @@
 import UIKit
 
 @objc protocol UITimerLabelDelegate {
-    optional func timerDidReachZero(timer: UITimerLabel);
+    @objc optional func timerDidReachZero(_ timer: UITimerLabel);
 }
 
 class UITimerLabel: UILabel {
     
-    private var timer: NSTimer?
-    private var runToDate: NSDate?
+    private var timer: Timer?
+    private var runToDate: Date?
     private var timerRunning: Bool = false
     
     var delegate: UITimerLabelDelegate?
@@ -31,13 +31,13 @@ class UITimerLabel: UILabel {
         self.common()
     }
     
-    private func common() {
+    fileprivate func common() {
         NSLog("Initing")
         self.text = "00:00"
     }
     
     // Sets the date which the timer counts down to (or up to)
-    func setDate(date: NSDate) {
+    func setDate(_ date: Date) {
         runToDate = date
         self.setTimeDisplay(self.runToDate!.timeIntervalSinceNow + 1)
     }
@@ -47,10 +47,10 @@ class UITimerLabel: UILabel {
         // If the date is not set it won't start
         // Also if already running won't start another timer
         if runToDate != nil && !timerRunning {
-            timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(UITimerLabel.updateTime), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(UITimerLabel.updateTime), userInfo: nil, repeats: true)
             
             // Timer needs to run on main loop for obvious reasons
-            NSRunLoop.currentRunLoop().addTimer(timer!, forMode: NSDefaultRunLoopMode)
+            RunLoop.current.add(timer!, forMode: RunLoopMode.defaultRunLoopMode)
             timerRunning = true
         } else {
             setTimeDisplay(0)
@@ -64,7 +64,7 @@ class UITimerLabel: UILabel {
     }
     
     // Updates the time
-    @objc private func updateTime() {
+    @objc fileprivate func updateTime() {
         let time = self.runToDate!.timeIntervalSinceNow + 1
         self.setTimeDisplay(time)
         if floor(time) == 0 {
@@ -74,26 +74,26 @@ class UITimerLabel: UILabel {
     }
     
     // Formats the time interval for displaying
-    private func setTimeDisplay(displayTime: NSTimeInterval) {
+    fileprivate func setTimeDisplay(_ displayTime: TimeInterval) {
         if displayTime >= 0 {
             if displayTime < 60 {
-                self.textColor = UIColor.redColor()
+                self.textColor = UIColor.red
             } else if displayTime < 120 {
-                self.textColor = UIColor.orangeColor()
+                self.textColor = UIColor.orange
             } else {
-                self.textColor = UIColor.blackColor()
+                self.textColor = UIColor.black
             }
             let (m,s) = secondsToMinutesSeconds(Int(displayTime))
             self.text = String(format: "%02d:%02d",m,s)
         } else {
-            self.textColor = UIColor.redColor()
+            self.textColor = UIColor.red
             let (m,s) = secondsToMinutesSeconds(Int(abs(displayTime)))
             self.text = String(format: "+%02d:%02d",m,s)
         }
     }
     
     // Converts the seconds to minutes and seconds
-    private func secondsToMinutesSeconds (seconds : Int) -> (Int, Int) {
+    fileprivate func secondsToMinutesSeconds (_ seconds : Int) -> (Int, Int) {
         return ( (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 
