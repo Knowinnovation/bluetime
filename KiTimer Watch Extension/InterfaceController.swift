@@ -51,7 +51,7 @@ class InterfaceController: WKInterfaceController {
         timerLabel.setDate(Date(timeIntervalSinceNow: duration+1))
         
         if WCSession.isSupported() {
-            session = WCSession.default()
+            session = WCSession.default
             session!.sendMessage(["action":"initialData"], replyHandler: { (response) -> Void in
                 
                 self.startTime = response["startTime"] as! TimeInterval

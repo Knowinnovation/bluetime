@@ -113,7 +113,7 @@ class ViewController: UIViewController {
         fullscreenLabel.setDate(Date(timeIntervalSinceNow: duration-elapsedTime))
         
         if WCSession.isSupported() {
-            session = WCSession.default()
+            session = WCSession.default
         }
         
         timerCancelled = true
@@ -276,10 +276,12 @@ class ViewController: UIViewController {
         
         // Play sound here
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL(string: "/Library/Ringtones/Duck.m4r")!)
-            NSLog("Playing Sound")
-            audioPlayer.numberOfLoops = -1
-            audioPlayer.play()
+            if let url = URL(string: "/Library/Ringtones/Duck.m4r") {
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                NSLog("Playing Sound")
+                audioPlayer.numberOfLoops = -1
+                audioPlayer.play()
+            }
         } catch {
             debugPrint("\(error)")
         }
@@ -354,7 +356,7 @@ class ViewController: UIViewController {
     }
     
     // Changes view based on rotation of device
-    func rotated() {
+    @objc func rotated() {
 //        print("rotated")
 //        print("\(self.view.frame.size.width)")
         minsLabel.frame = CGRect(x: self.view.frame.size.width/2-40, y: self.timerPicker.frame.height/2-11, width: 44, height: 22)
@@ -383,7 +385,7 @@ class ViewController: UIViewController {
 //    }
     
     //create observers when app reopens
-    func appBecameActive(_ note: Notification) {
+    @objc func appBecameActive(_ note: Notification) {
         print("Became Active")
         // Try to reconnect with last device
         // if repopen
@@ -392,13 +394,13 @@ class ViewController: UIViewController {
         }
     }
     
-    func appEnteredBackground(_ note: Notification) {
+    @objc func appEnteredBackground(_ note: Notification) {
         print("Entered Background")
         openFromTerm = false
     }
     
     //remove all observers
-    func appWillTerminate(_ note: Notification) {
+    @objc func appWillTerminate(_ note: Notification) {
         print("App Terminated")
 //        timerIsRunning = false
         
